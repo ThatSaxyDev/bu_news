@@ -28,7 +28,7 @@ class _MyAppState extends ConsumerState<MyApp> {
         builder: (context, child) {
           return Builder(builder: (context) {
             return MaterialApp(
-              title: 'Flutter Demo',
+              title: 'BU News',
               debugShowCheckedModeBanner: false,
               theme: ref.watch(themeNotifierProvider),
               home: Container(),

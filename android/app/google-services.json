@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "606399324370",
+    "project_id": "bu-news",
+    "storage_bucket": "bu-news.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606399324370:android:195339cdea1822e31b8d0b",
+        "android_client_info": {
+          "package_name": "dev.kiishidart.bu_news"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "606399324370-faetgkl73kjo28h4pij76uhds2i0gjfs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.kiishidart.bu_news",
+            "certificate_hash": "ca26560740d0472113c1786109bcc24c617f24b8"
+          }
+        },
+        {
+          "client_id": "606399324370-a9hissqm6p76n36ugevfujl91l9qvrp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-BsZ3VMxaU6TmViMyEIpXUrTRxQTpQ2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "606399324370-a9hissqm6p76n36ugevfujl91l9qvrp9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "606399324370-j1l74o8rd5snouje00doncphnb3ap2mb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dev.kiishidart.buNews"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

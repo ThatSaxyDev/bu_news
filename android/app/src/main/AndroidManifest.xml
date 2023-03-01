@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.kiishidart.bu_news">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="bu_news"
         android:name="${applicationName}"

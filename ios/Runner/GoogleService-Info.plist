@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>606399324370-j1l74o8rd5snouje00doncphnb3ap2mb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.606399324370-j1l74o8rd5snouje00doncphnb3ap2mb</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBQ9LeGVgQqXnEgKQ1z_SQ8OFWEx7PYVg0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>606399324370</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>dev.kiishidart.buNews</string>
+	<key>PROJECT_ID</key>
+	<string>bu-news</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bu-news.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:606399324370:ios:716d823d89cf9a6b1b8d0b</string>
+</dict>
+</plist>

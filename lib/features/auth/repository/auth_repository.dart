@@ -59,6 +59,11 @@ class AuthRepository {
         userCredential = await _auth.signInWithCredential(credential);
       }
 
+      final userEmail = userCredential.user!.email;
+      if (!userEmail!.contains('@student.babcock.edu.ng')) {
+        return left(Failure('Not a babcock mail'));
+      }
+
       UserModel userModel;
 
       if (userCredential.additionalUserInfo!.isNewUser) {
@@ -71,6 +76,60 @@ class AuthRepository {
           schoolName: '',
           isACourseRep: false,
           isALead: false,
+          email: userCredential.user!.email ?? '',
+        );
+        await _users.doc(userCredential.user!.uid).set(userModel.toMap());
+      } else {
+        userModel = await getUserData(userCredential.user!.uid).first;
+      }
+
+      return right(userModel);
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+   FutureEither<UserModel> signInWithGoogleAdmin() async {
+    try {
+      UserCredential userCredential;
+      if (kIsWeb) {
+        GoogleAuthProvider googleAuthProvider = GoogleAuthProvider();
+        googleAuthProvider
+            .addScope('https://www.googleapis.com/auth/contacts.readonly');
+        userCredential = await _auth.signInWithPopup(googleAuthProvider);
+      } else {
+        final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+        final googleAuth = await googleUser?.authentication;
+
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth?.accessToken,
+          idToken: googleAuth?.idToken,
+        );
+
+        userCredential = await _auth.signInWithCredential(credential);
+      }
+
+      final userEmail = userCredential.user!.email;
+      if (userEmail != 'bunewsa@gmail.com') {
+        return left(Failure('Error!'));
+      }
+
+      UserModel userModel;
+
+      if (userCredential.additionalUserInfo!.isNewUser) {
+        userModel = UserModel(
+          uid: userCredential.user!.uid,
+          name: userCredential.user!.displayName ?? 'No Name',
+          profilePic: userCredential.user!.photoURL ?? Constants.avatarDefault,
+          banner: userCredential.user!.photoURL ?? Constants.bannerDefault,
+          matricNo: '',
+          schoolName: '',
+          isACourseRep: false,
+          isALead: false,
+          email: userCredential.user!.email ?? '',
         );
         await _users.doc(userCredential.user!.uid).set(userModel.toMap());
       } else {

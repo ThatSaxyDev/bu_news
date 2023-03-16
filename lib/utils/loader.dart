@@ -24,14 +24,17 @@ class Loader extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currenTheme = ref.watch(themeNotifierProvider);
-    return Center(
+    return const Center(
       child: SizedBox(
         height: 60,
         width: 60,
-        child: LoadingAnimationWidget.halfTriangleDot(
-           color: currenTheme.textTheme.bodyMedium!.color!,
-          size: 60,
+        child: CircularProgressIndicator(
+          color: Pallete.blueColor,
         ),
+        // child: LoadingAnimationWidget.halfTriangleDot(
+        //    color: currenTheme.textTheme.bodyMedium!.color!,
+        //   size: 60,
+        // ),
       ),
     );
   }

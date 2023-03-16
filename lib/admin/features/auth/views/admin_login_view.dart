@@ -1,6 +1,6 @@
+import 'package:bu_news/admin/features/auth/controller/admin_auth_controller.dart';
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/theme/palette.dart';
-import 'package:bu_news/utils/button.dart';
 import 'package:bu_news/utils/loader.dart';
 import 'package:bu_news/utils/string_extensions.dart';
 import 'package:bu_news/utils/widget_extensions.dart';
@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginScreen extends ConsumerWidget {
-  const LoginScreen({super.key});
+class AdminLoginScreen extends ConsumerWidget {
+  const AdminLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = ref.watch(authControllerProvider);
+    final isLoading = ref.watch(adminAuthControllerProvider);
 
     return Scaffold(
       body: Padding(
@@ -44,7 +44,7 @@ class LoginScreen extends ConsumerWidget {
                     child: Image.asset('main_logo'.png),
                   ),
                   60.sbH,
-                  GButton(
+                  AdminGButton(
                     padding: 10.h,
                     item: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -62,6 +62,59 @@ class LoginScreen extends ConsumerWidget {
                   ),
                 ],
               ),
+      ),
+    );
+  }
+}
+
+class AdminGButton extends ConsumerWidget {
+  // final double height;
+  // final double width;
+  final double padding;
+  // final double radius;
+  // final void Function()? onTap;
+
+  final Widget item;
+  final bool isFromLogin;
+  const AdminGButton({
+    Key? key,
+    // required this.height,
+    // required this.width,
+    this.padding = 30,
+    this.isFromLogin = true,
+    // required this.radius,
+    // required this.onTap,
+
+    required this.item,
+  }) : super(key: key);
+
+  void signInWithGoogleAdmin(BuildContext context, WidgetRef ref) {
+    ref.read(authControllerProvider.notifier).signInWithGoogleAdmin(context);
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentTheme = ref.watch(themeNotifierProvider);
+    return SizedBox(
+      height: 50.h,
+      // width: width,
+      child: ElevatedButton(
+        onPressed: () => signInWithGoogleAdmin(context, ref),
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(width: 0.5.w),
+            borderRadius: BorderRadius.all(
+              Radius.circular(35.r),
+            ),
+          ),
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          backgroundColor: currentTheme.backgroundColor,
+          padding: EdgeInsets.symmetric(horizontal: padding),
+        ),
+        child: Center(
+          child: item,
+        ),
       ),
     );
   }

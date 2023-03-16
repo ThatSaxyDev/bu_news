@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Constants {
   static const bannerDefault =
-      'https://thumbs.dreamstime.com/b/abstract-stained-pattern-rectangle-background-blue-sky-over-fiery-red-orange-color-modern-painting-art-watercolor-effe-texture-123047399.jpg';
+      'https://umis.babcock.edu.ng/babcock/assets/landing/images/bu_logo_main_white_bg.jpg';
   static const avatarDefault =
       'https://freesvg.org/img/abstract-user-flat-4.png';
   static const communityAvatarDefault =

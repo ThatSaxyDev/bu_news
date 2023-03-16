@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/palette.dart';
 
-
 class BButton extends StatelessWidget {
   final double? height;
   final double? width;
@@ -105,7 +104,7 @@ class GButton extends ConsumerWidget {
   final double padding;
   // final double radius;
   // final void Function()? onTap;
-  final Color color;
+
   final Widget item;
   final bool isFromLogin;
   const GButton({
@@ -116,7 +115,7 @@ class GButton extends ConsumerWidget {
     this.isFromLogin = true,
     // required this.radius,
     // required this.onTap,
-    required this.color,
+
     required this.item,
   }) : super(key: key);
 
@@ -126,6 +125,7 @@ class GButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentTheme = ref.watch(themeNotifierProvider);
     return SizedBox(
       height: 50.h,
       // width: width,
@@ -133,13 +133,16 @@ class GButton extends ConsumerWidget {
         onPressed: () => signInWithGoogle(context, ref),
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
+            side: BorderSide(
+              width: 0.5.w
+            ),
             borderRadius: BorderRadius.all(
               Radius.circular(35.r),
             ),
           ),
           elevation: 0,
           shadowColor: Colors.transparent,
-          backgroundColor: color,
+          backgroundColor: currentTheme.backgroundColor,
           padding: EdgeInsets.symmetric(horizontal: padding),
         ),
         child: Center(

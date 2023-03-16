@@ -45,6 +45,17 @@ class AuthController extends StateNotifier<bool> {
     );
   }
 
+  void signInWithGoogleAdmin(BuildContext context) async {
+    state = true;
+    final user = await _authRepository.signInWithGoogleAdmin();
+    state = false;
+    user.fold(
+      (l) => showSnackBar(context, l.message),
+      (userModel) =>
+          _ref.read(userProvider.notifier).update((state) => userModel),
+    );
+  }
+
 
 
   Stream<UserModel> getUserData(String uid) {

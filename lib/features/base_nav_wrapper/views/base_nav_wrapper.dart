@@ -1,5 +1,6 @@
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/features/base_nav_wrapper/widgets/nav_bar_widget.dart';
+import 'package:bu_news/features/home/views/home_view.dart';
 import 'package:bu_news/features/profile/views/profile_view.dart';
 import 'package:bu_news/theme/palette.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class BaseNavWrapper extends ConsumerStatefulWidget {
 
 class _BaseNavWrapperState extends ConsumerState<BaseNavWrapper> {
   List<Widget> pages = [
-    Container(),
+    HomeView(),
     Container(),
     // Container(color: Colors.green),
     // Container(color: Colors.pink),

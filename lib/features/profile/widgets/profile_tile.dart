@@ -1,4 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bu_news/features/posts/controllers/post_controller.dart';
+import 'package:bu_news/utils/error_text.dart';
+import 'package:bu_news/utils/loader.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,6 +24,7 @@ class ProfileTile extends ConsumerWidget {
   final Color? iconColor;
   final void Function()? onTap;
   final void Function(bool)? onHover;
+  final bool? isReactive;
   const ProfileTile({
     super.key,
     required this.icon,
@@ -29,6 +34,7 @@ class ProfileTile extends ConsumerWidget {
     this.onTap,
     this.iconColor,
     this.onHover,
+    this.isReactive,
   });
 
   @override
@@ -79,7 +85,30 @@ class ProfileTile extends ConsumerWidget {
                         ThemeMode.dark,
                     onChanged: (val) => toggleTheme(ref),
                   )
-                : Icon(Icons.arrow_forward_ios_rounded, size: 17.h),
+                : isReactive == true
+                    ? ref.watch(userBookmarksProvider).when(
+                          data: (data) {
+                            int number = data.length;
+                            return CircleAvatar(
+                              backgroundColor: Pallete.blueColor,
+                              radius: 14.h,
+                              child: Text(
+                                '$number',
+                                style: TextStyle(
+                                  color: Pallete.whiteColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 17.sp,
+                                ),
+                              ),
+                            );
+                          },
+                          error: (error, stackTrace) {
+                            if (kDebugMode) print(error);
+                            return ErrorText(error: error.toString());
+                          },
+                          loading: () => const Loader(),
+                        )
+                    : Icon(Icons.arrow_forward_ios_rounded, size: 17.h),
           ],
         ),
       ),

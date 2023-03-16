@@ -61,6 +61,7 @@ class AdminPostController extends StateNotifier<bool> {
       awards: [],
       description: description,
       link: link,
+      bookmarkedBy: [],
     );
 
     final res = await _postRepository.addPost(post);

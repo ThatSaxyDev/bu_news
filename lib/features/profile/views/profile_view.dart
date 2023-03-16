@@ -1,15 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:bu_news/features/auth/controller/auth_controller.dart';
-import 'package:bu_news/features/profile/widgets/profile_tile.dart';
-import 'package:bu_news/theme/palette.dart';
-import 'package:bu_news/utils/app_fade_animation.dart';
-import 'package:bu_news/utils/widget_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:routemaster/routemaster.dart';
+
+import 'package:bu_news/features/auth/controller/auth_controller.dart';
+import 'package:bu_news/features/profile/widgets/profile_tile.dart';
+import 'package:bu_news/theme/palette.dart';
+import 'package:bu_news/utils/app_fade_animation.dart';
+import 'package:bu_news/utils/widget_extensions.dart';
 
 class ProfileView extends ConsumerWidget {
   const ProfileView({super.key});
@@ -26,7 +27,7 @@ class ProfileView extends ConsumerWidget {
     Routemaster.of(context).push('/new-symptoms');
   }
 
-   void navigateToApproval(BuildContext context) {
+  void navigateToApproval(BuildContext context) {
     Routemaster.of(context).push('/approval-status');
   }
 
@@ -162,6 +163,7 @@ class ProfileView extends ConsumerWidget {
                       title: e.title,
                       isSwitch: e.isSwitch,
                       isLogout: e.isLogout,
+                      isReactive: e.isReactive,
                     ),
                   ),
                 )
@@ -191,11 +193,13 @@ class ProfileItem {
   final String title;
   final bool isSwitch;
   final bool isLogout;
+  final bool isReactive;
   const ProfileItem({
     required this.icon,
     required this.title,
     required this.isSwitch,
     required this.isLogout,
+    required this.isReactive,
   });
 }
 
@@ -205,24 +209,28 @@ const profileItems = [
     title: 'My Profile',
     isSwitch: false,
     isLogout: false,
+    isReactive: false,
   ),
   ProfileItem(
     icon: PhosphorIcons.bookmark,
     title: 'Bookmarks',
     isSwitch: false,
     isLogout: false,
+    isReactive: true,
   ),
   ProfileItem(
     icon: PhosphorIcons.moonStars,
-    title: '------------------------->',
+    title: 'Dark Theme',
     isSwitch: true,
     isLogout: false,
+    isReactive: false,
   ),
   ProfileItem(
     icon: PhosphorIcons.appWindow,
     title: 'Community Creation Approval',
     isSwitch: false,
     isLogout: false,
+    isReactive: false,
   ),
 ];
 

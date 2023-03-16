@@ -4,6 +4,7 @@ import 'package:bu_news/core/constants/constants.dart';
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/features/community/controllers/communtiy_controller.dart';
 import 'package:bu_news/features/posts/controllers/post_controller.dart';
+import 'package:bu_news/features/profile/controllers/profile_controller.dart';
 import 'package:bu_news/models/post_model.dart';
 import 'package:bu_news/theme/palette.dart';
 import 'package:bu_news/utils/app_fade_animation.dart';
@@ -91,6 +92,18 @@ class PostCard extends ConsumerWidget {
 
   void navigateToComments(BuildContext context) {
     Routemaster.of(context).push('/post/${post.id}/comments');
+  }
+
+  void bookmark(BuildContext context, WidgetRef ref, String uid) async {
+    if (post.bookmarkedBy.contains(uid)) {
+      ref
+          .read(postControllerProvider.notifier)
+          .removeFromBookmarks(post.id, context);
+    } else {
+      ref
+          .read(postControllerProvider.notifier)
+          .addToBookmarks(post.id, context);
+    }
   }
 
   @override
@@ -312,27 +325,20 @@ class PostCard extends ConsumerWidget {
                                   ),
                                 ],
                               ),
-                              ref
-                                  .watch(getCommunityByNameProvider(
-                                      post.communityName))
-                                  .when(
-                                    data: (data) {
-                                      if (data.mods.contains(user.uid)) {
-                                        return IconButton(
-                                          onPressed: () =>
-                                              deletePost(ref, context),
-                                          icon: const Icon(
-                                            PhosphorIcons.gearSix,
-                                          ),
-                                        );
-                                      } else {
-                                        return const SizedBox.shrink();
-                                      }
-                                    },
-                                    error: (error, stackTrace) =>
-                                        ErrorText(error: error.toString()),
-                                    loading: () => const Loader(),
-                                  ),
+                              IconButton(
+                                onPressed: () =>
+                                    bookmark(context, ref, user.uid),
+                                icon: post.bookmarkedBy.contains(user.uid)
+                                    ? Icon(
+                                        PhosphorIcons.bookmarkFill,
+                                        color: Pallete.blueColor,
+                                      )
+                                    : Icon(
+                                        PhosphorIcons.bookmarkBold,
+                                        color: currentTheme
+                                            .textTheme.bodyMedium!.color!,
+                                      ),
+                              ),
                             ],
                           ),
                         ],

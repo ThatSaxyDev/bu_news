@@ -27,6 +27,12 @@ final userPostProvider =
   return postController.fetchUserPosts(communities);
 });
 
+final userBookmarksProvider = StreamProvider((ref) {
+  final postController = ref.watch(postControllerProvider.notifier);
+
+  return postController.fetchUserBookMarks();
+});
+
 final guestPostProvider = StreamProvider((ref) {
   final postController = ref.watch(postControllerProvider.notifier);
 
@@ -215,6 +221,7 @@ class PostController extends StateNotifier<bool> {
       awards: [],
       description: description,
       link: link,
+      bookmarkedBy: [],
     );
 
     final res = await _postRepository.addPost(post);
@@ -224,9 +231,46 @@ class PostController extends StateNotifier<bool> {
       (l) => showSnackBar(context, l.message),
       (r) {
         showSnackBar(context, 'Posted Successfully!');
-        Routemaster.of(context).pop();
+        Routemaster.of(context).replace('/base-nav-wrapper');
       },
     );
+  }
+
+  void addToBookmarks(
+    String postId,
+    BuildContext context,
+  ) async {
+    state = true;
+    final uid = _ref.read(userProvider)!.uid;
+    final res = await _postRepository.addToBookmarks(postId, uid);
+    state = false;
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) {
+        showSnackBar(context, 'Added to bookmarks!');
+      },
+    );
+  }
+
+  void removeFromBookmarks(
+    String postId,
+    BuildContext context,
+  ) async {
+    state = true;
+    final uid = _ref.read(userProvider)!.uid;
+    final res = await _postRepository.removeFromBookmarks(postId, uid);
+    state = false;
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) {
+        showSnackBar(context, 'Removed from bookmarks!');
+      },
+    );
+  }
+
+  Stream<List<Post>> fetchUserBookMarks() {
+    final uid = _ref.read(userProvider)!.uid;
+    return _postRepository.fetchUserBookMarks(uid);
   }
 
   Stream<List<Post>> fetchUserPosts(List<Community> communities) {

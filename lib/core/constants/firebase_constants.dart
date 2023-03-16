@@ -5,4 +5,5 @@ class FirebaseConstants {
   static const commentsCollection = 'comments';
   static const adminCollection = 'admin';
   static const approvalCollection = 'approvals';
+  static const bookmarksCollection = 'bookmarks';
 }

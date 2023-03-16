@@ -27,6 +27,46 @@ class PostRepository {
     }
   }
 
+  FutureVoid addToBookmarks(String postId, String uid) async {
+    try {
+      return right(
+        _posts.doc(postId).update({
+          'bookmarkedBy': FieldValue.arrayUnion([uid]),
+        }),
+      );
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  FutureVoid removeFromBookmarks(String postId, String uid) async {
+    try {
+      return right(
+        _posts.doc(postId).update({
+          'bookmarkedBy': FieldValue.arrayRemove([uid]),
+        }),
+      );
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  Stream<List<Post>> fetchUserBookMarks(String uid) {
+    return _posts
+        .where('bookmarkedBy', arrayContains: uid)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((event) => event.docs
+            .map(
+              (e) => Post.fromMap(e.data() as Map<String, dynamic>),
+            )
+            .toList());
+  }
+
   Stream<List<Post>> fetchUserPosts(List<Community> communities) {
     return _posts
         .where('communityName',
@@ -156,4 +196,7 @@ class PostRepository {
 
   CollectionReference get _users =>
       _firestore.collection(FirebaseConstants.usersCollection);
+
+  CollectionReference get _bookmarks =>
+      _firestore.collection(FirebaseConstants.bookmarksCollection);
 }

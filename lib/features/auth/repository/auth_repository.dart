@@ -91,7 +91,7 @@ class AuthRepository {
     }
   }
 
-   FutureEither<UserModel> signInWithGoogleAdmin() async {
+  FutureEither<UserModel> signInWithGoogleAdmin() async {
     try {
       UserCredential userCredential;
       if (kIsWeb) {

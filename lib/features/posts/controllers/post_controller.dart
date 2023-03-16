@@ -6,6 +6,7 @@ import 'package:bu_news/models/post_model.dart';
 import 'package:bu_news/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:uuid/uuid.dart';
 
 final postControllerProvider =
@@ -186,6 +187,47 @@ class PostController extends StateNotifier<bool> {
   //     },
   //   );
   // }
+
+  // to share text post
+  void shareTextPost({
+    required BuildContext context,
+    required String title,
+    required Community selectedCommunity,
+    required String description,
+    required String link,
+  }) async {
+    state = true;
+    String postId = const Uuid().v1();
+    final user = _ref.read(userProvider)!;
+
+    final Post post = Post(
+      id: postId,
+      title: title,
+      communityName: selectedCommunity.name,
+      communityProfilePic: selectedCommunity.avatar,
+      upvotes: [],
+      downvotes: [],
+      commentCount: 0,
+      username: user.name,
+      uid: user.uid,
+      type: 'text',
+      createdAt: DateTime.now(),
+      awards: [],
+      description: description,
+      link: link,
+    );
+
+    final res = await _postRepository.addPost(post);
+
+    state = false;
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) {
+        showSnackBar(context, 'Posted Successfully!');
+        Routemaster.of(context).pop();
+      },
+    );
+  }
 
   Stream<List<Post>> fetchUserPosts(List<Community> communities) {
     if (communities.isNotEmpty) {

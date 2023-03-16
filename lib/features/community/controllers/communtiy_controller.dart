@@ -6,6 +6,7 @@ import 'package:bu_news/core/failure.dart';
 import 'package:bu_news/core/providers/storage_repository_provider.dart';
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/features/community/repository/community_repository.dart';
+import 'package:bu_news/models/application_model.dart';
 import 'package:bu_news/models/post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,6 +18,31 @@ import '../../../utils/snack_bar.dart';
 final userCommunitiesProvider = StreamProvider((ref) {
   final communityController = ref.watch(communityControllerProvider.notifier);
   return communityController.getUserCommunities();
+});
+
+final userOwnCommunitiesProvider = StreamProvider((ref) {
+  final communityController = ref.watch(communityControllerProvider.notifier);
+  return communityController.getUserOwnCommunities();
+});
+
+final getApprovalsProvider = StreamProvider((ref) {
+  final communityController = ref.watch(communityControllerProvider.notifier);
+  return communityController.getApprovals();
+});
+
+final getPending = StreamProvider((ref) {
+  final communityController = ref.watch(communityControllerProvider.notifier);
+  return communityController.getPendingApprovals();
+});
+
+final getApproved = StreamProvider((ref) {
+  final communityController = ref.watch(communityControllerProvider.notifier);
+  return communityController.getApprovedApprovals();
+});
+
+final getRejected = StreamProvider((ref) {
+  final communityController = ref.watch(communityControllerProvider.notifier);
+  return communityController.getrejectedApprovals();
 });
 
 final communityControllerProvider =
@@ -57,24 +83,69 @@ class CommunityController extends StateNotifier<bool> {
         _ref = ref,
         super(false);
 
-  void createCommunity(String name, BuildContext context) async {
+  // void createCommunity(String name, BuildContext context) async {
+  //   state = true;
+  //   final uid = _ref.read(userProvider)?.uid ?? '';
+  //   Community community = Community(
+  //     id: name,
+  //     name: name,
+  //     banner: Constants.bannerDefault,
+  //     avatar: Constants.communityAvatarDefault,
+  //     members: [uid],
+  //     mods: [uid],
+  //   );
+
+  //   final res = await _communityRepository.createCommunity(community);
+  //   state = false;
+  //   res.fold(
+  //     (failure) => showSnackBar(context, failure.message),
+  //     (success) {
+  //       showSnackBar(context, 'Komyuniti created successfully');
+  //       Routemaster.of(context).pop();
+  //     },
+  //   );
+  // }
+
+  void applyToCreateCommunity({
+    required BuildContext context,
+    required String communityName,
+    required String matricNo,
+    required File? photoIdCard,
+    required String description,
+    required String approvalStatus,
+  }) async {
     state = true;
     final uid = _ref.read(userProvider)?.uid ?? '';
-    Community community = Community(
-      id: name,
-      name: name,
-      banner: Constants.bannerDefault,
-      avatar: Constants.communityAvatarDefault,
-      members: [uid],
-      mods: [uid],
+    String image = '';
+
+    if (photoIdCard != null) {
+      final res = await _storageRepository.storeFile(
+        path: 'appproval/ids',
+        id: uid,
+        file: photoIdCard,
+      );
+      res.fold(
+        (l) => showSnackBar(context, l.message),
+        (r) => image = r,
+      );
+    }
+
+    ApplicationModel application = ApplicationModel(
+      userId: uid,
+      communityName: communityName,
+      matricNo: matricNo,
+      photoIdCard: image,
+      description: description,
+      approvalStatus: approvalStatus,
+      createdAt: DateTime.now(),
     );
 
-    final res = await _communityRepository.createCommunity(community);
+    final res = await _communityRepository.applyToCreateCommunity(application);
     state = false;
     res.fold(
       (failure) => showSnackBar(context, failure.message),
       (success) {
-        showSnackBar(context, 'Komyuniti created successfully');
+        showSnackBar(context, 'Application successful');
         Routemaster.of(context).pop();
       },
     );
@@ -121,6 +192,31 @@ class CommunityController extends StateNotifier<bool> {
   Stream<List<Community>> getUserCommunities() {
     final uid = _ref.read(userProvider)!.uid;
     return _communityRepository.getUserCommunities(uid);
+  }
+
+  Stream<List<Community>> getUserOwnCommunities() {
+    final uid = _ref.read(userProvider)!.uid;
+    return _communityRepository.getUserOwnCommunities(uid);
+  }
+
+  Stream<List<ApplicationModel>> getApprovals() {
+    final uid = _ref.read(userProvider)!.uid;
+    return _communityRepository.getApprovals(uid);
+  }
+
+  Stream<List<ApplicationModel>> getPendingApprovals() {
+    final uid = _ref.read(userProvider)!.uid;
+    return _communityRepository.getPending(uid);
+  }
+
+  Stream<List<ApplicationModel>> getApprovedApprovals() {
+    final uid = _ref.read(userProvider)!.uid;
+    return _communityRepository.getApproved(uid);
+  }
+
+  Stream<List<ApplicationModel>> getrejectedApprovals() {
+    final uid = _ref.read(userProvider)!.uid;
+    return _communityRepository.getRejected(uid);
   }
 
   Stream<Community> getCommunityByName(String name) {

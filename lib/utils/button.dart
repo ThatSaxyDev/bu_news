@@ -13,28 +13,32 @@ class BButton extends StatelessWidget {
   final double? radius;
   final void Function()? onTap;
   final Color? color;
-  final Widget item;
+  final Widget? item;
+  final String? text;
+  final bool isText;
   const BButton({
     Key? key,
     this.height,
-    this.radius,
     this.width,
+    this.radius,
     required this.onTap,
     this.color,
-    required this.item,
+    this.item,
+    this.text,
+    this.isText = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height ?? 50.h,
+      height: height ?? 40.h,
       width: width ?? double.infinity,
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
-              Radius.circular(radius ?? 35.r),
+              Radius.circular(radius ?? 8.r),
             ),
           ),
           padding: EdgeInsets.zero,
@@ -43,7 +47,15 @@ class BButton extends StatelessWidget {
           backgroundColor: color ?? Pallete.blueColor,
         ),
         child: Center(
-          child: item,
+          child: isText == true
+              ? Text(
+                  text ?? '',
+                  style: TextStyle(
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                )
+              : item,
         ),
       ),
     );
@@ -51,47 +63,63 @@ class BButton extends StatelessWidget {
 }
 
 class TransparentButton extends StatelessWidget {
-  final double height;
+  final double? height;
   final double? width;
-  final double? padding;
+  final double? radius;
   final void Function()? onTap;
-  final Color color;
-  final Widget child;
+  final Color? color;
+  final Widget? item;
+  final String? text;
+  final bool isText;
+  final Color? backgroundColor;
+  final Color? textColor;
   const TransparentButton({
     Key? key,
-    required this.height,
+    this.height,
     this.width,
-    this.padding,
+    this.radius,
     required this.onTap,
-    required this.color,
-    required this.child,
+    this.color,
+    this.item,
+    this.text,
+    this.isText = true,
+    this.backgroundColor,
+    this.textColor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height,
-      width: width,
+      height: height ?? 40.h,
+      width: width ?? double.infinity,
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                width: 1,
-                color: color,
-              ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(25.r),
-              ),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              width: 1,
+              color: color ?? Pallete.greey,
             ),
-            elevation: 0,
-            shadowColor: Colors.transparent,
-            backgroundColor: Colors.transparent,
-            padding: EdgeInsets.symmetric(
-              vertical: padding ?? 0,
-            )),
+            borderRadius: BorderRadius.all(
+              Radius.circular(radius ?? 8.r),
+            ),
+          ),
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          backgroundColor: backgroundColor ?? Colors.transparent,
+          padding: EdgeInsets.zero,
+        ),
         child: Center(
-          child: child,
+          child: isText == true
+              ? Text(
+                  text ?? '',
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                )
+              : item,
         ),
       ),
     );

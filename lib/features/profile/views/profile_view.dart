@@ -26,6 +26,10 @@ class ProfileView extends ConsumerWidget {
     Routemaster.of(context).push('/new-symptoms');
   }
 
+   void navigateToApproval(BuildContext context) {
+    Routemaster.of(context).push('/approval-status');
+  }
+
   void showlogOutDialog(WidgetRef ref, BuildContext context) async {
     showDialog(
         context: context,
@@ -145,8 +149,8 @@ class ProfileView extends ConsumerWidget {
                     child: ProfileTile(
                       onTap: () {
                         switch (e.title) {
-                          case 'Reminders':
-                            navigateToReminders(context);
+                          case 'Community Creation Approval':
+                            navigateToApproval(context);
                             break;
 
                           case 'Add new symptoms':
@@ -212,6 +216,12 @@ const profileItems = [
     icon: PhosphorIcons.moonStars,
     title: '------------------------->',
     isSwitch: true,
+    isLogout: false,
+  ),
+  ProfileItem(
+    icon: PhosphorIcons.appWindow,
+    title: 'Community Creation Approval',
+    isSwitch: false,
     isLogout: false,
   ),
 ];

@@ -1,5 +1,6 @@
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/features/community/controllers/communtiy_controller.dart';
+import 'package:bu_news/features/home/widgets/circular_fab.dart';
 import 'package:bu_news/features/posts/controllers/post_controller.dart';
 import 'package:bu_news/features/posts/widgets/post_card.dart';
 import 'package:bu_news/theme/palette.dart';
@@ -134,6 +135,16 @@ class _HomeViewState extends ConsumerState<HomeView>
                 ),
           ],
         ),
+        floatingActionButton: ref.watch(getApproved).when(
+              data: (data) {
+                if (data.isEmpty) {
+                  return const SizedBox.shrink();
+                }
+                return const CircularFAB();
+              },
+              error: (error, stackTrace) => ErrorText(error: error.toString()),
+              loading: () => const Loader(),
+            ),
       ),
     );
   }

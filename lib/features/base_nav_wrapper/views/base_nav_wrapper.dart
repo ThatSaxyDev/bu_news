@@ -1,6 +1,8 @@
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/features/base_nav_wrapper/widgets/nav_bar_widget.dart';
+import 'package:bu_news/features/community/views/community_view.dart';
 import 'package:bu_news/features/home/views/home_view.dart';
+import 'package:bu_news/features/posts/views/add_post_view.dart';
 import 'package:bu_news/features/profile/views/profile_view.dart';
 import 'package:bu_news/theme/palette.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +20,7 @@ class BaseNavWrapper extends ConsumerStatefulWidget {
 class _BaseNavWrapperState extends ConsumerState<BaseNavWrapper> {
   List<Widget> pages = [
     HomeView(),
-    Container(),
-    // Container(color: Colors.green),
-    // Container(color: Colors.pink),
-    // NotesView(),
-    // InsightsView(),
-    // HomeView(),
-    // HelpView(),
+    CommunityView(),
     ProfileView(),
   ];
 
@@ -120,7 +116,7 @@ class _BaseNavWrapperState extends ConsumerState<BaseNavWrapper> {
                 //! Insights
                 NavBarWidget(
                   onTap: () => _page.value = 1,
-                  icon: PhosphorIcons.plusBold,
+                  icon: PhosphorIcons.usersThreeBold,
                   label: '',
                   iconColor: _page.value == 1 ? Pallete.blueColor : null,
                   color: _page.value == 1 ? Pallete.blueColor : null,

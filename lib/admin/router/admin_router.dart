@@ -1,4 +1,5 @@
 import 'package:bu_news/admin/features/auth/views/admin_login_view.dart';
+import 'package:bu_news/admin/features/base_nav_wrapper/views/base_nav_wrapper.dart';
 import 'package:bu_news/admin/features/home/views/admin_home_view.dart';
 import 'package:bu_news/admin/features/posts/views/admin_add_post_type_screen.dart';
 import 'package:bu_news/features/auth/screens/login_screen.dart';
@@ -14,7 +15,7 @@ final adminLoggedOutRoute = RouteMap(
 final adminLoggedInRoute = RouteMap(
   routes: {
     '/': (_) => const MaterialPage(
-          child: AdminHomeView(),
+          child: AdminBaseNavWrapper(),
         ),
     '/add-post/:type': (routeData) => MaterialPage(
           child: AdminAddPostTypeScreen(

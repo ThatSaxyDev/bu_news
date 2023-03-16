@@ -17,15 +17,15 @@ class PostRepository {
   PostRepository({required FirebaseFirestore firestore})
       : _firestore = firestore;
 
-  // FutureVoid addPost(Post post) async {
-  //   try {
-  //     return right(_posts.doc(post.id).set(post.toMap()));
-  //   } on FirebaseException catch (e) {
-  //     throw e.message!;
-  //   } catch (e) {
-  //     return left(Failure(e.toString()));
-  //   }
-  // }
+  FutureVoid addPost(Post post) async {
+    try {
+      return right(_posts.doc(post.id).set(post.toMap()));
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
 
   Stream<List<Post>> fetchUserPosts(List<Community> communities) {
     return _posts

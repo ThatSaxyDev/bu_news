@@ -1,6 +1,8 @@
 import 'package:bu_news/features/auth/screens/login_screen.dart';
 import 'package:bu_news/features/base_nav_wrapper/views/base_nav_wrapper.dart';
 import 'package:bu_news/features/home/views/home_view.dart';
+import 'package:bu_news/features/posts/views/add_post_view.dart';
+import 'package:bu_news/features/profile/views/approval_status_view.dart';
 import 'package:bu_news/features/welcome/view/welcome_view.dart';
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
@@ -16,7 +18,17 @@ final loggedInRoute = RouteMap(
     '/base-nav-wrapper': (_) => const MaterialPage(
           child: BaseNavWrapper(),
         ),
-
+    '/community-application': (_) => const MaterialPage(
+          child: BaseNavWrapper(),
+        ),
+    '/approval-status': (_) => const MaterialPage(
+          child: AppprovalStatusView(),
+        ),
+    '/add-post/:type': (routeData) => MaterialPage(
+          child: AddPostView(
+            type: routeData.pathParameters['type']!,
+          ),
+        ),
     // '/create-community': (_) => const MaterialPage(
     //       child: CreateCommunityScreen(),
     //     ),

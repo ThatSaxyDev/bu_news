@@ -17,7 +17,9 @@ class ProfileTile extends ConsumerWidget {
   final String title;
   final bool? isSwitch;
   final bool? isLogout;
+  final Color? iconColor;
   final void Function()? onTap;
+  final void Function(bool)? onHover;
   const ProfileTile({
     super.key,
     required this.icon,
@@ -25,6 +27,8 @@ class ProfileTile extends ConsumerWidget {
     this.isSwitch = true,
     this.isLogout = true,
     this.onTap,
+    this.iconColor,
+    this.onHover,
   });
 
   @override
@@ -36,20 +40,19 @@ class ProfileTile extends ConsumerWidget {
     }
 
     return InkWell(
+      hoverColor: Colors.transparent,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: onTap,
+      onHover: onHover,
       child: Container(
         height: 60.h,
         padding: EdgeInsets.only(left: 11.w, right: 19.43.h),
         margin: EdgeInsets.only(bottom: 16.h, left: 24.w, right: 24.w),
         decoration: BoxDecoration(
-          color: currentTheme.backgroundColor,
-          borderRadius: BorderRadius.circular(15.r),
-          border: Border.all(
-            width: 0.5.w
-          )
-        ),
+            color: currentTheme.backgroundColor,
+            borderRadius: BorderRadius.circular(15.r),
+            border: Border.all(width: 0.5.w)),
         child: Row(
           children: [
             Icon(
@@ -57,7 +60,9 @@ class ProfileTile extends ConsumerWidget {
               size: 25.w,
               color: isLogout == true
                   ? Pallete.thickRed
-                  : currentTheme.textTheme.bodyMedium!.color,
+                  : isLogout == false
+                      ? iconColor
+                      : currentTheme.textTheme.bodyMedium!.color,
             ),
             13.5.sbW,
             Text(

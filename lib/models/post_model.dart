@@ -7,6 +7,7 @@ class Post {
   final String id;
   final String title;
   final String? link;
+  final String? imageUrl;
   final String? description;
   final String communityName;
   final String communityProfilePic;
@@ -23,6 +24,7 @@ class Post {
     required this.id,
     required this.title,
     this.link,
+    this.imageUrl,
     this.description,
     required this.communityName,
     required this.communityProfilePic,
@@ -41,6 +43,7 @@ class Post {
     String? id,
     String? title,
     String? link,
+    String? imageUrl,
     String? description,
     String? communityName,
     String? communityProfilePic,
@@ -58,6 +61,7 @@ class Post {
       id: id ?? this.id,
       title: title ?? this.title,
       link: link ?? this.link,
+      imageUrl: imageUrl ?? this.imageUrl,
       description: description ?? this.description,
       communityName: communityName ?? this.communityName,
       communityProfilePic: communityProfilePic ?? this.communityProfilePic,
@@ -78,6 +82,7 @@ class Post {
       'id': id,
       'title': title,
       'link': link,
+      'imageUrl': imageUrl,
       'description': description,
       'communityName': communityName,
       'communityProfilePic': communityProfilePic,
@@ -98,9 +103,8 @@ class Post {
       id: (map["id"] ?? '') as String,
       title: (map["title"] ?? '') as String,
       link: map['link'] != null ? map["link"] ?? '' as String : null,
-      description: map['description'] != null
-          ? map["description"] ?? '' as String
-          : null,
+      imageUrl: map['imageUrl'] != null ? map["imageUrl"] ?? '' as String : null,
+      description: map['description'] != null ? map["description"] ?? '' as String : null,
       communityName: (map["communityName"] ?? '') as String,
       communityProfilePic: (map["communityProfilePic"] ?? '') as String,
       upvotes: List<String>.from(map['upvotes']),
@@ -109,8 +113,7 @@ class Post {
       username: (map["username"] ?? '') as String,
       uid: (map["uid"] ?? '') as String,
       type: (map["type"] ?? '') as String,
-      createdAt:
-          DateTime.fromMillisecondsSinceEpoch((map["createdAt"] ?? 0) as int),
+      createdAt: DateTime.fromMillisecondsSinceEpoch((map["createdAt"]??0) as int),
       awards: List<String>.from(map['awards']),
       bookmarkedBy: List<String>.from(map['bookmarkedBy']),
     );
@@ -118,47 +121,50 @@ class Post {
 
   @override
   String toString() {
-    return 'Post(id: $id, title: $title, link: $link, description: $description, communityName: $communityName, communityProfilePic: $communityProfilePic, upvotes: $upvotes, downvotes: $downvotes, commentCount: $commentCount, username: $username, uid: $uid, type: $type, createdAt: $createdAt, awards: $awards, bookmarkedBy: $bookmarkedBy)';
+    return 'Post(id: $id, title: $title, link: $link, imageUrl: $imageUrl, description: $description, communityName: $communityName, communityProfilePic: $communityProfilePic, upvotes: $upvotes, downvotes: $downvotes, commentCount: $commentCount, username: $username, uid: $uid, type: $type, createdAt: $createdAt, awards: $awards, bookmarkedBy: $bookmarkedBy)';
   }
 
   @override
   bool operator ==(covariant Post other) {
     if (identical(this, other)) return true;
-
-    return other.id == id &&
-        other.title == title &&
-        other.link == link &&
-        other.description == description &&
-        other.communityName == communityName &&
-        other.communityProfilePic == communityProfilePic &&
-        listEquals(other.upvotes, upvotes) &&
-        listEquals(other.downvotes, downvotes) &&
-        other.commentCount == commentCount &&
-        other.username == username &&
-        other.uid == uid &&
-        other.type == type &&
-        other.createdAt == createdAt &&
-        listEquals(other.awards, awards) &&
-        listEquals(other.bookmarkedBy, bookmarkedBy);
+  
+    return 
+      other.id == id &&
+      other.title == title &&
+      other.link == link &&
+      other.imageUrl == imageUrl &&
+      other.description == description &&
+      other.communityName == communityName &&
+      other.communityProfilePic == communityProfilePic &&
+      listEquals(other.upvotes, upvotes) &&
+      listEquals(other.downvotes, downvotes) &&
+      other.commentCount == commentCount &&
+      other.username == username &&
+      other.uid == uid &&
+      other.type == type &&
+      other.createdAt == createdAt &&
+      listEquals(other.awards, awards) &&
+      listEquals(other.bookmarkedBy, bookmarkedBy);
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        title.hashCode ^
-        link.hashCode ^
-        description.hashCode ^
-        communityName.hashCode ^
-        communityProfilePic.hashCode ^
-        upvotes.hashCode ^
-        downvotes.hashCode ^
-        commentCount.hashCode ^
-        username.hashCode ^
-        uid.hashCode ^
-        type.hashCode ^
-        createdAt.hashCode ^
-        awards.hashCode ^
-        bookmarkedBy.hashCode;
+      title.hashCode ^
+      link.hashCode ^
+      imageUrl.hashCode ^
+      description.hashCode ^
+      communityName.hashCode ^
+      communityProfilePic.hashCode ^
+      upvotes.hashCode ^
+      downvotes.hashCode ^
+      commentCount.hashCode ^
+      username.hashCode ^
+      uid.hashCode ^
+      type.hashCode ^
+      createdAt.hashCode ^
+      awards.hashCode ^
+      bookmarkedBy.hashCode;
   }
 
   String toJson() => json.encode(toMap());

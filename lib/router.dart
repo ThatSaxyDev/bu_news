@@ -25,10 +25,8 @@ final loggedInRoute = RouteMap(
     '/approval-status': (_) => const MaterialPage(
           child: AppprovalStatusView(),
         ),
-    '/add-post/:type': (routeData) => MaterialPage(
-          child: AddPostView(
-            type: routeData.pathParameters['type']!,
-          ),
+    '/add-post': (routeData) => const MaterialPage(
+          child: AddPostView(),
         ),
     '/bookmarks': (routeData) => const MaterialPage(
           child: BookmarksView(),

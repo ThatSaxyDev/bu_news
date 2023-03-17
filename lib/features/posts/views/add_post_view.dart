@@ -19,11 +19,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:routemaster/routemaster.dart';
 
 class AddPostView extends ConsumerStatefulWidget {
-  final String? type;
-  const AddPostView({
-    super.key,
-    this.type,
-  });
+  const AddPostView({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _AddPostViewState();
@@ -45,7 +41,7 @@ class _AddPostViewState extends ConsumerState<AddPostView> {
     textPostController.dispose();
   }
 
-  void selectBannerImage() async {
+  void selectImage() async {
     final res = await pickImage();
 
     if (res != null) {
@@ -56,36 +52,24 @@ class _AddPostViewState extends ConsumerState<AddPostView> {
   }
 
   void sharePost() {
-    if (widget.type == 'image' &&
-        image != null &&
-        titleController.text.isNotEmpty) {
-      // ref.read(adminPostControllerProvider.notifier).shareImagePost(
-      //       context: context,
-      //       title: titleController.text.trim(),
-      //       selectedCommunity: selectedCommunity ?? communities[0],
-      //       file: bannerFile,
-      //     );
-    } else if (widget.type == 'text' &&
-        titleController.text.isNotEmpty &&
-        textPostController.text.isNotEmpty) {
+    if (titleController.text.isNotEmpty && textPostController.text.isNotEmpty) {
       ref.read(postControllerProvider.notifier).shareTextPost(
             context: context,
             title: titleController.text.trim(),
             selectedCommunity: selectedCommunity ?? communities[0],
             description: textPostController.text.trim(),
             link: linkController.text.isEmpty ? '' : linkController.text.trim(),
+            image: image,
           );
     } else {
-      showSnackBar(context, 'Please enter all fields');
+      showSnackBar(context, 'Please enter a title and some content');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(userProvider)!;
-    final isTypeImage = widget.type == 'image';
-    // final isTypeLink = widget.type == 'link';
-    final isTypeText = widget.type == 'text';
+
     final currentTheme = ref.watch(themeNotifierProvider);
     final isLoading = ref.watch(postControllerProvider);
     return Scaffold(
@@ -112,7 +96,7 @@ class _AddPostViewState extends ConsumerState<AddPostView> {
                       // 20.sbH,
                       //! header
                       Text(
-                        'Post ${widget.type}',
+                        'Post',
                         style: TextStyle(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w500,
@@ -129,7 +113,7 @@ class _AddPostViewState extends ConsumerState<AddPostView> {
                       ),
                     ],
                   ),
-                  40.sbW,
+                  1.sbW,
                 ],
               ),
             ),
@@ -137,199 +121,177 @@ class _AddPostViewState extends ConsumerState<AddPostView> {
 
           //!
           Expanded(
-            child: Container(
-              padding: EdgeInsets.fromLTRB(24.w, 15.h, 24.w, 0),
-              child: Column(
-                children: [
-                  TextField(
-                    controller: titleController,
-                    decoration: InputDecoration(
-                        hintText: 'Title',
-                        hintStyle: TextStyle(fontSize: 14.sp),
-                        filled: true,
-                        border: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.transparent),
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.transparent),
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.transparent),
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        contentPadding: EdgeInsets.all(18.w)),
-                    maxLength: 30,
-                  ),
-                  20.sbH,
-                  if (isTypeImage)
-                    GestureDetector(
-                      onTap: selectBannerImage,
-                      child: DottedBorder(
-                        borderType: BorderType.RRect,
-                        radius: Radius.circular(15.r),
-                        dashPattern: const [10, 4],
-                        strokeCap: StrokeCap.round,
-                        color: currentTheme.textTheme.bodyMedium!.color!,
-                        child: Container(
-                          width: double.infinity,
-                          height: 200.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
+            child: isLoading
+                ? const Loader()
+                : Container(
+                    padding: EdgeInsets.fromLTRB(24.w, 15.h, 24.w, 0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          TextField(
+                            controller: titleController,
+                            decoration: InputDecoration(
+                                hintText: 'Title',
+                                hintStyle: TextStyle(fontSize: 14.sp),
+                                filled: true,
+                                border: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                contentPadding: EdgeInsets.all(18.w)),
+                            maxLength: 30,
                           ),
-                          child: image != null
-                              ? Image.file(image!)
-                              : Center(
-                                  child: Icon(
-                                    PhosphorIcons.image,
-                                    size: 40.h,
+                          20.sbH,
+                          Column(
+                            children: [
+                              TextField(
+                                controller: textPostController,
+                                decoration: InputDecoration(
+                                    hintText: 'Type something...',
+                                    hintStyle: TextStyle(fontSize: 14.sp),
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent),
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent),
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent),
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    contentPadding: EdgeInsets.all(18.w)),
+                                // maxLength: 21,
+                                maxLines: 7,
+                              ),
+
+                              //! image
+                              40.sbH,
+                              GestureDetector(
+                                onTap: selectImage,
+                                child: DottedBorder(
+                                  borderType: BorderType.RRect,
+                                  radius: Radius.circular(15.r),
+                                  dashPattern: const [10, 4],
+                                  strokeCap: StrokeCap.round,
+                                  color:
+                                      currentTheme.textTheme.bodyMedium!.color!,
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 200.h,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    child: image != null
+                                        ? Image.file(image!)
+                                        : Center(
+                                            child: Icon(
+                                              PhosphorIcons.image,
+                                              size: 40.h,
+                                            ),
+                                          ),
                                   ),
                                 ),
-                        ),
+                              ),
+
+                              40.sbH,
+
+                              // link
+                              TextField(
+                                controller: linkController,
+                                decoration: InputDecoration(
+                                    hintText: 'Link',
+                                    hintStyle: TextStyle(fontSize: 14.sp),
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent),
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent),
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent),
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    contentPadding: EdgeInsets.all(18.w)),
+                                // maxLength: 30,
+                                maxLines: 3,
+                              ),
+                            ],
+                          ),
+                          40.sbH,
+                          const Align(
+                            alignment: Alignment.topLeft,
+                            child: Text('Select community'),
+                          ),
+                          ref.watch(userOwnCommunitiesProvider).when(
+                                data: (data) {
+                                  communities = data;
+
+                                  if (data.isEmpty) {
+                                    return const SizedBox();
+                                  }
+
+                                  return DropdownButton(
+                                    dropdownColor: currentTheme.backgroundColor,
+                                    style: TextStyle(
+                                        color: currentTheme
+                                            .textTheme.bodyMedium!.color),
+                                    value: selectedCommunity ?? data[0],
+                                    items: data
+                                        .map(
+                                          (e) => DropdownMenuItem(
+                                            value: e,
+                                            child: Text(e.name),
+                                          ),
+                                        )
+                                        .toList(),
+                                    onChanged: (val) {
+                                      setState(() {
+                                        selectedCommunity = val;
+                                      });
+                                    },
+                                  );
+                                },
+                                error: (error, stackTrace) =>
+                                    ErrorText(error: error.toString()),
+                                loading: () => const Loader(),
+                              ),
+                          100.sbH,
+                          BButton(
+                            height: 60.h,
+                            width: double.infinity,
+                            radius: 10.r,
+                            onTap: sharePost,
+                            color: Pallete.blueColor,
+                            text: 'Share',
+                          ),
+                          60.sbH,
+                        ],
                       ),
                     ),
-
-                  if (isTypeText)
-                    Column(
-                      children: [
-                        TextField(
-                          controller: textPostController,
-                          decoration: InputDecoration(
-                              hintText: 'Type something...',
-                              hintStyle: TextStyle(fontSize: 14.sp),
-                              filled: true,
-                              border: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(10.r),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(10.r),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(10.r),
-                              ),
-                              contentPadding: EdgeInsets.all(18.w)),
-                          // maxLength: 21,
-                          maxLines: 7,
-                        ),
-
-                        40.sbH,
-
-                        // link
-                        TextField(
-                          controller: linkController,
-                          decoration: InputDecoration(
-                              hintText: 'Link',
-                              hintStyle: TextStyle(fontSize: 14.sp),
-                              filled: true,
-                              border: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(10.r),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(10.r),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(10.r),
-                              ),
-                              contentPadding: EdgeInsets.all(18.w)),
-                          // maxLength: 30,
-                          maxLines: 3,
-                        ),
-                      ],
-                    ),
-
-                  // if (isTypeLink)
-                  //   TextField(
-                  //     controller: linktController,
-                  //     decoration: InputDecoration(
-                  //         hintText: 'Link',
-                  //         hintStyle: TextStyle(fontSize: 14.sp),
-                  //         filled: true,
-                  //         border: OutlineInputBorder(
-                  //           borderSide: const BorderSide(color: Colors.transparent),
-                  //           borderRadius: BorderRadius.circular(10.r),
-                  //         ),
-                  //         enabledBorder: OutlineInputBorder(
-                  //           borderSide: const BorderSide(color: Colors.transparent),
-                  //           borderRadius: BorderRadius.circular(10.r),
-                  //         ),
-                  //         focusedBorder: OutlineInputBorder(
-                  //           borderSide: const BorderSide(color: Colors.transparent),
-                  //           borderRadius: BorderRadius.circular(10.r),
-                  //         ),
-                  //         contentPadding: EdgeInsets.all(18.w)),
-                  //     // maxLength: 30,
-                  //     maxLines: 3,
-                  //   ),
-
-                  30.sbH,
-                  const Align(
-                    alignment: Alignment.topLeft,
-                    child: Text('Select community'),
                   ),
-                  ref.watch(userOwnCommunitiesProvider).when(
-                        data: (data) {
-                          communities = data;
-
-                          if (data.isEmpty) {
-                            return const SizedBox();
-                          }
-
-                          return DropdownButton(
-                            dropdownColor: currentTheme.backgroundColor,
-                            style: TextStyle(
-                                color:
-                                    currentTheme.textTheme.bodyMedium!.color),
-                            value: selectedCommunity ?? data[0],
-                            items: data
-                                .map(
-                                  (e) => DropdownMenuItem(
-                                    value: e,
-                                    child: Text(e.name),
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: (val) {
-                              setState(() {
-                                selectedCommunity = val;
-                              });
-                            },
-                          );
-                        },
-                        error: (error, stackTrace) =>
-                            ErrorText(error: error.toString()),
-                        loading: () => const Loader(),
-                      ),
-                  100.sbH,
-                  isLoading
-                      ? const Loader()
-                      : BButton(
-                          height: 60.h,
-                          width: double.infinity,
-                          radius: 10.r,
-                          onTap: sharePost,
-                          color: Pallete.blueColor,
-                          text: 'Share',
-                        ),
-                  // Spc(h: 60.h),
-                ],
-              ),
-            ),
           ),
         ],
       ),

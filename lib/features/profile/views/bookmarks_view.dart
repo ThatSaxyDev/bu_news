@@ -78,6 +78,7 @@ class BookmarksView extends ConsumerWidget {
                         itemBuilder: (context, index) {
                           final post = bookmarks[index];
                           return PostCard(
+                            isInCommentView: true,
                             post: post,
                             delay: index + 0.2,
                           );

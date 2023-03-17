@@ -34,29 +34,32 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
     final currentTheme = ref.watch(themeNotifierProvider);
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (user.isALead == false) {
-            showGeneralDialog(
-                context: context,
-                //!SHADOW EFFECT
-                barrierColor: Pallete.blackColor.withOpacity(0.2),
-                transitionBuilder: (context, a1, a2, widget) =>
-                    CannotCreateCommunityPopUp(
-                      a1: a1,
-                      a2: a2,
-                    ),
+      floatingActionButton: Padding(
+        padding: EdgeInsets.all(11.w),
+        child: FloatingActionButton(
+          onPressed: () {
+            if (user.isALead == false) {
+              showGeneralDialog(
+                  context: context,
+                  //!SHADOW EFFECT
+                  barrierColor: Pallete.blackColor.withOpacity(0.2),
+                  transitionBuilder: (context, a1, a2, widget) =>
+                      CannotCreateCommunityPopUp(
+                        a1: a1,
+                        a2: a2,
+                      ),
 
-                //! ANIMATION DURATION
-                transitionDuration: const Duration(milliseconds: 200),
+                  //! ANIMATION DURATION
+                  transitionDuration: const Duration(milliseconds: 200),
 
-                //! STILL DON'T KNOW WHAT THIS DOES, BUT IT'S REQUIRED
-                pageBuilder: (context, animation1, animation2) =>
-                    const Text(""));
-          }
-        },
-        backgroundColor: currentTheme.textTheme.bodyMedium!.color,
-        child: const Icon(PhosphorIcons.plusBold),
+                  //! STILL DON'T KNOW WHAT THIS DOES, BUT IT'S REQUIRED
+                  pageBuilder: (context, animation1, animation2) =>
+                      const Text(""));
+            }
+          },
+          backgroundColor: currentTheme.textTheme.bodyMedium!.color,
+          child: const Icon(PhosphorIcons.plusBold),
+        ),
       ),
       body: Column(
         children: [

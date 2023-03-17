@@ -16,14 +16,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:readmore/readmore.dart';
+
+import '../views/comments_view.dart';
 
 class PostCard extends ConsumerWidget {
   final Post post;
   final double delay;
+  final bool isInCommentView;
   const PostCard({
     super.key,
     required this.post,
     required this.delay,
+    required this.isInCommentView,
   });
 
   void deletePost(WidgetRef ref, BuildContext context) async {
@@ -74,8 +79,8 @@ class PostCard extends ConsumerWidget {
         });
   }
 
-  void upvotePost(WidgetRef ref) async {
-    ref.read(postControllerProvider.notifier).upvote(post);
+  void like(WidgetRef ref) async {
+    ref.read(postControllerProvider.notifier).like(post);
   }
 
   void downvotePost(WidgetRef ref) async {
@@ -90,9 +95,9 @@ class PostCard extends ConsumerWidget {
     Routemaster.of(context).push('/kom/${post.communityName}');
   }
 
-  void navigateToComments(BuildContext context) {
-    Routemaster.of(context).push('/post/${post.id}/comments');
-  }
+  // void navigateToComments(BuildContext context) {
+  //   Routemaster.of(context).push('/post/${post.id}/comments');
+  // }
 
   void bookmark(BuildContext context, WidgetRef ref, String uid) async {
     if (post.bookmarkedBy.contains(uid)) {
@@ -248,21 +253,77 @@ class PostCard extends ConsumerWidget {
                                   alignment: Alignment.bottomLeft,
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 15.w),
-                                  child: Text(
+                                  child: ReadMoreText(
                                     post.description!,
-                                    style: TextStyle(
-                                      color: currentTheme
-                                          .textTheme.bodyMedium!.color!,
+                                    trimLines: 6,
+                                    colorClickableText: Pallete.blueColor,
+                                    trimMode: TrimMode.Line,
+                                    trimCollapsedText: 'read more',
+                                    trimExpandedText: ' show less',
+                                    moreStyle: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: Pallete.blueColor,
                                     ),
+                                    lessStyle: TextStyle(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Pallete.blueColor),
                                   ),
+                                  // child: RichText(
+                                  //   maxLines: 6,
+                                  //   overflow: TextOverflow.ellipsis,
+                                  //   text: TextSpan(
+                                  //     children: [
+                                  //       TextSpan(
+                                  //         text: post.description,
+                                  //         style: TextStyle(
+                                  //           color: currentTheme
+                                  //               .textTheme.bodyMedium!.color!,
+                                  //         ),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
+                                  // child: Text(
+                                  //   post.description!,
+                                  //   maxLines: 6,
+                                  //   overflow: TextOverflow.ellipsis,
+                                  //   style: TextStyle(
+                                  //     color: currentTheme
+                                  //         .textTheme.bodyMedium!.color!,
+                                  //   ),
+                                  // ),
                                 ),
+                                post.imageUrl!.isEmpty
+                                    ? const SizedBox.shrink()
+                                    : Column(
+                                        children: [
+                                          20.sbH,
+                                          Container(
+                                            height: 200.h,
+                                            width: 300.w,
+                                            margin: post.link!.isEmpty
+                                                ? null
+                                                : EdgeInsets.only(bottom: 10.h),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r),
+                                              image: DecorationImage(
+                                                  image: NetworkImage(
+                                                      post.imageUrl!),
+                                                  fit: BoxFit.cover),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                 post.link!.isEmpty
                                     ? const SizedBox.shrink()
                                     : Column(
                                         children: [
                                           20.sbH,
                                           Container(
-                                            height: 80.h,
+                                            height: 60.h,
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 10.w),
                                             child: AnyLinkPreview(
@@ -282,20 +343,25 @@ class PostCard extends ConsumerWidget {
                               Row(
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      PhosphorIcons.heartBold,
-                                      color: post.upvotes.contains(user.uid)
-                                          ? Pallete.blueColor
-                                          : null,
-                                    ),
+                                    onPressed: () => like(ref),
+                                    icon: post.upvotes.contains(user.uid)
+                                        ? Icon(
+                                            PhosphorIcons.heartFill,
+                                            color: Colors.red,
+                                            size: 23.sp,
+                                          )
+                                        : Icon(
+                                            PhosphorIcons.heart,
+                                            size: 23.sp,
+                                          ),
                                   ),
                                   Text(
-                                    // '${post.upvotes.length - post.downvotes.length == 0 ? 'Vote' : post.upvotes.length - post.downvotes.length}',
-                                    '1',
+                                    '${post.upvotes.length}',
                                     style: TextStyle(
-                                      fontSize: 17.sp,
-                                    ),
+                                        fontSize: 17.sp,
+                                        color: post.upvotes.contains(user.uid)
+                                            ? Colors.red
+                                            : null),
                                   ),
                                   // IconButton(
                                   //   onPressed: () {},
@@ -311,10 +377,18 @@ class PostCard extends ConsumerWidget {
                               Row(
                                 children: [
                                   IconButton(
-                                    onPressed: () =>
-                                        navigateToComments(context),
+                                    onPressed: () {
+                                      if (isInCommentView == true) {
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                          builder: (context) => CommentsView(
+                                            post: post,
+                                          ),
+                                        ));
+                                      } else {}
+                                    },
                                     icon: const Icon(
-                                      PhosphorIcons.chatCircleDotsBold,
+                                      PhosphorIcons.chatCircleDots,
                                     ),
                                   ),
                                   Text(
@@ -334,7 +408,7 @@ class PostCard extends ConsumerWidget {
                                         color: Pallete.blueColor,
                                       )
                                     : Icon(
-                                        PhosphorIcons.bookmarkBold,
+                                        PhosphorIcons.bookmark,
                                         color: currentTheme
                                             .textTheme.bodyMedium!.color!,
                                       ),

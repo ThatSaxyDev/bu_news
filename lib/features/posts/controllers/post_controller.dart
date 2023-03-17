@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:bu_news/admin/models/community_model.dart';
 import 'package:bu_news/core/providers/storage_repository_provider.dart';
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/features/posts/repositories/post_repository.dart';
+import 'package:bu_news/features/profile/controllers/profile_controller.dart';
+import 'package:bu_news/models/comment_model.dart';
 import 'package:bu_news/models/post_model.dart';
 import 'package:bu_news/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
@@ -45,11 +49,11 @@ final getPostByIdProvider = StreamProvider.family((ref, String postId) {
   return postController.getPostById(postId);
 });
 
-// final getPostCommentsProvider = StreamProvider.family((ref, String postId) {
-//   final postController = ref.watch(postControllerProvider.notifier);
+final getPostCommentsProvider = StreamProvider.family((ref, String postId) {
+  final postController = ref.watch(postControllerProvider.notifier);
 
-//   return postController.getCommentsOfPost(postId);
-// });
+  return postController.getCommentsOfPost(postId);
+});
 
 class PostController extends StateNotifier<bool> {
   final PostRepository _postRepository;
@@ -201,28 +205,41 @@ class PostController extends StateNotifier<bool> {
     required Community selectedCommunity,
     required String description,
     required String link,
+    required File? image,
   }) async {
     state = true;
     String postId = const Uuid().v1();
     final user = _ref.read(userProvider)!;
+    String photo = '';
+    if (image != null) {
+      final res = await _storageRepository.storeFile(
+        path: 'appproval/ids',
+        id: user.uid,
+        file: image,
+      );
+      res.fold(
+        (l) => showSnackBar(context, l.message),
+        (r) => photo = r,
+      );
+    }
 
     final Post post = Post(
-      id: postId,
-      title: title,
-      communityName: selectedCommunity.name,
-      communityProfilePic: selectedCommunity.avatar,
-      upvotes: [],
-      downvotes: [],
-      commentCount: 0,
-      username: user.name,
-      uid: user.uid,
-      type: 'text',
-      createdAt: DateTime.now(),
-      awards: [],
-      description: description,
-      link: link,
-      bookmarkedBy: [],
-    );
+        id: postId,
+        title: title,
+        communityName: selectedCommunity.name,
+        communityProfilePic: selectedCommunity.avatar,
+        upvotes: [],
+        downvotes: [],
+        commentCount: 0,
+        username: user.name,
+        uid: user.uid,
+        type: 'text',
+        createdAt: DateTime.now(),
+        awards: [],
+        description: description,
+        link: link,
+        bookmarkedBy: [],
+        imageUrl: photo);
 
     final res = await _postRepository.addPost(post);
 
@@ -293,9 +310,9 @@ class PostController extends StateNotifier<bool> {
     );
   }
 
-  void upvote(Post post) async {
+  void like(Post post) async {
     final uid = _ref.read(userProvider)!.uid;
-    _postRepository.upvote(post, uid);
+    _postRepository.like(post, uid);
   }
 
   void downvote(Post post) async {
@@ -307,34 +324,32 @@ class PostController extends StateNotifier<bool> {
     return _postRepository.getPostById(postId);
   }
 
-  // void addComment({
-  //   required BuildContext context,
-  //   required String text,
-  //   required Post post,
-  // }) async {
-  //   final user = _ref.read(userProvider)!;
-  //   String commentId = const Uuid().v1();
-  //   Comment comment = Comment(
-  //     id: commentId,
-  //     text: text,
-  //     createdAt: DateTime.now(),
-  //     postId: post.id,
-  //     username: user.name,
-  //     profilePic: user.profilePic,
-  //   );
-  //   final res = await _postRepository.addComment(comment);
-  //   _ref
-  //       .read(userProfileControllerProvider.notifier)
-  //       .updateUserKoinz(UserKarma.comment);
-  //   res.fold(
-  //     (l) => showSnackBar(context, l.message),
-  //     (r) => null,
-  //   );
-  // }
+  void addComment({
+    required BuildContext context,
+    required String text,
+    required Post post,
+  }) async {
+    final user = _ref.read(userProvider)!;
+    String commentId = const Uuid().v1();
+    Comment comment = Comment(
+      id: commentId,
+      text: text,
+      createdAt: DateTime.now(),
+      postId: post.id,
+      username: user.name,
+      profilePic: user.profilePic,
+    );
+    final res = await _postRepository.addComment(comment);
 
-  // Stream<List<Comment>> getCommentsOfPost(String postId) {
-  //   return _postRepository.getCommentsOfPost(postId);
-  // }
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) => null,
+    );
+  }
+
+  Stream<List<Comment>> getCommentsOfPost(String postId) {
+    return _postRepository.getCommentsOfPost(postId);
+  }
 
   // void awardPost({
   //   required Post post,

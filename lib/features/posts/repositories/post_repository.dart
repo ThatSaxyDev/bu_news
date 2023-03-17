@@ -3,6 +3,7 @@ import 'package:bu_news/core/constants/firebase_constants.dart';
 import 'package:bu_news/core/failure.dart';
 import 'package:bu_news/core/providers/firebase_provider.dart';
 import 'package:bu_news/core/type_defs.dart';
+import 'package:bu_news/models/comment_model.dart';
 import 'package:bu_news/models/post_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -102,13 +103,8 @@ class PostRepository {
     }
   }
 
-  void upvote(Post post, String userId) async {
-    if (post.downvotes.contains(userId)) {
-      _posts.doc(post.id).update({
-        'downvotes': FieldValue.arrayRemove([userId]),
-      });
-    }
-
+  // like a post
+  void like(Post post, String userId) async {
     if (post.upvotes.contains(userId)) {
       _posts.doc(post.id).update({
         'upvotes': FieldValue.arrayRemove([userId]),
@@ -145,30 +141,30 @@ class PostRepository {
         .map((event) => Post.fromMap(event.data() as Map<String, dynamic>));
   }
 
-  // FutureVoid addComment(Comment comment) async {
-  //   try {
-  //     await _comments.doc(comment.id).set(comment.toMap());
-  //     return right(_posts.doc(comment.postId).update({
-  //       'commentCount': FieldValue.increment(1),
-  //     }));
-  //   } on FirebaseException catch (e) {
-  //     throw e.message!;
-  //   } catch (e) {
-  //     return left(Failure(e.toString()));
-  //   }
-  // }
+  FutureVoid addComment(Comment comment) async {
+    try {
+      await _comments.doc(comment.id).set(comment.toMap());
+      return right(_posts.doc(comment.postId).update({
+        'commentCount': FieldValue.increment(1),
+      }));
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
 
-  // Stream<List<Comment>> getCommentsOfPost(String postId) {
-  //   return _comments
-  //       .where('postId', isEqualTo: postId)
-  //       .orderBy('createdAt', descending: true)
-  //       .snapshots()
-  //       .map((event) => event.docs
-  //           .map(
-  //             (e) => Comment.fromMap(e.data() as Map<String, dynamic>),
-  //           )
-  //           .toList());
-  // }
+  Stream<List<Comment>> getCommentsOfPost(String postId) {
+    return _comments
+        .where('postId', isEqualTo: postId)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((event) => event.docs
+            .map(
+              (e) => Comment.fromMap(e.data() as Map<String, dynamic>),
+            )
+            .toList());
+  }
 
   FutureVoid awardPost(Post post, String award, String senderId) async {
     try {

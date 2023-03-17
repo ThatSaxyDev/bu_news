@@ -16,6 +16,8 @@ class TextInputBox extends ConsumerWidget {
   final int? maxLines;
   final void Function(String)? onChanged;
   final void Function()? onTap;
+  final TextInputAction? textInputAction;
+  final void Function(String)? onFieldSubmitted;
   const TextInputBox({
     Key? key,
     this.height,
@@ -29,6 +31,8 @@ class TextInputBox extends ConsumerWidget {
     this.maxLines,
     this.onChanged,
     this.onTap,
+    this.textInputAction,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   @override
@@ -50,15 +54,17 @@ class TextInputBox extends ConsumerWidget {
         obscuringCharacter: '*',
         cursorColor: currenTheme.textTheme.bodyMedium!.color,
         keyboardType: keyboardType,
+        textInputAction: textInputAction,
+        onFieldSubmitted: onFieldSubmitted,
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.always,
           filled: true,
           fillColor: currenTheme.backgroundColor,
-          contentPadding: EdgeInsets.fromLTRB(24.w, 20.h, 0, 20.h),
+          contentPadding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 0),
           helperText: " ",
           helperStyle: const TextStyle(fontSize: 0.0005),
           errorStyle: const TextStyle(fontSize: 0.0005),
-          isDense: true,
+          // isDense: true,
 
           suffixIcon: suffixIcon,
           // labelText: hintText,

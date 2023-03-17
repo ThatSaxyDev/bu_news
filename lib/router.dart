@@ -1,5 +1,6 @@
 import 'package:bu_news/features/auth/screens/login_screen.dart';
 import 'package:bu_news/features/base_nav_wrapper/views/base_nav_wrapper.dart';
+import 'package:bu_news/features/community/views/community_apllication_view.dart';
 import 'package:bu_news/features/home/views/home_view.dart';
 import 'package:bu_news/features/posts/views/add_post_view.dart';
 import 'package:bu_news/features/profile/views/approval_status_view.dart';
@@ -13,14 +14,14 @@ final loggedOutRoute =
 
 final loggedInRoute = RouteMap(
   routes: {
+    // '/base-nav-wrapper': (_) => const MaterialPage(
+    //       child: WelcomeView(),
+    //     ),
     '/': (_) => const MaterialPage(
-          child: WelcomeView(),
-        ),
-    '/base-nav-wrapper': (_) => const MaterialPage(
           child: BaseNavWrapper(),
         ),
     '/community-application': (_) => const MaterialPage(
-          child: BaseNavWrapper(),
+          child: CommunityApplicationView(),
         ),
     '/approval-status': (_) => const MaterialPage(
           child: AppprovalStatusView(),

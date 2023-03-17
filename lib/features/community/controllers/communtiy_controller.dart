@@ -161,7 +161,7 @@ class CommunityController extends StateNotifier<bool> {
     res.fold(
       (failure) => showSnackBar(context, failure.message),
       (success) {
-        Routemaster.of(context).push('/base-nav-wrapper');
+        Routemaster.of(context).push('/');
       },
     );
   }

@@ -3,6 +3,7 @@ import 'package:any_link_preview/any_link_preview.dart';
 import 'package:bu_news/core/constants/constants.dart';
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/features/community/controllers/communtiy_controller.dart';
+import 'package:bu_news/features/community/views/community_profile_view.dart';
 import 'package:bu_news/features/posts/controllers/post_controller.dart';
 import 'package:bu_news/features/profile/controllers/profile_controller.dart';
 import 'package:bu_news/models/post_model.dart';
@@ -92,7 +93,13 @@ class PostCard extends ConsumerWidget {
   }
 
   void navigateToCommunity(BuildContext context) {
-    Routemaster.of(context).push('/kom/${post.communityName}');
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => CommnunityProfileView(
+          name: post.communityName,
+        ),
+      ),
+    );
   }
 
   // void navigateToComments(BuildContext context) {
@@ -175,7 +182,7 @@ class PostCard extends ConsumerWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          post.communityName,
+                                          'bu/${post.communityName}',
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 16.sp,

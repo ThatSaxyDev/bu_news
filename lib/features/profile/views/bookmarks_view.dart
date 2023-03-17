@@ -33,7 +33,7 @@ class BookmarksView extends ConsumerWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      Routemaster.of(context).replace('/base-nav-wrapper');
+                      Routemaster.of(context).pop();
                     },
                     child: Icon(Icons.arrow_back_ios),
                   ),

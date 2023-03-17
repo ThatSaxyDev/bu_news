@@ -168,6 +168,7 @@ class CommunityRepository {
         (event) => Community.fromMap(event.data() as Map<String, dynamic>));
   }
 
+//! edit community
   FutureVoid editCommunity(Community community) async {
     try {
       return right(_communities.doc(community.name).update(community.toMap()));

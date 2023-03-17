@@ -1,6 +1,10 @@
 import 'package:bu_news/features/auth/screens/login_screen.dart';
 import 'package:bu_news/features/base_nav_wrapper/views/base_nav_wrapper.dart';
+import 'package:bu_news/features/community/views/add_mods_view.dart';
 import 'package:bu_news/features/community/views/community_apllication_view.dart';
+import 'package:bu_news/features/community/views/community_profile_view.dart';
+import 'package:bu_news/features/community/views/community_settings_view.dart';
+import 'package:bu_news/features/community/views/edit_community_view.dart';
 import 'package:bu_news/features/home/views/home_view.dart';
 import 'package:bu_news/features/posts/views/add_post_view.dart';
 import 'package:bu_news/features/profile/views/approval_status_view.dart';
@@ -35,26 +39,28 @@ final loggedInRoute = RouteMap(
     // '/create-community': (_) => const MaterialPage(
     //       child: CreateCommunityScreen(),
     //     ),
-    // '/kom/:name': (route) => MaterialPage(
-    //       child: CommnunityScreen(
-    //         name: route.pathParameters['name']!,
-    //       ),
-    //     ),
-    // '/mod-tools/:name': (routeDate) => MaterialPage(
-    //       child: ModToolsScreen(
-    //         name: routeDate.pathParameters['name']!,
-    //       ),
-    //     ),
-    // '/edit-komyuniti/:name': (routeData) => MaterialPage(
-    //       child: EditCommunityScreen(
-    //         name: routeData.pathParameters['name']!,
-    //       ),
-    //     ),
-    // '/add-mods/:name': (routeData) => MaterialPage(
-    //       child: AddModsScreen(
-    //         name: routeData.pathParameters['name']!,
-    //       ),
-    //     ),
+    '/com/:name': (route) => MaterialPage(
+          child: CommnunityProfileView(
+            name: route.pathParameters['name']!,
+          ),
+        ),
+    '/com/:name/community-settings/:name': (routeDate) => MaterialPage(
+          child: CommunitySettingsView(
+            name: routeDate.pathParameters['name']!,
+          ),
+        ),
+    '/com/:name/community-settings/:name/edit-community/:name': (routeData) =>
+        MaterialPage(
+          child: EditCommunityView(
+            name: routeData.pathParameters['name']!,
+          ),
+        ),
+    '/com/:name/community-settings/:name/add-mods/:name': (routeData) =>
+        MaterialPage(
+          child: AddModsView(
+            name: routeData.pathParameters['name']!,
+          ),
+        ),
     // '/user-profile/:uid': (routeData) => MaterialPage(
     //       child: UserProfileScreen(
     //         uid: routeData.pathParameters['uid']!,

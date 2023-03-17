@@ -6,6 +6,7 @@ import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/models/post_model.dart';
 import 'package:bu_news/models/user_model.dart';
 import 'package:bu_news/utils/snack_bar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
@@ -53,12 +54,12 @@ class UserProfileController extends StateNotifier<bool> {
   //   );
   // }
 
-  void editUserProfile({
-    required BuildContext context,
-    required File? profileFile,
-    required File? bannerFile,
-    required String name,
-  }) async {
+  void editUserProfile(
+      {required BuildContext context,
+      required File? profileFile,
+      required File? bannerFile,
+      required String name,
+      Uint8List? file}) async {
     state = true;
     UserModel user = _ref.read(userProvider)!;
     if (profileFile != null) {
@@ -66,6 +67,7 @@ class UserProfileController extends StateNotifier<bool> {
         path: 'users/profile',
         id: user.uid,
         file: profileFile,
+        webFile: file,
       );
       res.fold(
         (l) => showSnackBar(context, l.message),
@@ -78,6 +80,7 @@ class UserProfileController extends StateNotifier<bool> {
         path: 'users/banner',
         id: user.uid,
         file: bannerFile,
+        webFile: file,
       );
       res.fold(
         (l) => showSnackBar(context, l.message),

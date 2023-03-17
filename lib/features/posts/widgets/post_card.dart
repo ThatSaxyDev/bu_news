@@ -93,13 +93,7 @@ class PostCard extends ConsumerWidget {
   }
 
   void navigateToCommunity(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => CommnunityProfileView(
-          name: post.communityName,
-        ),
-      ),
-    );
+    Routemaster.of(context).push('/com/${post.communityName}');
   }
 
   // void navigateToComments(BuildContext context) {

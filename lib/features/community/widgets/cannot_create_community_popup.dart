@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/features/community/views/community_apllication_view.dart';
+import 'package:bu_news/features/community/views/search_communities_delegate.dart';
 import 'package:bu_news/theme/palette.dart';
 import 'package:bu_news/utils/button.dart';
 import 'package:bu_news/utils/widget_extensions.dart';
@@ -32,7 +33,7 @@ class CannotCreateCommunityPopUp extends ConsumerWidget {
       backgroundColor: Colors.transparent,
       child: Container(
         //! USE ANIMATION DOUBLE VALUES TO ANIMATE DIALOGUE
-        height: 200.h * a1.value,
+        height: 240.h * a1.value,
         width: 280.w * a2.value,
         padding: EdgeInsets.all(25.w),
         decoration: BoxDecoration(
@@ -40,6 +41,7 @@ class CannotCreateCommunityPopUp extends ConsumerWidget {
           borderRadius: BorderRadius.circular(15.r),
         ),
         child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,11 +67,27 @@ class CannotCreateCommunityPopUp extends ConsumerWidget {
               25.sbH,
               BButton(
                 onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(builder:(context) => const CommunityApplicationView(),));
+                  // Navigator.of(context).pop();
+                  showSearch(
+                      context: context, delegate: SearchCommunityDelegate(ref));
                 },
                 width: 150.h,
-                text: 'Apply',
+                text: 'Join',
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const CommunityApplicationView(),
+                  ));
+                },
+                child: Text(
+                  'Apply',
+                  style: TextStyle(
+                    color: currentTheme.textTheme.bodyMedium!.color,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),

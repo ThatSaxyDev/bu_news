@@ -1,7 +1,7 @@
 import 'package:bu_news/admin/features/auth/views/admin_login_view.dart';
 import 'package:bu_news/admin/features/base_nav_wrapper/views/base_nav_wrapper.dart';
 import 'package:bu_news/admin/features/home/views/admin_home_view.dart';
-import 'package:bu_news/admin/features/posts/views/admin_add_post_type_screen.dart';
+import 'package:bu_news/admin/features/posts/views/admin_add_post_type_view.dart';
 import 'package:bu_news/features/auth/screens/login_screen.dart';
 import 'package:bu_news/features/home/views/home_view.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +17,8 @@ final adminLoggedInRoute = RouteMap(
     '/': (_) => const MaterialPage(
           child: AdminBaseNavWrapper(),
         ),
-    '/add-post/:type': (routeData) => MaterialPage(
-          child: AdminAddPostTypeScreen(
-            type: routeData.pathParameters['type']!,
-          ),
+    '/add-post/:type': (routeData) => const MaterialPage(
+          child: AdminAddPostTypeView(),
         ),
     '/create-community': (_) => const MaterialPage(
           child: CreateCommunityView(),

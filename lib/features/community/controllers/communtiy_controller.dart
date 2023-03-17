@@ -8,6 +8,7 @@ import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/features/community/repository/community_repository.dart';
 import 'package:bu_news/models/application_model.dart';
 import 'package:bu_news/models/post_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
@@ -106,14 +107,14 @@ class CommunityController extends StateNotifier<bool> {
   //   );
   // }
 
-  void applyToCreateCommunity({
-    required BuildContext context,
-    required String communityName,
-    required String matricNo,
-    required File? photoIdCard,
-    required String description,
-    required String approvalStatus,
-  }) async {
+  void applyToCreateCommunity(
+      {required BuildContext context,
+      required String communityName,
+      required String matricNo,
+      required File? photoIdCard,
+      required String description,
+      required String approvalStatus,
+      Uint8List? file}) async {
     state = true;
     final uid = _ref.read(userProvider)?.uid ?? '';
     String image = '';
@@ -123,6 +124,7 @@ class CommunityController extends StateNotifier<bool> {
         path: 'appproval/ids',
         id: uid,
         file: photoIdCard,
+        webFile: file,
       );
       res.fold(
         (l) => showSnackBar(context, l.message),
@@ -228,6 +230,7 @@ class CommunityController extends StateNotifier<bool> {
     required File? profileFile,
     required Community community,
     required File? bannerFile,
+    Uint8List? file,
   }) async {
     state = true;
     if (profileFile != null) {
@@ -236,6 +239,7 @@ class CommunityController extends StateNotifier<bool> {
         path: 'communities/profile',
         id: community.name,
         file: profileFile,
+        webFile: file,
       );
       res.fold(
         (l) => showSnackBar(context, l.message),
@@ -249,6 +253,7 @@ class CommunityController extends StateNotifier<bool> {
         path: 'communities/banner',
         id: community.name,
         file: bannerFile,
+        webFile: file,
       );
       res.fold(
         (l) => showSnackBar(context, l.message),

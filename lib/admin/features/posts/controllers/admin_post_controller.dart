@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:bu_news/admin/features/posts/repositories/admin_post_repository.dart';
 import 'package:bu_news/admin/models/community_model.dart';
 import 'package:bu_news/core/providers/storage_repository_provider.dart';
@@ -35,16 +38,30 @@ class AdminPostController extends StateNotifier<bool> {
         super(false);
 
   // to share text post
-  void shareTextPost({
-    required BuildContext context,
-    required String title,
-    required Community selectedCommunity,
-    required String description,
-    required String link,
-  }) async {
+  void shareTextPost(
+      {required BuildContext context,
+      required String title,
+      required Community selectedCommunity,
+      required String description,
+      required String link,
+      required Uint8List? image,
+      File? file}) async {
     state = true;
     String postId = const Uuid().v1();
     final user = _ref.read(userProvider)!;
+    String photo = '';
+    if (image != null) {
+      final res = await _storageRepository.storeFile(
+        path: 'posts/ids',
+        id: user.uid,
+        webFile: image,
+        file: file,
+      );
+      res.fold(
+        (l) => showSnackBar(context, l.message),
+        (r) => photo = r,
+      );
+    }
 
     final Post post = Post(
       id: postId,
@@ -62,6 +79,7 @@ class AdminPostController extends StateNotifier<bool> {
       description: description,
       link: link,
       bookmarkedBy: [],
+      imageUrl: photo,
     );
 
     final res = await _postRepository.addPost(post);

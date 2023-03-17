@@ -48,13 +48,14 @@ class _AppprovalStatusViewState extends ConsumerState<AppprovalStatusView>
           leadingWidth: 50.w,
           leading: InkWell(
             onTap: () {
-              Routemaster.of(context).replace('/base-nav-wrapper');
+              Routemaster.of(context).pop();
             },
             child: Icon(Icons.arrow_back_ios),
           ),
           title: Text(
             'Community Approval',
             style: TextStyle(
+              color: currentTheme.textTheme.bodyMedium!.color,
               fontSize: 18.sp,
               fontWeight: FontWeight.w500,
             ),
@@ -108,7 +109,7 @@ class _AppprovalStatusViewState extends ConsumerState<AppprovalStatusView>
                       child: Text(
                         'You have nothing pending',
                         style: TextStyle(
-                          color: Pallete.whiteColor,
+                          color: currentTheme.textTheme.bodyMedium!.color,
                           fontWeight: FontWeight.w600,
                           fontSize: 17.sp,
                         ),
@@ -146,7 +147,7 @@ class _AppprovalStatusViewState extends ConsumerState<AppprovalStatusView>
                       child: Text(
                         'You have nothing approved',
                         style: TextStyle(
-                          color: Pallete.whiteColor,
+                          color: currentTheme.textTheme.bodyMedium!.color,
                           fontWeight: FontWeight.w600,
                           fontSize: 17.sp,
                         ),
@@ -184,7 +185,7 @@ class _AppprovalStatusViewState extends ConsumerState<AppprovalStatusView>
                       child: Text(
                         'You have nothing rejected',
                         style: TextStyle(
-                          color: Pallete.whiteColor,
+                          color: currentTheme.textTheme.bodyMedium!.color,
                           fontWeight: FontWeight.w600,
                           fontSize: 17.sp,
                         ),

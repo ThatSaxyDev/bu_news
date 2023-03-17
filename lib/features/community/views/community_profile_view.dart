@@ -3,6 +3,7 @@ import 'package:bu_news/admin/models/community_model.dart';
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/features/community/controllers/communtiy_controller.dart';
 import 'package:bu_news/features/posts/widgets/post_card.dart';
+import 'package:bu_news/theme/palette.dart';
 import 'package:bu_news/utils/error_text.dart';
 import 'package:bu_news/utils/loader.dart';
 import 'package:bu_news/utils/widget_extensions.dart';
@@ -19,8 +20,8 @@ class CommnunityProfileView extends ConsumerWidget {
     required this.name,
   });
 
-  void navigateToModTools(BuildContext context) {
-    Routemaster.of(context).push('/mod-tools/$name');
+  void navigateToCommunitySettings(BuildContext context) {
+    Routemaster.of(context).push('/com/$name/community-settings/$name');
   }
 
   void joinCommunity(
@@ -36,6 +37,7 @@ class CommnunityProfileView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
+    final currentTheme = ref.watch(themeNotifierProvider);
 
     String member;
     return Scaffold(
@@ -100,24 +102,30 @@ class CommnunityProfileView extends ConsumerWidget {
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 25.w)),
                                         onPressed: () =>
-                                            navigateToModTools(context),
-                                        child: const Text('Mod Tools'),
+                                            navigateToCommunitySettings(
+                                                context),
+                                        child: const Text('Settings',
+                                            style: TextStyle(
+                                                color: Pallete.blueColor)),
                                       )
-                                    : OutlinedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.r),
-                                            ),
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 25.w)),
-                                        onPressed: () => joinCommunity(
-                                            ref, community, context),
-                                        child: Text(
-                                            community.members.contains(user.uid)
+                                    : community.name == 'busa_official'
+                                        ? const SizedBox.shrink()
+                                        : OutlinedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.r),
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 25.w)),
+                                            onPressed: () => joinCommunity(
+                                                ref, community, context),
+                                            child: Text(community.members
+                                                    .contains(user.uid)
                                                 ? 'Joined'
                                                 : 'Join'),
-                                      ),
+                                          ),
                               ],
                             ),
                             Padding(
@@ -135,6 +143,18 @@ class CommnunityProfileView extends ConsumerWidget {
                 },
                 body: ref.watch(getCommunityPostsProvider(name)).when(
                       data: (data) {
+                        if (data.isEmpty) {
+                          return Center(
+                            child: Text(
+                              'There are no posts here yet',
+                              style: TextStyle(
+                                color: currentTheme.textTheme.bodyMedium!.color,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17.sp,
+                              ),
+                            ),
+                          );
+                        }
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           physics: const AlwaysScrollableScrollPhysics(

@@ -8,6 +8,7 @@ import 'package:bu_news/features/profile/controllers/profile_controller.dart';
 import 'package:bu_news/models/comment_model.dart';
 import 'package:bu_news/models/post_model.dart';
 import 'package:bu_news/utils/snack_bar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
@@ -206,6 +207,7 @@ class PostController extends StateNotifier<bool> {
     required String description,
     required String link,
     required File? image,
+    Uint8List? file,
   }) async {
     state = true;
     String postId = const Uuid().v1();
@@ -213,9 +215,10 @@ class PostController extends StateNotifier<bool> {
     String photo = '';
     if (image != null) {
       final res = await _storageRepository.storeFile(
-        path: 'appproval/ids',
+        path: 'posts/ids',
         id: user.uid,
         file: image,
+        webFile: file,
       );
       res.fold(
         (l) => showSnackBar(context, l.message),
@@ -224,22 +227,23 @@ class PostController extends StateNotifier<bool> {
     }
 
     final Post post = Post(
-        id: postId,
-        title: title,
-        communityName: selectedCommunity.name,
-        communityProfilePic: selectedCommunity.avatar,
-        upvotes: [],
-        downvotes: [],
-        commentCount: 0,
-        username: user.name,
-        uid: user.uid,
-        type: 'text',
-        createdAt: DateTime.now(),
-        awards: [],
-        description: description,
-        link: link,
-        bookmarkedBy: [],
-        imageUrl: photo);
+      id: postId,
+      title: title,
+      communityName: selectedCommunity.name,
+      communityProfilePic: selectedCommunity.avatar,
+      upvotes: [],
+      downvotes: [],
+      commentCount: 0,
+      username: user.name,
+      uid: user.uid,
+      type: 'text',
+      createdAt: DateTime.now(),
+      awards: [],
+      description: description,
+      link: link,
+      bookmarkedBy: [],
+      imageUrl: photo,
+    );
 
     final res = await _postRepository.addPost(post);
 
@@ -248,7 +252,7 @@ class PostController extends StateNotifier<bool> {
       (l) => showSnackBar(context, l.message),
       (r) {
         showSnackBar(context, 'Posted Successfully!');
-        Routemaster.of(context).replace('/base-nav-wrapper');
+        Routemaster.of(context).pop();
       },
     );
   }

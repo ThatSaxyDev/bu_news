@@ -1,5 +1,6 @@
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/features/community/controllers/communtiy_controller.dart';
+import 'package:bu_news/features/community/views/search_communities_delegate.dart';
 import 'package:bu_news/features/community/widgets/cannot_create_community_popup.dart';
 import 'package:bu_news/theme/palette.dart';
 import 'package:bu_news/utils/app_fade_animation.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:routemaster/routemaster.dart';
 
 class CommunityView extends ConsumerStatefulWidget {
   const CommunityView({super.key});
@@ -26,6 +28,10 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
   @override
   void initState() {
     super.initState();
+  }
+
+  void navigateToCommunity(BuildContext context, String communityName) {
+    Routemaster.of(context).push('/com/$communityName');
   }
 
   @override
@@ -123,6 +129,18 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
                             ),
                           ),
                         ),
+                        const Spacer(),
+                        InkWell(
+                          onTap: () {
+                            showSearch(
+                                context: context,
+                                delegate: SearchCommunityDelegate(ref));
+                          },
+                          child: Icon(
+                            PhosphorIcons.magnifyingGlass,
+                            size: 25.sp,
+                          ),
+                        ),
                       ],
                     );
                   }),
@@ -153,10 +171,9 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
                           leading: CircleAvatar(
                             backgroundImage: NetworkImage(community.avatar),
                           ),
-                          title: Text('com/${community.name}'),
+                          title: Text('bu/${community.name}'),
                           onTap: () {
-                            Navigator.of(context).pop();
-                            // navigateToCommunity(context, community);
+                            navigateToCommunity(context, community.name);
                           },
                         );
                       },
@@ -300,10 +317,9 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
                                   backgroundImage:
                                       NetworkImage(community.avatar),
                                 ),
-                                title: Text('com/${community.name}'),
+                                title: Text('bu/${community.name}'),
                                 onTap: () {
-                                  Navigator.of(context).pop();
-                                  // navigateToCommunity(context, community);
+                                  navigateToCommunity(context, community.name);
                                 },
                               );
                             },

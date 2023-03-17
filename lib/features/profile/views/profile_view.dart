@@ -31,6 +31,10 @@ class ProfileView extends ConsumerWidget {
     Routemaster.of(context).push('/approval-status');
   }
 
+  void navigateToBookmarks(BuildContext context) {
+    Routemaster.of(context).push('/bookmarks');
+  }
+
   void showlogOutDialog(WidgetRef ref, BuildContext context) async {
     showDialog(
         context: context,
@@ -156,6 +160,10 @@ class ProfileView extends ConsumerWidget {
 
                           case 'Add new symptoms':
                             navigateToNewSymptoms(context);
+                            break;
+
+                          case 'Bookmarks':
+                            navigateToBookmarks(context);
                             break;
                         }
                       },

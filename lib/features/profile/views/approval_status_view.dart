@@ -1,6 +1,7 @@
 import 'package:bu_news/features/community/controllers/communtiy_controller.dart';
 import 'package:bu_news/features/posts/controllers/post_controller.dart';
 import 'package:bu_news/features/posts/widgets/post_card.dart';
+import 'package:bu_news/features/profile/widgets/approval_tile.dart';
 import 'package:bu_news/theme/palette.dart';
 import 'package:bu_news/utils/error_text.dart';
 import 'package:bu_news/utils/loader.dart';
@@ -47,8 +48,7 @@ class _AppprovalStatusViewState extends ConsumerState<AppprovalStatusView>
           leadingWidth: 50.w,
           leading: InkWell(
             onTap: () {
-              Routemaster.of(context)
-                  .replace('/base-nav-wrapper');
+              Routemaster.of(context).replace('/base-nav-wrapper');
             },
             child: Icon(Icons.arrow_back_ios),
           ),
@@ -87,15 +87,32 @@ class _AppprovalStatusViewState extends ConsumerState<AppprovalStatusView>
             //! pending
             ref.watch(getPending).when(
                   data: (applications) {
-                    return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      physics: const AlwaysScrollableScrollPhysics(
-                          parent: BouncingScrollPhysics()),
-                      itemCount: applications.length,
-                      itemBuilder: (context, index) {
-                        final post = applications[index];
-                        return Text(applications.length.toString());
-                      },
+                    if (applications.isNotEmpty) {
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const AlwaysScrollableScrollPhysics(
+                            parent: BouncingScrollPhysics()),
+                        itemCount: applications.length,
+                        itemBuilder: (context, index) {
+                          final application = applications[index];
+                          return ApprovalTile(
+                            name: application.communityName,
+                            description: application.description,
+                            date: application.createdAt,
+                            status: application.approvalStatus,
+                          );
+                        },
+                      );
+                    }
+                    return Center(
+                      child: Text(
+                        'You have nothing pending',
+                        style: TextStyle(
+                          color: Pallete.whiteColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 17.sp,
+                        ),
+                      ),
                     );
                   },
                   error: (error, stackTrace) {
@@ -108,15 +125,27 @@ class _AppprovalStatusViewState extends ConsumerState<AppprovalStatusView>
             //! approved
             ref.watch(getApproved).when(
                   data: (applications) {
-                    return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      physics: const AlwaysScrollableScrollPhysics(
-                          parent: BouncingScrollPhysics()),
-                      itemCount: applications.length,
-                      itemBuilder: (context, index) {
-                        final post = applications[index];
-                        return Text(applications.length.toString());
-                      },
+                    if (applications.isNotEmpty) {
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const AlwaysScrollableScrollPhysics(
+                            parent: BouncingScrollPhysics()),
+                        itemCount: applications.length,
+                        itemBuilder: (context, index) {
+                          final application = applications[index];
+                          return Text(applications.length.toString());
+                        },
+                      );
+                    }
+                    return Center(
+                      child: Text(
+                        'You have nothing approved',
+                        style: TextStyle(
+                          color: Pallete.whiteColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 17.sp,
+                        ),
+                      ),
                     );
                   },
                   error: (error, stackTrace) {
@@ -129,15 +158,27 @@ class _AppprovalStatusViewState extends ConsumerState<AppprovalStatusView>
             //! rejected
             ref.watch(getRejected).when(
                   data: (applications) {
-                    return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      physics: const AlwaysScrollableScrollPhysics(
-                          parent: BouncingScrollPhysics()),
-                      itemCount: applications.length,
-                      itemBuilder: (context, index) {
-                        final post = applications[index];
-                        return Text(applications.length.toString());
-                      },
+                    if (applications.isNotEmpty) {
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const AlwaysScrollableScrollPhysics(
+                            parent: BouncingScrollPhysics()),
+                        itemCount: applications.length,
+                        itemBuilder: (context, index) {
+                          final application = applications[index];
+                          return Text(applications.length.toString());
+                        },
+                      );
+                    }
+                    return Center(
+                      child: Text(
+                        'You have nothing rejected',
+                        style: TextStyle(
+                          color: Pallete.whiteColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 17.sp,
+                        ),
+                      ),
                     );
                   },
                   error: (error, stackTrace) {

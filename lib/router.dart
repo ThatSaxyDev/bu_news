@@ -3,6 +3,7 @@ import 'package:bu_news/features/base_nav_wrapper/views/base_nav_wrapper.dart';
 import 'package:bu_news/features/home/views/home_view.dart';
 import 'package:bu_news/features/posts/views/add_post_view.dart';
 import 'package:bu_news/features/profile/views/approval_status_view.dart';
+import 'package:bu_news/features/profile/views/bookmarks_view.dart';
 import 'package:bu_news/features/welcome/view/welcome_view.dart';
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
@@ -28,6 +29,9 @@ final loggedInRoute = RouteMap(
           child: AddPostView(
             type: routeData.pathParameters['type']!,
           ),
+        ),
+    '/bookmarks': (routeData) => const MaterialPage(
+          child: BookmarksView(),
         ),
     // '/create-community': (_) => const MaterialPage(
     //       child: CreateCommunityScreen(),

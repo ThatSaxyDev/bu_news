@@ -204,7 +204,7 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
                                                 TextSpan(
                                                   text: applicationsNumber == 1
                                                       ? ' application pending'
-                                                      : 'applications pending',
+                                                      : ' applications pending',
                                                   style: TextStyle(
                                                     color: currentTheme
                                                         .textTheme

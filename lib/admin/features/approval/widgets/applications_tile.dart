@@ -22,6 +22,7 @@ class ApplicationsTile extends ConsumerStatefulWidget {
   final void Function()? approve;
   final void Function()? reject;
   final bool isLoading;
+  final String status;
   const ApplicationsTile({
     super.key,
     required this.application,
@@ -33,6 +34,7 @@ class ApplicationsTile extends ConsumerStatefulWidget {
     this.approve,
     this.reject,
     required this.isLoading,
+    required this.status,
   });
 
   @override
@@ -93,6 +95,55 @@ class _ApplicationsTileState extends ConsumerState<ApplicationsTile> {
                     ],
                   ),
                   50.sbH,
+                  Row(
+                    children: [
+                      Container(
+                        height: 400.h,
+                        width: 300.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.r),
+                          image: DecorationImage(
+                            image: NetworkImage(widget.application.photoIdCard),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      50.sbW,
+                      SizedBox(
+                        height: 400.h,
+                        width: 400.w,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RichText(
+                                text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Description: ',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 26.sp,
+                                   
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: widget.application.description,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20.sp,
+                                     color: currentTheme.textTheme.bodyMedium!.color,
+                                  ),
+                                ),
+                              ],
+                            )),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  50.sbH,
+                  if (widget.status == 'pending')
                   widget.isLoading
                       ? const Loader()
                       : Row(

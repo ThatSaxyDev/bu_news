@@ -212,10 +212,11 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
                                             delay: index + 0.2,
                                             height: isPendingSelected.value ==
                                                     index + 1
-                                                ? 600.h
+                                                ? 650.h
                                                 : 100.h,
                                             isExtended: false,
                                             isLoading: isLoading,
+                                            status: application.approvalStatus,
                                             approve: () => approve(application),
                                             reject: () => reject(application),
                                           );
@@ -283,17 +284,23 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
                                                     size: 25.sp,
                                                   ),
                                             onTap: () {
-                                              isApprovedSelected.value =
-                                                  index + 1;
+                                               if (isApprovedSelected.value ==
+                                                  0) {
+                                                isApprovedSelected.value =
+                                                    index + 1;
+                                              } else {
+                                                isApprovedSelected.value = 0;
+                                              }
                                             },
                                             application: application,
                                             delay: index + 0.2,
                                             height: isApprovedSelected.value ==
                                                     index + 1
-                                                ? 300.h
+                                                ? 650.h
                                                 : 100.h,
                                             isExtended: false,
                                             isLoading: isLoading,
+                                            status: application.approvalStatus,
                                           );
                                         });
                                   },
@@ -343,28 +350,41 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
                                   itemCount: applications.length,
                                   itemBuilder: (context, index) {
                                     final application = applications[index];
-                                    return ApplicationsTile(
-                                      icon:
-                                          isRejectedSelected.value == index + 1
-                                              ? Icon(
-                                                  Icons.keyboard_arrow_up,
-                                                  size: 25.sp,
-                                                )
-                                              : Icon(
-                                                  Icons.keyboard_arrow_down,
-                                                  size: 25.sp,
-                                                ),
-                                      onTap: () {
-                                        isRejectedSelected.value = index + 1;
-                                      },
-                                      application: application,
-                                      delay: index + 0.2,
-                                      height:
-                                          isRejectedSelected.value == index + 1
-                                              ? 300.h
-                                              : 100.h,
-                                      isExtended: false,
-                                      isLoading: isLoading,
+                                    return ValueListenableBuilder(
+                                        valueListenable: isRejectedSelected,
+                                        child: const SizedBox.shrink(),
+                                        builder: (context, value, child) {
+                                        return ApplicationsTile(
+                                          icon:
+                                              isRejectedSelected.value == index + 1
+                                                  ? Icon(
+                                                      Icons.keyboard_arrow_up,
+                                                      size: 25.sp,
+                                                    )
+                                                  : Icon(
+                                                      Icons.keyboard_arrow_down,
+                                                      size: 25.sp,
+                                                    ),
+                                          onTap: () {
+                                            if (isRejectedSelected.value ==
+                                                  0) {
+                                                isRejectedSelected.value =
+                                                    index + 1;
+                                              } else {
+                                                isRejectedSelected.value = 0;
+                                              }
+                                          },
+                                          application: application,
+                                          delay: index + 0.2,
+                                          height:
+                                              isRejectedSelected.value == index + 1
+                                                  ? 650.h
+                                                  : 100.h,
+                                          isExtended: false,
+                                          isLoading: isLoading,
+                                          status: application.approvalStatus,
+                                        );
+                                      }
                                     );
                                   },
                                 ),

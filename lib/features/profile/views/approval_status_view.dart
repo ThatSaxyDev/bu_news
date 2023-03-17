@@ -133,7 +133,12 @@ class _AppprovalStatusViewState extends ConsumerState<AppprovalStatusView>
                         itemCount: applications.length,
                         itemBuilder: (context, index) {
                           final application = applications[index];
-                          return Text(applications.length.toString());
+                          return ApprovalTile(
+                            name: application.communityName,
+                            description: application.description,
+                            date: application.createdAt,
+                            status: application.approvalStatus,
+                          );
                         },
                       );
                     }
@@ -166,7 +171,12 @@ class _AppprovalStatusViewState extends ConsumerState<AppprovalStatusView>
                         itemCount: applications.length,
                         itemBuilder: (context, index) {
                           final application = applications[index];
-                          return Text(applications.length.toString());
+                          return ApprovalTile(
+                            name: application.communityName,
+                            description: application.description,
+                            date: application.createdAt,
+                            status: application.approvalStatus,
+                          );
                         },
                       );
                     }

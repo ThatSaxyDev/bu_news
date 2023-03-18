@@ -19,14 +19,6 @@ class ProfileView extends ConsumerWidget {
     ref.read(authControllerProvider.notifier).logOut();
   }
 
-  void navigateToReminders(BuildContext context) {
-    Routemaster.of(context).push('/reminders');
-  }
-
-  void navigateToNewSymptoms(BuildContext context) {
-    Routemaster.of(context).push('/new-symptoms');
-  }
-
   void navigateToApproval(BuildContext context) {
     Routemaster.of(context).push('/approval-status');
   }
@@ -122,7 +114,7 @@ class ProfileView extends ConsumerWidget {
                 ),
               ),
             ),
-      
+
             //! profile photo and name
             AppFadeAnimation(
               delay: 1,
@@ -146,7 +138,7 @@ class ProfileView extends ConsumerWidget {
               ),
             ),
             24.sbH,
-      
+
             Column(
               children: profileItems
                   .map(
@@ -162,15 +154,11 @@ class ProfileView extends ConsumerWidget {
                             case 'Community Creation Approval':
                               navigateToApproval(context);
                               break;
-      
-                            case 'Add new symptoms':
-                              navigateToNewSymptoms(context);
-                              break;
-      
+
                             case 'Bookmarks':
                               navigateToBookmarks(context);
                               break;
-      
+
                             case 'My Profile':
                               navigateToEditProfile(context);
                               break;
@@ -187,7 +175,7 @@ class ProfileView extends ConsumerWidget {
                   .toList(),
             ),
             60.sbH,
-      
+
             AppFadeAnimation(
               delay: 1.6,
               child: ProfileTile(

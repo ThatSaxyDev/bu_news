@@ -24,6 +24,10 @@ class CannotCreateCommunityPopUp extends ConsumerWidget {
     Routemaster.of(context).push('/community-application');
   }
 
+  void navigateToEditProfile(BuildContext context) {
+    Routemaster.of(context).push('/edit-profile');
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
@@ -42,55 +46,91 @@ class CannotCreateCommunityPopUp extends ConsumerWidget {
         ),
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Icon(PhosphorIcons.xBold),
+          child: user.schoolName == 'approved'
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Icon(PhosphorIcons.xBold),
+                      ),
+                    ),
+                    12.sbH,
+                    Text(
+                      'You can join communites here, or by searching, or applying to create one',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    25.sbH,
+                    BButton(
+                      onTap: () {
+                        // Navigator.of(context).pop();
+                        showSearch(
+                            context: context,
+                            delegate: SearchCommunityDelegate(ref));
+                      },
+                      width: 150.h,
+                      text: 'Join',
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              const CommunityApplicationView(),
+                        ));
+                      },
+                      child: Text(
+                        'Apply',
+                        style: TextStyle(
+                          color: currentTheme.textTheme.bodyMedium!.color,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Icon(PhosphorIcons.xBold),
+                      ),
+                    ),
+                    12.sbH,
+                    Text(
+                      'Verify your profile to join or create communities',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    25.sbH,
+                    BButton(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        navigateToEditProfile(context);
+                      },
+                      width: 150.h,
+                      text: 'Verify Profile',
+                    ),
+                  ],
                 ),
-              ),
-              12.sbH,
-              Text(
-                'You do not have approval to create communities',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15.sp,
-                ),
-              ),
-              25.sbH,
-              BButton(
-                onTap: () {
-                  // Navigator.of(context).pop();
-                  showSearch(
-                      context: context, delegate: SearchCommunityDelegate(ref));
-                },
-                width: 150.h,
-                text: 'Join',
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const CommunityApplicationView(),
-                  ));
-                },
-                child: Text(
-                  'Apply',
-                  style: TextStyle(
-                    color: currentTheme.textTheme.bodyMedium!.color,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );

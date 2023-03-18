@@ -187,7 +187,7 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
               ref.watch(userOwnCommunitiesProvider).when(
                     data: (communities) => communities.isEmpty
                         ? Center(
-                            child: ref.watch(getApprovalsProvider).when(
+                            child: ref.watch(getPending).when(
                                   data: (applications) {
                                     int applicationsNumber =
                                         applications.length;

@@ -28,6 +28,7 @@ class CommunitySettingsView extends ConsumerWidget {
     final currentTheme = ref.watch(themeNotifierProvider);
     return Scaffold(
       appBar: AppBar(
+         centerTitle: true,
         title: Text(
           'Community Settings',
           style: TextStyle(

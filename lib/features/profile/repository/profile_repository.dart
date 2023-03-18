@@ -4,6 +4,7 @@ import 'package:bu_news/core/providers/firebase_provider.dart';
 import 'package:bu_news/core/type_defs.dart';
 import 'package:bu_news/models/post_model.dart';
 import 'package:bu_news/models/user_model.dart';
+import 'package:bu_news/models/verification_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
@@ -25,6 +26,32 @@ class UserProfileRepository {
     } catch (e) {
       return left(Failure(e.toString()));
     }
+  }
+
+  FutureVoid requestVerification(VerificationModel verification) async {
+    try {
+      _users.doc(verification.userId).update({'schoolName': 'pending'});
+      return right(
+          _verifications.doc(verification.userId).set(verification.toMap()));
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  Stream<List<VerificationModel>> getVerificationStatus(String uid) {
+    return _verifications
+        .where('userId', isEqualTo: uid)
+        .snapshots()
+        .map((event) {
+      List<VerificationModel> verifications = [];
+      for (var doc in event.docs) {
+        verifications
+            .add(VerificationModel.fromMap(doc.data() as Map<String, dynamic>));
+      }
+      return verifications;
+    });
   }
 
   Stream<List<Post>> getUserPosts(String uid) {
@@ -134,6 +161,9 @@ class UserProfileRepository {
 
   CollectionReference get _users =>
       _firestore.collection(FirebaseConstants.usersCollection);
+
+  CollectionReference get _verifications =>
+      _firestore.collection(FirebaseConstants.verificationCollection);
 
   CollectionReference get _posts =>
       _firestore.collection(FirebaseConstants.postsCollection);

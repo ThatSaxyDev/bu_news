@@ -14,7 +14,7 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isLoading = ref.watch(authControllerProvider);
-
+    final currentTheme = ref.watch(themeNotifierProvider);
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.w),
@@ -38,24 +38,32 @@ class LoginScreen extends ConsumerWidget {
                   //   ),
                   // ),
                   // Spc(h: 15.h),
-                  SizedBox(
-                    height: 300.h,
+                  Container(
+                    padding: 20.padH,
+                    decoration: BoxDecoration(
+                        color: currentTheme.textTheme.bodyMedium!.color!
+                            .withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(20.r)),
+                    height: 150.h,
                     width: 250.w,
                     child: Image.asset('main_logo'.png),
                   ),
-                  60.sbH,
+                  200.sbH,
                   GButton(
                     padding: 10.h,
                     item: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
                           width: 30.w,
                           child: Image.asset('google'.png),
                         ),
+                        15.sbW,
                         Text(
                           'Continue With Google',
-                          style: TextStyle(fontSize: 14.sp),
+                          style: TextStyle(
+                              fontSize: 14.sp,
+                              color: currentTheme.textTheme.bodyMedium!.color),
                         ),
                       ],
                     ),

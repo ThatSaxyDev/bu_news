@@ -11,6 +11,7 @@ class UserModel {
   final String schoolName;
   final bool isACourseRep;
   final bool isALead;
+  final String studentIdCard;
   const UserModel({
     required this.uid,
     required this.name,
@@ -21,6 +22,7 @@ class UserModel {
     required this.schoolName,
     required this.isACourseRep,
     required this.isALead,
+    required this.studentIdCard,
   });
 
   UserModel copyWith({
@@ -33,6 +35,7 @@ class UserModel {
     String? schoolName,
     bool? isACourseRep,
     bool? isALead,
+    String? studentIdCard,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
@@ -44,6 +47,7 @@ class UserModel {
       schoolName: schoolName ?? this.schoolName,
       isACourseRep: isACourseRep ?? this.isACourseRep,
       isALead: isALead ?? this.isALead,
+      studentIdCard: studentIdCard ?? this.studentIdCard,
     );
   }
 
@@ -58,20 +62,22 @@ class UserModel {
       'schoolName': schoolName,
       'isACourseRep': isACourseRep,
       'isALead': isALead,
+      'studentIdCard': studentIdCard,
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      uid: map["uid"] ?? '',
-      name: map["name"] ?? '',
-      email: map["email"] ?? '',
-      profilePic: map["profilePic"] ?? '',
-      banner: map["banner"] ?? '',
-      matricNo: map["matricNo"] ?? '',
-      schoolName: map["schoolName"] ?? '',
-      isACourseRep: map["isACourseRep"] ?? false,
-      isALead: map["isALead"] ?? false,
+      uid: (map["uid"] ?? '') as String,
+      name: (map["name"] ?? '') as String,
+      email: (map["email"] ?? '') as String,
+      profilePic: (map["profilePic"] ?? '') as String,
+      banner: (map["banner"] ?? '') as String,
+      matricNo: (map["matricNo"] ?? '') as String,
+      schoolName: (map["schoolName"] ?? '') as String,
+      isACourseRep: (map["isACourseRep"] ?? false) as bool,
+      isALead: (map["isALead"] ?? false) as bool,
+      studentIdCard: (map["studentIdCard"] ?? '') as String,
     );
   }
 
@@ -82,7 +88,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(uid: $uid, name: $name, email: $email, profilePic: $profilePic, banner: $banner, matricNo: $matricNo, schoolName: $schoolName, isACourseRep: $isACourseRep, isALead: $isALead)';
+    return 'UserModel(uid: $uid, name: $name, email: $email, profilePic: $profilePic, banner: $banner, matricNo: $matricNo, schoolName: $schoolName, isACourseRep: $isACourseRep, isALead: $isALead, studentIdCard: $studentIdCard)';
   }
 
   @override
@@ -97,7 +103,8 @@ class UserModel {
         other.matricNo == matricNo &&
         other.schoolName == schoolName &&
         other.isACourseRep == isACourseRep &&
-        other.isALead == isALead;
+        other.isALead == isALead &&
+        other.studentIdCard == studentIdCard;
   }
 
   @override
@@ -110,6 +117,7 @@ class UserModel {
         matricNo.hashCode ^
         schoolName.hashCode ^
         isACourseRep.hashCode ^
-        isALead.hashCode;
+        isALead.hashCode ^
+        studentIdCard.hashCode;
   }
 }

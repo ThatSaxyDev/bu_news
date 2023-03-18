@@ -63,6 +63,7 @@ class AdminCommunityController extends StateNotifier<bool> {
       avatar: Constants.communityAvatarDefault,
       members: [uid],
       mods: [uid],
+      description: ''
     );
 
     final res = await _communityRepository.createCommunity(community);
@@ -89,6 +90,7 @@ class AdminCommunityController extends StateNotifier<bool> {
       avatar: Constants.communityAvatarDefault,
       members: [application.userId],
       mods: [application.userId],
+      description: '',
     );
     final res = await _communityRepository.createCommunity(community);
     state = false;

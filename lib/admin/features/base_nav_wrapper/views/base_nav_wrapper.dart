@@ -1,6 +1,7 @@
 import 'package:bu_news/admin/features/approval/views/application_approval_view.dart';
 import 'package:bu_news/admin/features/base_nav_wrapper/widgets/nav_bar_item.dart';
 import 'package:bu_news/admin/features/home/views/admin_home_view.dart';
+import 'package:bu_news/admin/features/verifications/views/verification_view.dart';
 import 'package:bu_news/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,7 +21,7 @@ class _AdminBaseNavWrapperState extends ConsumerState<AdminBaseNavWrapper> {
   List<Widget> pages = [
     AdminHomeView(),
     ApplicationsApproval(),
-    Container(color: Colors.blue),
+    VerificationsView(),
   ];
 
   @override

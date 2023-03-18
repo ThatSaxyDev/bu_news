@@ -136,6 +136,7 @@ class CommnunityProfileView extends ConsumerWidget {
                             10.sbH,
                             const Divider(thickness: 2),
                           ],
+                          
                         ),
                       ),
                     ),
@@ -143,6 +144,18 @@ class CommnunityProfileView extends ConsumerWidget {
                 },
                 body: ref.watch(getCommunityPostsProvider(name)).when(
                       data: (data) {
+                        if (!community.members.contains(user.uid)) {
+                          return Center(
+                            child: Text(
+                              'You are not a member of this community',
+                              style: TextStyle(
+                                color: currentTheme.textTheme.bodyMedium!.color,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17.sp,
+                              ),
+                            ),
+                          );
+                        }
                         if (data.isEmpty) {
                           return Center(
                             child: Text(

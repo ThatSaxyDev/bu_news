@@ -5,6 +5,7 @@ import 'package:bu_news/core/providers/storage_repository_provider.dart';
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/models/post_model.dart';
 import 'package:bu_news/models/user_model.dart';
+import 'package:bu_news/models/verification_model.dart';
 import 'package:bu_news/utils/snack_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,11 @@ import 'package:routemaster/routemaster.dart';
 
 import '../../../core/enums/enums.dart';
 import '../repository/profile_repository.dart';
+
+final getVerificationsProvider = StreamProvider((ref) {
+  final communityController = ref.watch(userProfileControllerProvider.notifier);
+  return communityController.getVerification();
+});
 
 final userProfileControllerProvider =
     StateNotifierProvider<UserProfileController, bool>((ref) {
@@ -57,9 +63,7 @@ class UserProfileController extends StateNotifier<bool> {
   void editUserProfile(
       {required BuildContext context,
       required File? profileFile,
-      required File? bannerFile,
-      required String name,
-      Uint8List? file}) async {
+    Uint8List? file}) async {
     state = true;
     UserModel user = _ref.read(userProvider)!;
     if (profileFile != null) {
@@ -75,20 +79,6 @@ class UserProfileController extends StateNotifier<bool> {
       );
     }
 
-    if (bannerFile != null) {
-      final res = await _storageRepository.storeFile(
-        path: 'users/banner',
-        id: user.uid,
-        file: bannerFile,
-        webFile: file,
-      );
-      res.fold(
-        (l) => showSnackBar(context, l.message),
-        (r) => user = user.copyWith(banner: r),
-      );
-    }
-
-    user = user.copyWith(name: name);
 
     final res = await _userProfileRepository.editProfile(user);
     state = false;
@@ -100,6 +90,54 @@ class UserProfileController extends StateNotifier<bool> {
         Routemaster.of(context).pop();
       },
     );
+  }
+
+  void requestVerification({
+    required BuildContext context,
+    required String matricNo,
+    required File? photoIdCard,
+    Uint8List? file,
+  }) async {
+    state = true;
+    final user = _ref.read(userProvider)!;
+    String image = '';
+
+    if (photoIdCard != null) {
+      final res = await _storageRepository.storeFile(
+        path: 'appproval/ids',
+        id: user.uid,
+        file: photoIdCard,
+        webFile: file,
+      );
+      res.fold(
+        (l) => showSnackBar(context, l.message),
+        (r) => image = r,
+      );
+    }
+
+    VerificationModel verification = VerificationModel(
+      userId: user.uid,
+      matricNo: matricNo,
+      photoIdCard: image,
+      verificationStatus: 'pending',
+      createdAt: DateTime.now(),
+      description: '',
+    );
+
+    final res = await _userProfileRepository.requestVerification(verification);
+    state = false;
+    res.fold(
+      (failure) => showSnackBar(context, failure.message),
+      (success) {
+        showSnackBar(context, 'Verification Request successful');
+        // Routemaster.of(context).pop();
+      },
+    );
+  }
+
+   Stream<List<VerificationModel>> getVerification() {
+    final uid = _ref.read(userProvider)!.uid;
+    return _userProfileRepository.getVerificationStatus(uid);
   }
 
   void addToBookmarks({

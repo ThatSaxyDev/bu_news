@@ -31,6 +31,10 @@ class ProfileView extends ConsumerWidget {
     Routemaster.of(context).push('/approval-status');
   }
 
+  void navigateToEditProfile(BuildContext context) {
+    Routemaster.of(context).push('/edit-profile');
+  }
+
   void navigateToBookmarks(BuildContext context) {
     Routemaster.of(context).push('/bookmarks');
   }
@@ -78,119 +82,125 @@ class ProfileView extends ConsumerWidget {
     final user = ref.watch(userProvider)!;
     final currentTheme = ref.watch(themeNotifierProvider);
     return Scaffold(
-      body: Column(
-        children: [
-          71.sbH,
-          AppFadeAnimation(
-            delay: 1,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            71.sbH,
+            AppFadeAnimation(
+              delay: 1,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // 20.sbH,
+                        //! header
+                        Text(
+                          'Profile',
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        8.sbH,
+                        Text(
+                          '',
+                          style: TextStyle(
+                            color: Pallete.blackColor,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                    40.sbW,
+                  ],
+                ),
+              ),
+            ),
+      
+            //! profile photo and name
+            AppFadeAnimation(
+              delay: 1,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // 20.sbH,
-                      //! header
-                      Text(
-                        'Profile',
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      8.sbH,
-                      Text(
-                        '',
-                        style: TextStyle(
-                          color: Pallete.blackColor,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
+                  24.sbW,
+                  CircleAvatar(
+                    radius: 25.w,
+                    backgroundColor: Pallete.greyColor,
+                    backgroundImage: NetworkImage(user.profilePic),
                   ),
-                  40.sbW,
+                  10.sbW,
+                  Text(
+                    user.name,
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ],
               ),
             ),
-          ),
-
-          //! profile photo and name
-          AppFadeAnimation(
-            delay: 1,
-            child: Row(
-              children: [
-                24.sbW,
-                CircleAvatar(
-                  radius: 25.w,
-                  backgroundColor: Pallete.greyColor,
-                  backgroundImage: NetworkImage(user.profilePic),
-                ),
-                10.sbW,
-                Text(
-                  user.name,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          24.sbH,
-
-          Column(
-            children: profileItems
-                .map(
-                  (e) => AppFadeAnimation(
-                    delay: e.title == 'My Profile'
-                        ? 1
-                        : e.title == 'Bookmarks'
-                            ? 1.2
-                            : 1.4,
-                    child: ProfileTile(
-                      onTap: () {
-                        switch (e.title) {
-                          case 'Community Creation Approval':
-                            navigateToApproval(context);
-                            break;
-
-                          case 'Add new symptoms':
-                            navigateToNewSymptoms(context);
-                            break;
-
-                          case 'Bookmarks':
-                            navigateToBookmarks(context);
-                            break;
-                        }
-                      },
-                      icon: e.icon,
-                      title: e.title,
-                      isSwitch: e.isSwitch,
-                      isLogout: e.isLogout,
-                      isReactive: e.isReactive,
+            24.sbH,
+      
+            Column(
+              children: profileItems
+                  .map(
+                    (e) => AppFadeAnimation(
+                      delay: e.title == 'My Profile'
+                          ? 1
+                          : e.title == 'Bookmarks'
+                              ? 1.2
+                              : 1.4,
+                      child: ProfileTile(
+                        onTap: () {
+                          switch (e.title) {
+                            case 'Community Creation Approval':
+                              navigateToApproval(context);
+                              break;
+      
+                            case 'Add new symptoms':
+                              navigateToNewSymptoms(context);
+                              break;
+      
+                            case 'Bookmarks':
+                              navigateToBookmarks(context);
+                              break;
+      
+                            case 'My Profile':
+                              navigateToEditProfile(context);
+                              break;
+                          }
+                        },
+                        icon: e.icon,
+                        title: e.title,
+                        isSwitch: e.isSwitch,
+                        isLogout: e.isLogout,
+                        isReactive: e.isReactive,
+                      ),
                     ),
-                  ),
-                )
-                .toList(),
-          ),
-          const Spacer(),
-
-          AppFadeAnimation(
-            delay: 1.6,
-            child: ProfileTile(
-              onTap: () => showlogOutDialog(ref, context),
-              icon: PhosphorIcons.signOutBold,
-              title: 'Log out',
-              isLogout: true,
-              isSwitch: false,
+                  )
+                  .toList(),
             ),
-          ),
-          30.sbH,
-        ],
+            60.sbH,
+      
+            AppFadeAnimation(
+              delay: 1.6,
+              child: ProfileTile(
+                onTap: () => showlogOutDialog(ref, context),
+                icon: PhosphorIcons.signOutBold,
+                title: 'Log out',
+                isLogout: true,
+                isSwitch: false,
+              ),
+            ),
+            30.sbH,
+          ],
+        ),
       ),
     );
   }

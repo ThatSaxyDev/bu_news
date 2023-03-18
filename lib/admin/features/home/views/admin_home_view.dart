@@ -30,7 +30,7 @@ class AdminHomeView extends ConsumerWidget {
     return Scaffold(
       // backgroundColor: currentTheme.backgroundColor,
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>  navigateToCreateCommunity(context),
+        onPressed: () => navigateToCreateCommunity(context),
       ),
       body: Container(
         height: height(context),
@@ -38,26 +38,6 @@ class AdminHomeView extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            InkWell(
-              onTap: () => navigateToType(context, 'image'),
-              child: SizedBox(
-                height: cardDimension,
-                width: cardDimension,
-                child: Card(
-                  color: currentTheme.cardColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.r)),
-                  elevation: 16,
-                  child: Center(
-                    child: Icon(
-                      PhosphorIcons.image,
-                      size: iconSize,
-                      color: currentTheme.backgroundColor,
-                    ),
-                  ),
-                ),
-              ),
-            ),
             InkWell(
               onTap: () => navigateToType(context, 'text'),
               child: SizedBox(

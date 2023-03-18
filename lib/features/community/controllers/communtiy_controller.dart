@@ -185,7 +185,7 @@ class CommunityController extends StateNotifier<bool> {
         if (community.members.contains(user.uid)) {
           showSnackBar(context, 'You have left the komyuniti');
         } else {
-          Routemaster.of(context).push('/');
+          // Routemaster.of(context).push('/');
         }
       },
     );

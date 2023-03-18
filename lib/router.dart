@@ -9,6 +9,7 @@ import 'package:bu_news/features/home/views/home_view.dart';
 import 'package:bu_news/features/posts/views/add_post_view.dart';
 import 'package:bu_news/features/profile/views/approval_status_view.dart';
 import 'package:bu_news/features/profile/views/bookmarks_view.dart';
+import 'package:bu_news/features/profile/views/edit_profile_view.dart';
 import 'package:bu_news/features/welcome/view/welcome_view.dart';
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
@@ -66,11 +67,9 @@ final loggedInRoute = RouteMap(
     //         uid: routeData.pathParameters['uid']!,
     //       ),
     //     ),
-    // '/edit-profile/:uid': (routeData) => MaterialPage(
-    //       child: EditProfileScreen(
-    //         uid: routeData.pathParameters['uid']!,
-    //       ),
-    //     ),
+    '/edit-profile': (routeData) => const MaterialPage(
+          child: EditProfileView(),
+        ),
     // // '/add-post': (_) => const MaterialPage(
     // //       child: AddPostScreen(),
     // //     ),

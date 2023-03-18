@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:any_link_preview/any_link_preview.dart';
 import 'package:bu_news/core/constants/constants.dart';
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
@@ -88,9 +90,9 @@ class PostCard extends ConsumerWidget {
     ref.read(postControllerProvider.notifier).downvote(post);
   }
 
-  void navigateToUser(BuildContext context) {
-    Routemaster.of(context).push('/user-profile/${post.uid}');
-  }
+  // void navigateToUser(BuildContext context) {
+  //   Routemaster.of(context).push('/user-profile/${post.uid}');
+  // }
 
   void navigateToCommunity(BuildContext context) {
     Routemaster.of(context).push('/com/${post.communityName}');
@@ -112,6 +114,15 @@ class PostCard extends ConsumerWidget {
     }
   }
 
+  // void getUserData(WidgetRef ref, User data) async {
+  //   userModel = await ref
+  //       .watch(authControllerProvider.notifier)
+  //       .getUserData(data.uid)
+  //       .first;
+  //   ref.read(userProvider.notifier).update((state) => userModel);
+  //   setState(() {});
+  // }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isTypeImage = post.type == 'image';
@@ -119,6 +130,7 @@ class PostCard extends ConsumerWidget {
     final isTypeText = post.type == 'text';
     final currentTheme = ref.watch(themeNotifierProvider);
     final user = ref.watch(userProvider)!;
+    final uzer = ref.watch(getUserProvider(post.uid));
 
     // final isLoading = ref.watch(postControllerProvider);
 
@@ -184,12 +196,37 @@ class PostCard extends ConsumerWidget {
                                         ),
                                         2.sbH,
                                         GestureDetector(
-                                          onTap: () => navigateToUser(context),
-                                          child: Text(
-                                            '@${post.username}',
-                                            style: TextStyle(
-                                              fontSize: 12.sp,
-                                            ),
+                                          onTap: () {},
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                '@${post.username} ',
+                                                style: TextStyle(
+                                                  fontSize: 12.sp,
+                                                ),
+                                              ),
+                                              uzer.when(
+                                                data: (data) {
+                                                  if (data.schoolName ==
+                                                      'approved') {
+                                                    return Icon(
+                                                      PhosphorIcons
+                                                          .checkCircleFill,
+                                                      color: Pallete.blueColor,
+                                                      size: 15.sp,
+                                                    );
+                                                  } else {
+                                                    return const SizedBox
+                                                        .shrink();
+                                                  }
+                                                },
+                                                error: (error, stackTrace) {
+                                                  return ErrorText(
+                                                      error: error.toString());
+                                                },
+                                                loading: () => const Loader(),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],

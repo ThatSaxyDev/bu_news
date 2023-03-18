@@ -45,7 +45,7 @@ class _HomeViewState extends ConsumerState<HomeView>
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 70.h,
+          toolbarHeight: 40.h,
           centerTitle: true,
           leadingWidth: 50.w,
           leading: Padding(

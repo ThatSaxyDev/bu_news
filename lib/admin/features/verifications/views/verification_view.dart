@@ -1,6 +1,8 @@
 import 'package:bu_news/admin/features/approval/widgets/applications_tile.dart';
+import 'package:bu_news/admin/features/verifications/controller/verification_controller.dart';
+import 'package:bu_news/admin/features/verifications/widgets/verification_tile.dart';
 import 'package:bu_news/features/profile/widgets/profile_tile.dart';
-import 'package:bu_news/models/application_model.dart';
+import 'package:bu_news/models/verification_model.dart';
 import 'package:bu_news/theme/palette.dart';
 import 'package:bu_news/utils/error_text.dart';
 import 'package:bu_news/utils/loader.dart';
@@ -10,18 +12,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:routemaster/routemaster.dart';
 
-import '../../communities/controllers/community_controller.dart';
-
-class ApplicationsApproval extends ConsumerStatefulWidget {
-  const ApplicationsApproval({super.key});
+class VerificationsView extends ConsumerStatefulWidget {
+  const VerificationsView({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _ApplicationsApprovalState();
+      _VerificationsViewState();
 }
 
-class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
+class _VerificationsViewState extends ConsumerState<VerificationsView> {
   final ValueNotifier<int> selectedIndex = ValueNotifier(0);
   final PageController _controller = PageController();
   final ValueNotifier<int> isPendingSelected = ValueNotifier(0);
@@ -34,22 +35,59 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
     selectedIndex.value = 0;
   }
 
-  void approve(ApplicationModel application) {
-    ref
-        .read(adminCommunityControllerProvider.notifier)
-        .approveApplication(context, application);
+  void showReasonDialog(WidgetRef ref, BuildContext context,
+      VerificationModel verification) async {
+    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            title: const Text('Reason'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  reject(verification, 'unclear image');
+                  Routemaster.of(context).pop();
+                },
+                child: const Text(
+                  'Unclear image',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  reject(verification, 'inconsistent information');
+                  Routemaster.of(context).pop();
+                },
+                child: const Text(
+                  'Inconsistent info',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
   }
 
-  void reject(ApplicationModel application) {
+  void approve(VerificationModel verification) {
     ref
-        .read(adminCommunityControllerProvider.notifier)
-        .rejectApplication(context, application);
+        .read(verificationControllerProvider.notifier)
+        .approveApplication(context, verification);
+  }
+
+  void reject(VerificationModel verification, String reason) {
+    ref
+        .read(verificationControllerProvider.notifier)
+        .rejectApplication(context, verification, reason);
   }
 
   @override
   Widget build(BuildContext context) {
     final currentTheme = ref.watch(themeNotifierProvider);
-    final isLoading = ref.watch(adminCommunityControllerProvider);
+    final isLoading = ref.watch(verificationControllerProvider);
 
     return SizedBox(
       child: Row(
@@ -167,28 +205,28 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
                       Expanded(
                         flex: 1,
                         child: Text(
-                          'Pending Community Applications',
+                          'Pending Verification Applications',
                           style: TextStyle(
                               fontSize: 30.sp, fontWeight: FontWeight.bold),
                         ),
                       ),
                       10.sbH,
-                      ref.watch(getPendingApplicationsProvider).when(
-                            data: (applications) {
+                      ref.watch(getPendingVerificationsProvider).when(
+                            data: (verifications) {
                               return Expanded(
                                 flex: 8,
                                 child: ListView.builder(
                                   padding: EdgeInsets.zero,
                                   physics: const AlwaysScrollableScrollPhysics(
                                       parent: BouncingScrollPhysics()),
-                                  itemCount: applications.length,
+                                  itemCount: verifications.length,
                                   itemBuilder: (context, index) {
-                                    final application = applications[index];
+                                    final verification = verifications[index];
                                     return ValueListenableBuilder(
                                         valueListenable: isPendingSelected,
                                         child: const SizedBox.shrink(),
                                         builder: (context, value, child) {
-                                          return ApplicationsTile(
+                                          return VerificationsTile(
                                             icon: isPendingSelected.value ==
                                                     index + 1
                                                 ? Icon(
@@ -208,7 +246,7 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
                                                 isPendingSelected.value = 0;
                                               }
                                             },
-                                            application: application,
+                                            application: verification,
                                             delay: index + 0.2,
                                             height: isPendingSelected.value ==
                                                     index + 1
@@ -216,9 +254,12 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
                                                 : 100.h,
                                             isExtended: false,
                                             isLoading: isLoading,
-                                            status: application.approvalStatus,
-                                            approve: () => approve(application),
-                                            reject: () => reject(application),
+                                            status:
+                                                verification.verificationStatus,
+                                            approve: () =>
+                                                approve(verification),
+                                            reject: () => showReasonDialog(
+                                                ref, context, verification),
                                           );
                                         });
                                   },
@@ -252,13 +293,13 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
                       Expanded(
                         flex: 1,
                         child: Text(
-                          'Approved Community Applications',
+                          'Approved Verification Applications',
                           style: TextStyle(
                               fontSize: 30.sp, fontWeight: FontWeight.bold),
                         ),
                       ),
                       10.sbH,
-                      ref.watch(getApprovedApplicationsProvider).when(
+                      ref.watch(getApprovedVerificationsProvider).when(
                             data: (applications) {
                               return Expanded(
                                 flex: 8,
@@ -272,7 +313,7 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
                                     return ValueListenableBuilder(
                                         valueListenable: isApprovedSelected,
                                         builder: (context, value, child) {
-                                          return ApplicationsTile(
+                                          return VerificationsTile(
                                             icon: isApprovedSelected.value ==
                                                     index + 1
                                                 ? Icon(
@@ -284,7 +325,7 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
                                                     size: 25.sp,
                                                   ),
                                             onTap: () {
-                                               if (isApprovedSelected.value ==
+                                              if (isApprovedSelected.value ==
                                                   0) {
                                                 isApprovedSelected.value =
                                                     index + 1;
@@ -300,7 +341,8 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
                                                 : 100.h,
                                             isExtended: false,
                                             isLoading: isLoading,
-                                            status: application.approvalStatus,
+                                            status:
+                                                application.verificationStatus,
                                           );
                                         });
                                   },
@@ -333,13 +375,13 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
                       Expanded(
                         flex: 1,
                         child: Text(
-                          'Rejected Community Applications',
+                          'Rejected Verification Applications',
                           style: TextStyle(
                               fontSize: 30.sp, fontWeight: FontWeight.bold),
                         ),
                       ),
                       10.sbH,
-                      ref.watch(getRejectedApplicationsProvider).when(
+                      ref.watch(getRejectedVerificationsProvider).when(
                             data: (applications) {
                               return Expanded(
                                 flex: 8,
@@ -354,38 +396,38 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
                                         valueListenable: isRejectedSelected,
                                         child: const SizedBox.shrink(),
                                         builder: (context, value, child) {
-                                        return ApplicationsTile(
-                                          icon:
-                                              isRejectedSelected.value == index + 1
-                                                  ? Icon(
-                                                      Icons.keyboard_arrow_up,
-                                                      size: 25.sp,
-                                                    )
-                                                  : Icon(
-                                                      Icons.keyboard_arrow_down,
-                                                      size: 25.sp,
-                                                    ),
-                                          onTap: () {
-                                            if (isRejectedSelected.value ==
+                                          return VerificationsTile(
+                                            icon: isRejectedSelected.value ==
+                                                    index + 1
+                                                ? Icon(
+                                                    Icons.keyboard_arrow_up,
+                                                    size: 25.sp,
+                                                  )
+                                                : Icon(
+                                                    Icons.keyboard_arrow_down,
+                                                    size: 25.sp,
+                                                  ),
+                                            onTap: () {
+                                              if (isRejectedSelected.value ==
                                                   0) {
                                                 isRejectedSelected.value =
                                                     index + 1;
                                               } else {
                                                 isRejectedSelected.value = 0;
                                               }
-                                          },
-                                          application: application,
-                                          delay: index + 0.2,
-                                          height:
-                                              isRejectedSelected.value == index + 1
-                                                  ? 650.h
-                                                  : 100.h,
-                                          isExtended: false,
-                                          isLoading: isLoading,
-                                          status: application.approvalStatus,
-                                        );
-                                      }
-                                    );
+                                            },
+                                            application: application,
+                                            delay: index + 0.2,
+                                            height: isRejectedSelected.value ==
+                                                    index + 1
+                                                ? 650.h
+                                                : 100.h,
+                                            isExtended: false,
+                                            isLoading: isLoading,
+                                            status:
+                                                application.verificationStatus,
+                                          );
+                                        });
                                   },
                                 ),
                               );
@@ -407,15 +449,3 @@ class _ApplicationsApprovalState extends ConsumerState<ApplicationsApproval> {
     );
   }
 }
-
-// Text(
-//                                   TimeOfDay.fromDateTime(DateTime.parse(
-//                                           creditTransaction?.createdAt ??
-//                                               debitTransactionModel!
-//                                                   .createdAt!))
-//                                       .format(context),
-//                                   style: TextStyle(
-//                                       color: AppColors.grey,
-//                                       fontSize: 12.sp,
-//                                       fontWeight: FontWeight.w400),
-//                                 ),

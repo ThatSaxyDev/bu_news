@@ -80,7 +80,7 @@ class _CommentsViewState extends ConsumerState<CommentsView> {
                           data: (data) {
                             if (data.isEmpty) {
                               return Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                                padding: EdgeInsets.symmetric(horizontal: 24.w).copyWith(bottom: 70.h),
                                 child: const Text(
                                   'No comments here yet, be the first to comment!',
                                   textAlign: TextAlign.center,
@@ -90,7 +90,7 @@ class _CommentsViewState extends ConsumerState<CommentsView> {
                             }
                             return Padding(
                               padding:
-                                  EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 30.h),
+                                  EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 70.h),
                               child: Column(
                                 children: data
                                     .map((e) => CommentCard(comment: e))

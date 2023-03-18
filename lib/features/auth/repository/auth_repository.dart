@@ -77,6 +77,7 @@ class AuthRepository {
           isACourseRep: false,
           isALead: false,
           email: userCredential.user!.email ?? '',
+          studentIdCard: '',
         );
         await _users.doc(userCredential.user!.uid).set(userModel.toMap());
       } else {
@@ -130,6 +131,7 @@ class AuthRepository {
           isACourseRep: false,
           isALead: false,
           email: userCredential.user!.email ?? '',
+          studentIdCard: '',
         );
         await _users.doc(userCredential.user!.uid).set(userModel.toMap());
       } else {

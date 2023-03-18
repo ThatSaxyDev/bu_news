@@ -6,4 +6,5 @@ class FirebaseConstants {
   static const adminCollection = 'admin';
   static const approvalCollection = 'approvals';
   static const bookmarksCollection = 'bookmarks';
+  static const verificationCollection = 'verifications';
 }

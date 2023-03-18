@@ -8,6 +8,7 @@ class VerificationModel {
   final String verificationStatus;
   final DateTime createdAt;
   final String description;
+  final String phoneNumber;
   const VerificationModel({
     required this.userId,
     required this.matricNo,
@@ -15,6 +16,7 @@ class VerificationModel {
     required this.verificationStatus,
     required this.createdAt,
     required this.description,
+    required this.phoneNumber,
   });
 
   VerificationModel copyWith({
@@ -24,6 +26,7 @@ class VerificationModel {
     String? verificationStatus,
     DateTime? createdAt,
     String? description,
+    String? phoneNumber,
   }) {
     return VerificationModel(
       userId: userId ?? this.userId,
@@ -32,6 +35,7 @@ class VerificationModel {
       verificationStatus: verificationStatus ?? this.verificationStatus,
       createdAt: createdAt ?? this.createdAt,
       description: description ?? this.description,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
     );
   }
 
@@ -43,6 +47,7 @@ class VerificationModel {
       'verificationStatus': verificationStatus,
       'createdAt': createdAt.millisecondsSinceEpoch,
       'description': description,
+      'phoneNumber': phoneNumber,
     };
   }
 
@@ -54,6 +59,7 @@ class VerificationModel {
       verificationStatus: (map["verificationStatus"] ?? '') as String,
       createdAt: DateTime.fromMillisecondsSinceEpoch((map["createdAt"]??0) as int),
       description: (map["description"] ?? '') as String,
+      phoneNumber: (map["phoneNumber"] ?? '') as String,
     );
   }
 
@@ -63,7 +69,7 @@ class VerificationModel {
 
   @override
   String toString() {
-    return 'VerificationModel(userId: $userId, matricNo: $matricNo, photoIdCard: $photoIdCard, verificationStatus: $verificationStatus, createdAt: $createdAt, description: $description)';
+    return 'VerificationModel(userId: $userId, matricNo: $matricNo, photoIdCard: $photoIdCard, verificationStatus: $verificationStatus, createdAt: $createdAt, description: $description, phoneNumber: $phoneNumber)';
   }
 
   @override
@@ -76,7 +82,8 @@ class VerificationModel {
       other.photoIdCard == photoIdCard &&
       other.verificationStatus == verificationStatus &&
       other.createdAt == createdAt &&
-      other.description == description;
+      other.description == description &&
+      other.phoneNumber == phoneNumber;
   }
 
   @override
@@ -86,6 +93,7 @@ class VerificationModel {
       photoIdCard.hashCode ^
       verificationStatus.hashCode ^
       createdAt.hashCode ^
-      description.hashCode;
+      description.hashCode ^
+      phoneNumber.hashCode;
   }
 }

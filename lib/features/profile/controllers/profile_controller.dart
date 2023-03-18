@@ -63,7 +63,7 @@ class UserProfileController extends StateNotifier<bool> {
   void editUserProfile(
       {required BuildContext context,
       required File? profileFile,
-    Uint8List? file}) async {
+      Uint8List? file}) async {
     state = true;
     UserModel user = _ref.read(userProvider)!;
     if (profileFile != null) {
@@ -78,7 +78,6 @@ class UserProfileController extends StateNotifier<bool> {
         (r) => user = user.copyWith(profilePic: r),
       );
     }
-
 
     final res = await _userProfileRepository.editProfile(user);
     state = false;
@@ -96,6 +95,7 @@ class UserProfileController extends StateNotifier<bool> {
     required BuildContext context,
     required String matricNo,
     required File? photoIdCard,
+    required String phoneNumber,
     Uint8List? file,
   }) async {
     state = true;
@@ -122,6 +122,7 @@ class UserProfileController extends StateNotifier<bool> {
       verificationStatus: 'pending',
       createdAt: DateTime.now(),
       description: '',
+      phoneNumber: phoneNumber,
     );
 
     final res = await _userProfileRepository.requestVerification(verification);
@@ -135,7 +136,7 @@ class UserProfileController extends StateNotifier<bool> {
     );
   }
 
-   Stream<List<VerificationModel>> getVerification() {
+  Stream<List<VerificationModel>> getVerification() {
     final uid = _ref.read(userProvider)!.uid;
     return _userProfileRepository.getVerificationStatus(uid);
   }

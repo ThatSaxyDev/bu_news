@@ -183,7 +183,7 @@ class _HomeViewState extends ConsumerState<HomeView>
                 );
               },
               error: (error, stackTrace) => ErrorText(error: error.toString()),
-              loading: () => const Loader(),
+              loading: () => const SizedBox.shrink(),
             ),
       ),
     );

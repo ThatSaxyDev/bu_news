@@ -130,17 +130,19 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
                           ),
                         ),
                         const Spacer(),
-                        InkWell(
-                          onTap: () {
-                            showSearch(
-                                context: context,
-                                delegate: SearchCommunityDelegate(ref));
-                          },
-                          child: Icon(
-                            PhosphorIcons.magnifyingGlass,
-                            size: 25.sp,
-                          ),
-                        ),
+                        user.schoolName == 'approved'
+                            ? InkWell(
+                                onTap: () {
+                                  showSearch(
+                                      context: context,
+                                      delegate: SearchCommunityDelegate(ref));
+                                },
+                                child: Icon(
+                                  PhosphorIcons.magnifyingGlass,
+                                  size: 25.sp,
+                                ),
+                              )
+                            : const SizedBox.shrink(),
                       ],
                     );
                   }),

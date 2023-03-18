@@ -7,6 +7,7 @@ import 'package:bu_news/utils/widget_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
@@ -63,10 +64,29 @@ class LoginScreen extends ConsumerWidget {
                           'Continue With Google',
                           style: TextStyle(
                               fontSize: 14.sp,
-                              color: currentTheme.textTheme.bodyMedium!.color),
+                              color: currentTheme.textTheme.bodyMedium!.color,
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
+                  ),
+                  20.sbH,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        PhosphorIcons.warning,
+                        color: Colors.red,
+                        size: 23.sp,
+                      ),
+                      10.sbW,
+                      Text(
+                        'Make sure it is your school email',
+                        style: TextStyle(
+                            fontSize: 16.sp,
+                            color: currentTheme.textTheme.bodyMedium!.color),
+                      ),
+                    ],
                   ),
                 ],
               ),

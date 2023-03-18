@@ -46,11 +46,12 @@ class VerificationRepository {
 
   //! set user matric number and id card
   FutureVoid editUserProfile(
-      String userId, String matricNo, String idCard) async {
+      String userId, String matricNo, String idCard, String phoneNumber) async {
     try {
       return right(_users.doc(userId).update({
         'matricNo': matricNo,
         'studentIdCard': idCard,
+        'banner': phoneNumber,
       }));
     } on FirebaseException catch (e) {
       throw e.message!;

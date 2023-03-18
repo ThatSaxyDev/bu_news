@@ -27,6 +27,7 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
   File? bannerFile;
   File? profileFile;
   final TextEditingController matricController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
   @override
   void dispose() {
@@ -67,6 +68,7 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
           context: context,
           matricNo: matricController.text.trim(),
           photoIdCard: image,
+          phoneNumber: phoneController.text.trim(),
         );
   }
 
@@ -82,7 +84,7 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
               elevation: 0,
               centerTitle: true,
               title: Text(
-                'Edit Profile',
+                'Profile',
                 style: TextStyle(
                   color: currentTheme.textTheme.bodyMedium!.color,
                   fontSize: 18.sp,
@@ -231,6 +233,38 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
                                             contentPadding:
                                                 EdgeInsets.all(18.w)),
                                         maxLength: 7,
+                                      ),
+                                      20.sbH,
+
+                                      // phone
+                                       TextField(
+                                        controller: phoneController,
+                                        decoration: InputDecoration(
+                                            hintText: 'Phone number E.g. 08012345678',
+                                            hintStyle:
+                                                TextStyle(fontSize: 13.sp),
+                                            filled: true,
+                                            border: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.transparent),
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.transparent),
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.transparent),
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r),
+                                            ),
+                                            contentPadding:
+                                                EdgeInsets.all(18.w)),
+                                        maxLength: 11,
                                       ),
                                       20.sbH,
 
@@ -527,6 +561,43 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
                                                                   .isEmpty
                                                               ? '-------'
                                                               : user.matricNo,
+                                                          style: TextStyle(
+                                                            color: currentTheme
+                                                                .textTheme
+                                                                .bodyMedium!
+                                                                .color,
+                                                            fontSize: 15.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                20.sbH,
+                                                Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                      children: [
+                                                        TextSpan(
+                                                          text:
+                                                              'Phone Number: ',
+                                                          style: TextStyle(
+                                                            color: currentTheme
+                                                                .textTheme
+                                                                .bodyMedium!
+                                                                .color,
+                                                            fontSize: 15.sp,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                        TextSpan(
+                                                          text: user.banner,
                                                           style: TextStyle(
                                                             color: currentTheme
                                                                 .textTheme

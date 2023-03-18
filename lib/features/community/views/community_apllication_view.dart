@@ -9,6 +9,7 @@ import 'package:bu_news/utils/text_input.dart';
 import 'package:bu_news/utils/widget_extensions.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -24,14 +25,14 @@ class CommunityApplicationView extends ConsumerStatefulWidget {
 class _CommunityApplicationViewState
     extends ConsumerState<CommunityApplicationView> {
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _matricController = TextEditingController();
+  // final TextEditingController _matricController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   File? idCardPhoto;
 
   @override
   void dispose() {
     _nameController.dispose();
-    _matricController.dispose();
+    // _matricController.dispose();
     _descriptionController.dispose();
     super.dispose();
   }
@@ -50,8 +51,6 @@ class _CommunityApplicationViewState
     ref.read(communityControllerProvider.notifier).applyToCreateCommunity(
           context: context,
           communityName: _nameController.text,
-          matricNo: _matricController.text,
-          photoIdCard: idCardPhoto,
           description: _descriptionController.text,
           approvalStatus: 'pending',
         );
@@ -82,29 +81,38 @@ class _CommunityApplicationViewState
                   children: [
                     20.sbH,
                     //! name
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Community Name',
-                          style: TextStyle(
-                            fontSize: 14.6.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        10.sbH,
-                        TextInputBox(
-                          height: 56.h,
-                          hintText: '',
-                          controller: _nameController,
-                          validator: (val) {
-                            if (val == null || val.isEmpty) {
-                              return null;
-                            }
-                            return null;
-                          },
-                        ),
+                    TextField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.deny(RegExp(' '))
                       ],
+                      controller: _nameController,
+                      onChanged: (value) {
+                        _nameController.value = TextEditingValue(
+                            text: value.toLowerCase(),
+                            selection: _nameController.selection);
+                      },
+                      decoration: InputDecoration(
+                          prefixText: 'bu/',
+                          hintText: 'community_name',
+                          hintStyle: TextStyle(fontSize: 15.sp),
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          contentPadding: EdgeInsets.all(18.w)),
+                      maxLength: 21,
                     ),
                     20.sbH,
 
@@ -120,96 +128,109 @@ class _CommunityApplicationViewState
                           ),
                         ),
                         10.sbH,
-                        TextInputBox(
-                          height: 56.h,
-                          hintText: '',
+                        TextField(
+                          maxLines: 10,
                           controller: _descriptionController,
-                          maxLines: 5,
-                          keyboardType: const TextInputType.numberWithOptions(
-                            decimal: false,
-                          ),
-                          validator: (val) {
-                            if (val == null || val.isEmpty) {
-                              return null;
-                            }
-                            return null;
-                          },
+                          decoration: InputDecoration(
+                              hintText: 'What is your community about?',
+                              hintStyle: TextStyle(fontSize: 15.sp),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.transparent),
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.transparent),
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.transparent),
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              contentPadding: EdgeInsets.all(18.w)),
+                          maxLength: 150,
                         ),
                       ],
                     ),
                     20.sbH,
 
-                    //! matric
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Matric Number',
-                          style: TextStyle(
-                            fontSize: 14.6.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        10.sbH,
-                        TextInputBox(
-                          height: 56.h,
-                          hintText: '',
-                          controller: _matricController,
-                          maxLines: 5,
-                          keyboardType: const TextInputType.numberWithOptions(
-                            decimal: false,
-                          ),
-                          validator: (val) {
-                            if (val == null || val.isEmpty) {
-                              return null;
-                            }
-                            return null;
-                          },
-                        ),
-                      ],
-                    ),
-                    20.sbH,
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Student ID Card',
-                        style: TextStyle(
-                          fontSize: 14.6.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    10.sbH,
-                    GestureDetector(
-                      onTap: selectIdImage,
-                      child: DottedBorder(
-                        borderType: BorderType.RRect,
-                        radius: Radius.circular(15.r),
-                        dashPattern: const [10, 4],
-                        strokeCap: StrokeCap.round,
-                        color: currentTheme.textTheme.bodyMedium!.color!,
-                        child: Container(
-                          width: double.infinity,
-                          height: 150.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
-                          ),
-                          child: idCardPhoto != null
-                              ? Image.file(idCardPhoto!)
-                              : Center(
-                                  child: Icon(
-                                    PhosphorIcons.image,
-                                    size: 40.h,
-                                  ),
-                                ),
-                        ),
-                      ),
-                    ),
-                    40.sbH,
+                    // //! matric
+                    // Column(
+                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                    //   children: [
+                    //     Text(
+                    //       'Matric Number',
+                    //       style: TextStyle(
+                    //         fontSize: 14.6.sp,
+                    //         fontWeight: FontWeight.w500,
+                    //       ),
+                    //     ),
+                    //     10.sbH,
+                    //     TextInputBox(
+                    //       height: 56.h,
+                    //       hintText: '',
+                    //       controller: _matricController,
+                    //       maxLines: 5,
+                    //       keyboardType: const TextInputType.numberWithOptions(
+                    //         decimal: false,
+                    //       ),
+                    //       validator: (val) {
+                    //         if (val == null || val.isEmpty) {
+                    //           return null;
+                    //         }
+                    //         return null;
+                    //       },
+                    //     ),
+                    //   ],
+                    // ),
+                    // 20.sbH,
+                    // Align(
+                    //   alignment: Alignment.centerLeft,
+                    //   child: Text(
+                    //     'Student ID Card',
+                    //     style: TextStyle(
+                    //       fontSize: 14.6.sp,
+                    //       fontWeight: FontWeight.w500,
+                    //     ),
+                    //   ),
+                    // ),
+                    // 10.sbH,
+                    // GestureDetector(
+                    //   onTap: selectIdImage,
+                    //   child: DottedBorder(
+                    //     borderType: BorderType.RRect,
+                    //     radius: Radius.circular(15.r),
+                    //     dashPattern: const [10, 4],
+                    //     strokeCap: StrokeCap.round,
+                    //     color: currentTheme.textTheme.bodyMedium!.color!,
+                    //     child: Container(
+                    //       width: double.infinity,
+                    //       height: 150.h,
+                    //       decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(10.r),
+                    //       ),
+                    //       child: idCardPhoto != null
+                    //           ? Image.file(idCardPhoto!)
+                    //           : Center(
+                    //               child: Icon(
+                    //                 PhosphorIcons.image,
+                    //                 size: 40.h,
+                    //               ),
+                    //             ),
+                    //     ),
+                    //   ),
+                    // ),
+                    120.sbH,
                     BButton(
                       onTap: () {
-                        if (idCardPhoto != null) {
+                        if (_nameController.text.isNotEmpty &&
+                            _descriptionController.text.isNotEmpty) {
                           apply();
+                        } else {
+                          showSnackBar(context, 'There must be a community name and description');
                         }
                       },
                       height: 50.h,

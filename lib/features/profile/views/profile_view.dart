@@ -71,7 +71,7 @@ class ProfileView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider)!;
+    // final user = ref.watch(userProvider)!;
     final currentTheme = ref.watch(themeNotifierProvider);
     return Scaffold(
       body: SingleChildScrollView(
@@ -92,7 +92,7 @@ class ProfileView extends ConsumerWidget {
                         // 20.sbH,
                         //! header
                         Text(
-                          'Profile',
+                          'Settings',
                           style: TextStyle(
                             fontSize: 20.sp,
                             fontWeight: FontWeight.w500,
@@ -116,28 +116,28 @@ class ProfileView extends ConsumerWidget {
             ),
 
             //! profile photo and name
-            AppFadeAnimation(
-              delay: 1,
-              child: Row(
-                children: [
-                  24.sbW,
-                  CircleAvatar(
-                    radius: 25.w,
-                    backgroundColor: Pallete.greyColor,
-                    backgroundImage: NetworkImage(user.profilePic),
-                  ),
-                  10.sbW,
-                  Text(
-                    user.name,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            24.sbH,
+            // AppFadeAnimation(
+            //   delay: 1,
+            //   child: Row(
+            //     children: [
+            //       24.sbW,
+            //       CircleAvatar(
+            //         radius: 25.w,
+            //         backgroundColor: Pallete.greyColor,
+            //         backgroundImage: NetworkImage(user.profilePic),
+            //       ),
+            //       10.sbW,
+            //       Text(
+            //         user.name,
+            //         style: TextStyle(
+            //           fontSize: 16.sp,
+            //           fontWeight: FontWeight.w500,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // 24.sbH,
 
             Column(
               children: profileItems

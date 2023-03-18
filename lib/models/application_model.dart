@@ -9,6 +9,7 @@ class ApplicationModel {
   final String description;
   final String approvalStatus;
   final DateTime createdAt;
+  final String phoneNumber;
   const ApplicationModel({
     required this.userId,
     required this.communityName,
@@ -17,6 +18,7 @@ class ApplicationModel {
     required this.description,
     required this.approvalStatus,
     required this.createdAt,
+    required this.phoneNumber,
   });
 
   ApplicationModel copyWith({
@@ -27,6 +29,7 @@ class ApplicationModel {
     String? description,
     String? approvalStatus,
     DateTime? createdAt,
+    String? phoneNumber,
   }) {
     return ApplicationModel(
       userId: userId ?? this.userId,
@@ -36,6 +39,7 @@ class ApplicationModel {
       description: description ?? this.description,
       approvalStatus: approvalStatus ?? this.approvalStatus,
       createdAt: createdAt ?? this.createdAt,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
     );
   }
 
@@ -48,6 +52,7 @@ class ApplicationModel {
       'description': description,
       'approvalStatus': approvalStatus,
       'createdAt': createdAt.millisecondsSinceEpoch,
+      'phoneNumber': phoneNumber,
     };
   }
 
@@ -60,6 +65,7 @@ class ApplicationModel {
       description: (map["description"] ?? '') as String,
       approvalStatus: (map["approvalStatus"] ?? '') as String,
       createdAt: DateTime.fromMillisecondsSinceEpoch((map["createdAt"]??0) as int),
+      phoneNumber: (map["phoneNumber"] ?? '') as String,
     );
   }
 
@@ -70,7 +76,7 @@ class ApplicationModel {
 
   @override
   String toString() {
-    return 'ApplicationModel(userId: $userId, communityName: $communityName, matricNo: $matricNo, photoIdCard: $photoIdCard, description: $description, approvalStatus: $approvalStatus, createdAt: $createdAt)';
+    return 'ApplicationModel(userId: $userId, communityName: $communityName, matricNo: $matricNo, photoIdCard: $photoIdCard, description: $description, approvalStatus: $approvalStatus, createdAt: $createdAt, phoneNumber: $phoneNumber)';
   }
 
   @override
@@ -84,7 +90,8 @@ class ApplicationModel {
       other.photoIdCard == photoIdCard &&
       other.description == description &&
       other.approvalStatus == approvalStatus &&
-      other.createdAt == createdAt;
+      other.createdAt == createdAt &&
+      other.phoneNumber == phoneNumber;
   }
 
   @override
@@ -95,6 +102,7 @@ class ApplicationModel {
       photoIdCard.hashCode ^
       description.hashCode ^
       approvalStatus.hashCode ^
-      createdAt.hashCode;
+      createdAt.hashCode ^
+      phoneNumber.hashCode;
   }
 }

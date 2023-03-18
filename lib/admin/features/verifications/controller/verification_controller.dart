@@ -57,6 +57,7 @@ class VerificationController extends StateNotifier<bool> {
       verification.userId,
       verification.matricNo,
       verification.photoIdCard,
+      verification.phoneNumber,
     );
     state = false;
     res.fold(

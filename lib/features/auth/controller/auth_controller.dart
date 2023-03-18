@@ -46,8 +46,12 @@ class AuthController extends StateNotifier<bool> {
     state = true;
     late UserModel userM;
     final user = await _authRepository.signInWithGoogle();
+    state = false;
     user.fold(
-      (l) => showSnackBar(context, l.message),
+      (l) {
+        log(l.message);
+        showSnackBar(context, l.message);
+      },
       (userModel) =>
           _ref.read(userProvider.notifier).update((state) => userM = userModel),
     );
@@ -55,7 +59,7 @@ class AuthController extends StateNotifier<bool> {
     // join busa
     final res =
         await _communityRepository.joinCommunity('busa_official', userM.uid);
-    state = false;
+    // state = false;
     res.fold(
       (failure) => showSnackBar(context, failure.message),
       (success) {
@@ -80,6 +84,7 @@ class AuthController extends StateNotifier<bool> {
   }
 
   void logOut() async {
+    _ref.read(userProvider.notifier).update((state) => null);
     _authRepository.logOut();
   }
 }

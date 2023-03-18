@@ -110,36 +110,37 @@ class CommunityController extends StateNotifier<bool> {
   void applyToCreateCommunity(
       {required BuildContext context,
       required String communityName,
-      required String matricNo,
-      required File? photoIdCard,
+      // required String matricNo,
+      // required File? photoIdCard,
       required String description,
       required String approvalStatus,
       Uint8List? file}) async {
     state = true;
-    final uid = _ref.read(userProvider)?.uid ?? '';
+    final user = _ref.read(userProvider)!;
     String image = '';
 
-    if (photoIdCard != null) {
-      final res = await _storageRepository.storeFile(
-        path: 'appproval/ids',
-        id: uid,
-        file: photoIdCard,
-        webFile: file,
-      );
-      res.fold(
-        (l) => showSnackBar(context, l.message),
-        (r) => image = r,
-      );
-    }
+    // if (photoIdCard != null) {
+    //   final res = await _storageRepository.storeFile(
+    //     path: 'appproval/ids',
+    //     id: uid,
+    //     file: photoIdCard,
+    //     webFile: file,
+    //   );
+    //   res.fold(
+    //     (l) => showSnackBar(context, l.message),
+    //     (r) => image = r,
+    //   );
+    // }
 
     ApplicationModel application = ApplicationModel(
-      userId: uid,
+      userId: user.uid,
       communityName: communityName,
-      matricNo: matricNo,
-      photoIdCard: image,
+      matricNo: user.matricNo,
+      photoIdCard: user.studentIdCard,
       description: description,
       approvalStatus: approvalStatus,
       createdAt: DateTime.now(),
+      phoneNumber: user.banner,
     );
 
     final res = await _communityRepository.applyToCreateCommunity(application);
@@ -149,6 +150,53 @@ class CommunityController extends StateNotifier<bool> {
       (success) {
         showSnackBar(context, 'Application successful');
         Routemaster.of(context).pop();
+      },
+    );
+  }
+
+   void reapplyToCreateCommunity(
+      {required BuildContext context,
+      required String communityName,
+      // required String matricNo,
+      // required File? photoIdCard,
+      required String description,
+      required String approvalStatus,
+      Uint8List? file}) async {
+    state = true;
+    final user = _ref.read(userProvider)!;
+    String image = '';
+
+    // if (photoIdCard != null) {
+    //   final res = await _storageRepository.storeFile(
+    //     path: 'appproval/ids',
+    //     id: uid,
+    //     file: photoIdCard,
+    //     webFile: file,
+    //   );
+    //   res.fold(
+    //     (l) => showSnackBar(context, l.message),
+    //     (r) => image = r,
+    //   );
+    // }
+
+    ApplicationModel application = ApplicationModel(
+      userId: user.uid,
+      communityName: communityName,
+      matricNo: user.matricNo,
+      photoIdCard: user.studentIdCard,
+      description: description,
+      approvalStatus: approvalStatus,
+      createdAt: DateTime.now(),
+      phoneNumber: user.banner,
+    );
+
+    final res = await _communityRepository.applyToCreateCommunity(application);
+    state = false;
+    res.fold(
+      (failure) => showSnackBar(context, failure.message),
+      (success) {
+        showSnackBar(context, 'Re-Application successful');
+        // Routemaster.of(context).pop();
       },
     );
   }

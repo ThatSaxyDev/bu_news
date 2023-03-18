@@ -2,6 +2,7 @@ import 'package:bu_news/features/community/controllers/communtiy_controller.dart
 import 'package:bu_news/features/posts/controllers/post_controller.dart';
 import 'package:bu_news/features/posts/widgets/post_card.dart';
 import 'package:bu_news/features/profile/widgets/approval_tile.dart';
+import 'package:bu_news/features/profile/widgets/rejected_tile.dart';
 import 'package:bu_news/theme/palette.dart';
 import 'package:bu_news/utils/error_text.dart';
 import 'package:bu_news/utils/loader.dart';
@@ -172,7 +173,7 @@ class _AppprovalStatusViewState extends ConsumerState<AppprovalStatusView>
                         itemCount: applications.length,
                         itemBuilder: (context, index) {
                           final application = applications[index];
-                          return ApprovalTile(
+                          return RejectedTile(
                             name: application.communityName,
                             description: application.description,
                             date: application.createdAt,

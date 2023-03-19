@@ -1,0 +1,210 @@
+Date : 2023-03-18 22:41:56
+Directory : /Users/user/Documents/Dev/Projects/bu_news/lib
+Total : 117 files,  9711 codes, 866 comments, 888 blanks, all 11465 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Dart     |         84 |      9,557 |        866 |        855 |     11,278 |
+| XML      |         33 |        154 |          0 |         33 |        187 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                   | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                      |        117 |      9,711 |        866 |        888 |     11,465 |
+| . (Files)                                                                                                              |          3 |        248 |         40 |         21 |        309 |
+| admin                                                                                                                  |         21 |      2,647 |        155 |        220 |      3,022 |
+| admin/features                                                                                                         |         18 |      2,484 |        103 |        193 |      2,780 |
+| admin/features/approval                                                                                                |          2 |        558 |         19 |         20 |        597 |
+| admin/features/approval/views                                                                                          |          1 |        390 |         18 |         14 |        422 |
+| admin/features/approval/widgets                                                                                        |          1 |        168 |          1 |          6 |        175 |
+| admin/features/auth                                                                                                    |          3 |        202 |         40 |         34 |        276 |
+| admin/features/auth/controller                                                                                         |          1 |         46 |          0 |         10 |         56 |
+| admin/features/auth/repository                                                                                         |          1 |         67 |         16 |         15 |         98 |
+| admin/features/auth/views                                                                                              |          1 |         89 |         24 |          9 |        122 |
+| admin/features/base_nav_wrapper                                                                                        |          2 |        219 |         10 |         25 |        254 |
+| admin/features/base_nav_wrapper/views                                                                                  |          1 |         68 |          5 |          7 |         80 |
+| admin/features/base_nav_wrapper/widgets                                                                                |          1 |        151 |          5 |         18 |        174 |
+| admin/features/communities                                                                                             |          3 |        314 |         12 |         36 |        362 |
+| admin/features/communities/controllers                                                                                 |          1 |        114 |          6 |         15 |        135 |
+| admin/features/communities/repositories                                                                                |          1 |        101 |          6 |         14 |        121 |
+| admin/features/communities/views                                                                                       |          1 |         99 |          0 |          7 |        106 |
+| admin/features/home                                                                                                    |          1 |         59 |          1 |          7 |         67 |
+| admin/features/home/views                                                                                              |          1 |         59 |          1 |          7 |         67 |
+| admin/features/posts                                                                                                   |          3 |        348 |          5 |         31 |        384 |
+| admin/features/posts/controllers                                                                                       |          1 |         87 |          1 |          9 |         97 |
+| admin/features/posts/repositories                                                                                      |          1 |         27 |          1 |          5 |         33 |
+| admin/features/posts/views                                                                                             |          1 |        234 |          3 |         17 |        254 |
+| admin/features/verifications                                                                                           |          4 |        784 |         16 |         40 |        840 |
+| admin/features/verifications/controller                                                                                |          1 |         89 |          2 |         11 |        102 |
+| admin/features/verifications/repositories                                                                              |          1 |         93 |          6 |         11 |        110 |
+| admin/features/verifications/views                                                                                     |          1 |        432 |          7 |         13 |        452 |
+| admin/features/verifications/widgets                                                                                   |          1 |        170 |          1 |          5 |        176 |
+| admin/models                                                                                                           |          2 |        139 |          2 |         23 |        164 |
+| admin/router                                                                                                           |          1 |         24 |         50 |          4 |         78 |
+| assets                                                                                                                 |         33 |        154 |          0 |         33 |        187 |
+| assets/images                                                                                                          |         33 |        154 |          0 |         33 |        187 |
+| core                                                                                                                   |          8 |        108 |         14 |         23 |        145 |
+| core (Files)                                                                                                           |          3 |         23 |          0 |          6 |         29 |
+| core/constants                                                                                                         |          2 |         34 |          4 |          6 |         44 |
+| core/enums                                                                                                             |          1 |          4 |         10 |          2 |         16 |
+| core/providers                                                                                                         |          2 |         47 |          0 |          9 |         56 |
+| features                                                                                                               |         33 |      5,355 |        493 |        441 |      6,289 |
+| features/auth                                                                                                          |          3 |        289 |         18 |         40 |        347 |
+| features/auth/controller                                                                                               |          1 |         76 |          2 |         13 |         91 |
+| features/auth/repository                                                                                               |          1 |        134 |          1 |         24 |        159 |
+| features/auth/screens                                                                                                  |          1 |         79 |         15 |          3 |         97 |
+| features/base_nav_wrapper                                                                                              |          2 |        139 |         71 |         21 |        231 |
+| features/base_nav_wrapper/views                                                                                        |          1 |         86 |         60 |         14 |        160 |
+| features/base_nav_wrapper/widgets                                                                                      |          1 |         53 |         11 |          7 |         71 |
+| features/community                                                                                                     |         10 |      1,612 |        159 |        139 |      1,910 |
+| features/community/controllers                                                                                         |          1 |        245 |         53 |         45 |        343 |
+| features/community/repository                                                                                          |          1 |        196 |         18 |         22 |        236 |
+| features/community/views                                                                                               |          7 |      1,040 |         85 |         67 |      1,192 |
+| features/community/widgets                                                                                             |          1 |        131 |          3 |          5 |        139 |
+| features/home                                                                                                          |          2 |        334 |         11 |         38 |        383 |
+| features/home/views                                                                                                    |          1 |        181 |          3 |          8 |        192 |
+| features/home/widgets                                                                                                  |          1 |        153 |          8 |         30 |        191 |
+| features/posts                                                                                                         |          6 |      1,217 |         94 |         99 |      1,410 |
+| features/posts/controllers                                                                                             |          1 |        196 |         22 |         34 |        252 |
+| features/posts/repositories                                                                                            |          1 |        177 |          1 |         21 |        199 |
+| features/posts/views                                                                                                   |          2 |        390 |         18 |         25 |        433 |
+| features/posts/widgets                                                                                                 |          2 |        454 |         53 |         19 |        526 |
+| features/profile                                                                                                       |          9 |      1,720 |        125 |        100 |      1,945 |
+| features/profile/controllers                                                                                           |          1 |        136 |         38 |         22 |        196 |
+| features/profile/repository                                                                                            |          1 |        130 |         24 |         17 |        171 |
+| features/profile/views                                                                                                 |          4 |      1,108 |         60 |         46 |      1,214 |
+| features/profile/widgets                                                                                               |          3 |        346 |          3 |         15 |        364 |
+| features/welcome                                                                                                       |          1 |         44 |         15 |          4 |         63 |
+| features/welcome/view                                                                                                  |          1 |         44 |         15 |          4 |         63 |
+| models                                                                                                                 |          6 |        581 |          5 |         65 |        651 |
+| theme                                                                                                                  |          1 |         98 |         10 |         10 |        118 |
+| utils                                                                                                                  |         12 |        520 |        149 |         75 |        744 |
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                               | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/approval/views/application_approval_view.dart            | Dart     |        390 |         18 |         14 |        422 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/approval/widgets/applications_tile.dart                  | Dart     |        168 |          1 |          6 |        175 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/auth/controller/admin_auth_controller.dart               | Dart     |         46 |          0 |         10 |         56 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/auth/repository/admin_auth_repository.dart               | Dart     |         67 |         16 |         15 |         98 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/auth/views/admin_login_view.dart                         | Dart     |         89 |         24 |          9 |        122 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/base_nav_wrapper/views/base_nav_wrapper.dart             | Dart     |         68 |          5 |          7 |         80 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/base_nav_wrapper/widgets/nav_bar_item.dart               | Dart     |        151 |          5 |         18 |        174 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/communities/controllers/community_controller.dart        | Dart     |        114 |          6 |         15 |        135 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/communities/repositories/community_repository.dart       | Dart     |        101 |          6 |         14 |        121 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/communities/views/create_community_view.dart             | Dart     |         99 |          0 |          7 |        106 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/home/views/admin_home_view.dart                          | Dart     |         59 |          1 |          7 |         67 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/posts/controllers/admin_post_controller.dart             | Dart     |         87 |          1 |          9 |         97 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/posts/repositories/admin_post_repository.dart            | Dart     |         27 |          1 |          5 |         33 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/posts/views/admin_add_post_type_view.dart                | Dart     |        234 |          3 |         17 |        254 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/verifications/controller/verification_controller.dart    | Dart     |         89 |          2 |         11 |        102 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/verifications/repositories/verifications_repository.dart | Dart     |         93 |          6 |         11 |        110 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/verifications/views/verification_view.dart               | Dart     |        432 |          7 |         13 |        452 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/verifications/widgets/verification_tile.dart             | Dart     |        170 |          1 |          5 |        176 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/models/admin_model.dart                                           | Dart     |         50 |          1 |         11 |         62 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/models/community_model.dart                                       | Dart     |         89 |          1 |         12 |        102 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/router/admin_router.dart                                          | Dart     |         24 |         50 |          4 |         78 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/add.svg                                                   | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/balloon.svg                                               | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/bell.svg                                                  | XML      |          4 |          0 |          1 |          5 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/beta-logo.svg                                             | XML      |         15 |          0 |          1 |         16 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/camera.svg                                                | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/double-chevron.svg                                        | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/emergency.svg                                             | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/eye.svg                                                   | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/fever.svg                                                 | XML      |          9 |          0 |          1 |         10 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/google.svg                                                | XML      |         13 |          0 |          1 |         14 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/green-reminder.svg                                        | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/headache.svg                                              | XML      |          8 |          0 |          1 |          9 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/help-filled.svg                                           | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/help.svg                                                  | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/home-filled.svg                                           | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/home.svg                                                  | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/info.svg                                                  | XML      |          6 |          0 |          1 |          7 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/insights.svg                                              | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/insomnia.svg                                              | XML      |          4 |          0 |          1 |          5 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/logout.svg                                                | XML      |          4 |          0 |          1 |          5 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/new-note.svg                                              | XML      |          5 |          0 |          1 |          6 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/newBell.svg                                               | XML      |          4 |          0 |          1 |          5 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/notes-filled.svg                                          | XML      |          6 |          0 |          1 |          7 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/notes.svg                                                 | XML      |          6 |          0 |          1 |          7 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/profile-selected.svg                                      | XML      |          6 |          0 |          1 |          7 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/profile.svg                                               | XML      |          5 |          0 |          1 |          6 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/sick.svg                                                  | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/stomach.svg                                               | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/tired.svg                                                 | XML      |          5 |          0 |          1 |          6 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/tissue.svg                                                | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/toothache.svg                                             | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/triple-chevron.svg                                        | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/assets/images/yellow-reminder.svg                                       | XML      |          3 |          0 |          1 |          4 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/core/constants/constants.dart                                           | Dart     |         24 |          4 |          6 |         34 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/core/constants/firebase_constants.dart                                  | Dart     |         10 |          0 |          0 |         10 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/core/enums/enums.dart                                                   | Dart     |          4 |         10 |          2 |         16 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/core/failure.dart                                                       | Dart     |          4 |          0 |          2 |          6 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/core/providers/firebase_provider.dart                                   | Dart     |          9 |          0 |          1 |         10 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/core/providers/storage_repository_provider.dart                         | Dart     |         38 |          0 |          8 |         46 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/core/type_defs.dart                                                     | Dart     |          4 |          0 |          1 |          5 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/core/utils.dart                                                         | Dart     |         15 |          0 |          3 |         18 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/auth/controller/auth_controller.dart                           | Dart     |         76 |          2 |         13 |         91 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/auth/repository/auth_repository.dart                           | Dart     |        134 |          1 |         24 |        159 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/auth/screens/login_screen.dart                                 | Dart     |         79 |         15 |          3 |         97 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/base_nav_wrapper/views/base_nav_wrapper.dart                   | Dart     |         86 |         60 |         14 |        160 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/base_nav_wrapper/widgets/nav_bar_widget.dart                   | Dart     |         53 |         11 |          7 |         71 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/controllers/communtiy_controller.dart                | Dart     |        245 |         53 |         45 |        343 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/repository/community_repository.dart                 | Dart     |        196 |         18 |         22 |        236 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/views/add_mods_view.dart                             | Dart     |         94 |          0 |         10 |        104 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/views/community_apllication_view.dart                | Dart     |        164 |         71 |         12 |        247 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/views/community_profile_view.dart                    | Dart     |        192 |          1 |          7 |        200 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/views/community_settings_view.dart                   | Dart     |         55 |          1 |          5 |         61 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/views/community_view.dart                            | Dart     |        312 |         12 |         16 |        340 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/views/edit_community_view.dart                       | Dart     |        170 |          0 |         11 |        181 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/views/search_communities_delegate.dart               | Dart     |         53 |          0 |          6 |         59 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/widgets/cannot_create_community_popup.dart           | Dart     |        131 |          3 |          5 |        139 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/home/views/home_view.dart                                      | Dart     |        181 |          3 |          8 |        192 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/home/widgets/circular_fab.dart                                 | Dart     |        153 |          8 |         30 |        191 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/posts/controllers/post_controller.dart                         | Dart     |        196 |         22 |         34 |        252 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/posts/repositories/post_repository.dart                        | Dart     |        177 |          1 |         21 |        199 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/posts/views/add_post_view.dart                                 | Dart     |        276 |          7 |         18 |        301 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/posts/views/comments_view.dart                                 | Dart     |        114 |         11 |          7 |        132 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/posts/widgets/comment_card.dart                                | Dart     |         52 |          2 |          3 |         57 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/posts/widgets/post_card.dart                                   | Dart     |        402 |         51 |         16 |        469 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/controllers/profile_controller.dart                    | Dart     |        136 |         38 |         22 |        196 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/repository/profile_repository.dart                     | Dart     |        130 |         24 |         17 |        171 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/views/approval_status_view.dart                        | Dart     |        193 |          6 |          9 |        208 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/views/bookmarks_view.dart                              | Dart     |        106 |          2 |          3 |        111 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/views/edit_profile_view.dart                           | Dart     |        610 |          9 |         17 |        636 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/views/profile_view.dart                                | Dart     |        199 |         43 |         17 |        259 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/widgets/approval_tile.dart                             | Dart     |         95 |          1 |          4 |        100 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/widgets/profile_tile.dart                              | Dart     |        143 |          1 |          6 |        150 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/widgets/rejected_tile.dart                             | Dart     |        108 |          1 |          5 |        114 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/welcome/view/welcome_view.dart                                 | Dart     |         44 |         15 |          4 |         63 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/firebase_options.dart                                                   | Dart     |         60 |         12 |          5 |         77 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/main.dart                                                               | Dart     |        127 |          0 |         13 |        140 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/models/application_model.dart                                           | Dart     |         97 |          1 |         11 |        109 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/models/bookmarks_model.dart                                             | Dart     |         45 |          1 |         12 |         58 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/models/comment_model.dart                                               | Dart     |         77 |          0 |          8 |         85 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/models/post_model.dart                                                  | Dart     |        162 |          1 |         12 |        175 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/models/user_model.dart                                                  | Dart     |        112 |          1 |         11 |        124 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/models/verification_model.dart                                          | Dart     |         88 |          1 |         11 |        100 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/router.dart                                                             | Dart     |         61 |         28 |          3 |         92 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/theme/palette.dart                                                      | Dart     |         98 |         10 |         10 |        118 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/utils/app_fade_animation.dart                                           | Dart     |         27 |          6 |          6 |         39 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/utils/app_multi_value_listenable_builder.dart                           | Dart     |         23 |          2 |          4 |         29 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/utils/button.dart                                                       | Dart     |        207 |         10 |         14 |        231 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/utils/convert_time.dart                                                 | Dart     |          7 |          0 |          1 |          8 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/utils/error_text.dart                                                   | Dart     |         11 |          0 |          2 |         13 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/utils/keyboard_utils.dart                                               | Dart     |          9 |          0 |          3 |         12 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/utils/loader.dart                                                       | Dart     |         22 |         15 |          5 |         42 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/utils/picker.dart                                                       | Dart     |         43 |          3 |          5 |         51 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/utils/snack_bar.dart                                                    | Dart     |         11 |          5 |          3 |         19 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/utils/string_extensions.dart                                            | Dart     |         40 |          1 |         10 |         51 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/utils/text_input.dart                                                   | Dart     |         90 |        107 |          9 |        206 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/utils/widget_extensions.dart                                            | Dart     |         30 |          0 |         13 |         43 |
+| Total                                                                                                                  |          |      9,711 |        866 |        888 |     11,465 |
++------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

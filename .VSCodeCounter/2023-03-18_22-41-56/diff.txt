@@ -1,0 +1,61 @@
+Date : 2023-03-18 22:41:56
+Directory : /Users/user/Documents/Dev/Projects/bu_news/lib
+Total : 17 files,  232 codes, 1 comments, -2 blanks, all 231 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Dart     |         17 |        232 |          1 |         -2 |        231 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                   | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                      |         17 |        232 |          1 |         -2 |        231 |
+| admin                                                                                                                  |          2 |          2 |          0 |          0 |          2 |
+| admin/features                                                                                                         |          2 |          2 |          0 |          0 |          2 |
+| admin/features/verifications                                                                                           |          2 |          2 |          0 |          0 |          2 |
+| admin/features/verifications/controller                                                                                |          1 |          1 |          0 |          0 |          1 |
+| admin/features/verifications/repositories                                                                              |          1 |          1 |          0 |          0 |          1 |
+| features                                                                                                               |         13 |        214 |          1 |         -2 |        213 |
+| features/auth                                                                                                          |          2 |         24 |          1 |          0 |         25 |
+| features/auth/controller                                                                                               |          1 |          4 |          1 |          0 |          5 |
+| features/auth/screens                                                                                                  |          1 |         20 |          0 |          0 |         20 |
+| features/community                                                                                                     |          4 |         10 |         96 |          5 |        111 |
+| features/community/controllers                                                                                         |          1 |         15 |         29 |          4 |         48 |
+| features/community/views                                                                                               |          2 |        -44 |         67 |          0 |         23 |
+| features/community/widgets                                                                                             |          1 |         39 |          0 |          1 |         40 |
+| features/posts                                                                                                         |          1 |          0 |       -121 |         -9 |       -130 |
+| features/posts/controllers                                                                                             |          1 |          0 |       -121 |         -9 |       -130 |
+| features/profile                                                                                                       |          6 |        180 |         25 |          2 |        207 |
+| features/profile/controllers                                                                                           |          1 |          2 |          0 |         -1 |          1 |
+| features/profile/views                                                                                                 |          3 |         38 |         24 |         -2 |         60 |
+| features/profile/widgets                                                                                               |          2 |        140 |          1 |          5 |        146 |
+| models                                                                                                                 |          2 |         16 |          0 |          0 |         16 |
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                               | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/verifications/controller/verification_controller.dart    | Dart     |          1 |          0 |          0 |          1 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/admin/features/verifications/repositories/verifications_repository.dart | Dart     |          1 |          0 |          0 |          1 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/auth/controller/auth_controller.dart                           | Dart     |          4 |          1 |          0 |          5 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/auth/screens/login_screen.dart                                 | Dart     |         20 |          0 |          0 |         20 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/controllers/communtiy_controller.dart                | Dart     |         15 |         29 |          4 |         48 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/views/community_apllication_view.dart                | Dart     |        -46 |         67 |          0 |         21 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/views/community_view.dart                            | Dart     |          2 |          0 |          0 |          2 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/community/widgets/cannot_create_community_popup.dart           | Dart     |         39 |          0 |          1 |         40 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/posts/controllers/post_controller.dart                         | Dart     |          0 |       -121 |         -9 |       -130 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/controllers/profile_controller.dart                    | Dart     |          2 |          0 |         -1 |          1 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/views/approval_status_view.dart                        | Dart     |          1 |          0 |          0 |          1 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/views/edit_profile_view.dart                           | Dart     |         69 |          1 |          1 |         71 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/views/profile_view.dart                                | Dart     |        -32 |         23 |         -3 |        -12 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/widgets/profile_tile.dart                              | Dart     |         32 |          0 |          0 |         32 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/features/profile/widgets/rejected_tile.dart                             | Dart     |        108 |          1 |          5 |        114 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/models/application_model.dart                                           | Dart     |          8 |          0 |          0 |          8 |
+| /Users/user/Documents/Dev/Projects/bu_news/lib/models/verification_model.dart                                          | Dart     |          8 |          0 |          0 |          8 |
+| Total                                                                                                                  |          |        232 |          1 |         -2 |        231 |
++------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

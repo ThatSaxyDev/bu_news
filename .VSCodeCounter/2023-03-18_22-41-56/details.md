@@ -1,0 +1,132 @@
+# Details
+
+Date : 2023-03-18 22:41:56
+
+Directory /Users/user/Documents/Dev/Projects/bu_news/lib
+
+Total : 117 files,  9711 codes, 866 comments, 888 blanks, all 11465 lines
+
+[Summary](results.md) / Details / [Diff Summary](diff.md) / [Diff Details](diff-details.md)
+
+## Files
+| filename | language | code | comment | blank | total |
+| :--- | :--- | ---: | ---: | ---: | ---: |
+| [lib/admin/features/approval/views/application_approval_view.dart](/lib/admin/features/approval/views/application_approval_view.dart) | Dart | 390 | 18 | 14 | 422 |
+| [lib/admin/features/approval/widgets/applications_tile.dart](/lib/admin/features/approval/widgets/applications_tile.dart) | Dart | 168 | 1 | 6 | 175 |
+| [lib/admin/features/auth/controller/admin_auth_controller.dart](/lib/admin/features/auth/controller/admin_auth_controller.dart) | Dart | 46 | 0 | 10 | 56 |
+| [lib/admin/features/auth/repository/admin_auth_repository.dart](/lib/admin/features/auth/repository/admin_auth_repository.dart) | Dart | 67 | 16 | 15 | 98 |
+| [lib/admin/features/auth/views/admin_login_view.dart](/lib/admin/features/auth/views/admin_login_view.dart) | Dart | 89 | 24 | 9 | 122 |
+| [lib/admin/features/base_nav_wrapper/views/base_nav_wrapper.dart](/lib/admin/features/base_nav_wrapper/views/base_nav_wrapper.dart) | Dart | 68 | 5 | 7 | 80 |
+| [lib/admin/features/base_nav_wrapper/widgets/nav_bar_item.dart](/lib/admin/features/base_nav_wrapper/widgets/nav_bar_item.dart) | Dart | 151 | 5 | 18 | 174 |
+| [lib/admin/features/communities/controllers/community_controller.dart](/lib/admin/features/communities/controllers/community_controller.dart) | Dart | 114 | 6 | 15 | 135 |
+| [lib/admin/features/communities/repositories/community_repository.dart](/lib/admin/features/communities/repositories/community_repository.dart) | Dart | 101 | 6 | 14 | 121 |
+| [lib/admin/features/communities/views/create_community_view.dart](/lib/admin/features/communities/views/create_community_view.dart) | Dart | 99 | 0 | 7 | 106 |
+| [lib/admin/features/home/views/admin_home_view.dart](/lib/admin/features/home/views/admin_home_view.dart) | Dart | 59 | 1 | 7 | 67 |
+| [lib/admin/features/posts/controllers/admin_post_controller.dart](/lib/admin/features/posts/controllers/admin_post_controller.dart) | Dart | 87 | 1 | 9 | 97 |
+| [lib/admin/features/posts/repositories/admin_post_repository.dart](/lib/admin/features/posts/repositories/admin_post_repository.dart) | Dart | 27 | 1 | 5 | 33 |
+| [lib/admin/features/posts/views/admin_add_post_type_view.dart](/lib/admin/features/posts/views/admin_add_post_type_view.dart) | Dart | 234 | 3 | 17 | 254 |
+| [lib/admin/features/verifications/controller/verification_controller.dart](/lib/admin/features/verifications/controller/verification_controller.dart) | Dart | 89 | 2 | 11 | 102 |
+| [lib/admin/features/verifications/repositories/verifications_repository.dart](/lib/admin/features/verifications/repositories/verifications_repository.dart) | Dart | 93 | 6 | 11 | 110 |
+| [lib/admin/features/verifications/views/verification_view.dart](/lib/admin/features/verifications/views/verification_view.dart) | Dart | 432 | 7 | 13 | 452 |
+| [lib/admin/features/verifications/widgets/verification_tile.dart](/lib/admin/features/verifications/widgets/verification_tile.dart) | Dart | 170 | 1 | 5 | 176 |
+| [lib/admin/models/admin_model.dart](/lib/admin/models/admin_model.dart) | Dart | 50 | 1 | 11 | 62 |
+| [lib/admin/models/community_model.dart](/lib/admin/models/community_model.dart) | Dart | 89 | 1 | 12 | 102 |
+| [lib/admin/router/admin_router.dart](/lib/admin/router/admin_router.dart) | Dart | 24 | 50 | 4 | 78 |
+| [lib/assets/images/add.svg](/lib/assets/images/add.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/balloon.svg](/lib/assets/images/balloon.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/bell.svg](/lib/assets/images/bell.svg) | XML | 4 | 0 | 1 | 5 |
+| [lib/assets/images/beta-logo.svg](/lib/assets/images/beta-logo.svg) | XML | 15 | 0 | 1 | 16 |
+| [lib/assets/images/camera.svg](/lib/assets/images/camera.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/double-chevron.svg](/lib/assets/images/double-chevron.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/emergency.svg](/lib/assets/images/emergency.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/eye.svg](/lib/assets/images/eye.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/fever.svg](/lib/assets/images/fever.svg) | XML | 9 | 0 | 1 | 10 |
+| [lib/assets/images/google.svg](/lib/assets/images/google.svg) | XML | 13 | 0 | 1 | 14 |
+| [lib/assets/images/green-reminder.svg](/lib/assets/images/green-reminder.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/headache.svg](/lib/assets/images/headache.svg) | XML | 8 | 0 | 1 | 9 |
+| [lib/assets/images/help-filled.svg](/lib/assets/images/help-filled.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/help.svg](/lib/assets/images/help.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/home-filled.svg](/lib/assets/images/home-filled.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/home.svg](/lib/assets/images/home.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/info.svg](/lib/assets/images/info.svg) | XML | 6 | 0 | 1 | 7 |
+| [lib/assets/images/insights.svg](/lib/assets/images/insights.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/insomnia.svg](/lib/assets/images/insomnia.svg) | XML | 4 | 0 | 1 | 5 |
+| [lib/assets/images/logout.svg](/lib/assets/images/logout.svg) | XML | 4 | 0 | 1 | 5 |
+| [lib/assets/images/new-note.svg](/lib/assets/images/new-note.svg) | XML | 5 | 0 | 1 | 6 |
+| [lib/assets/images/newBell.svg](/lib/assets/images/newBell.svg) | XML | 4 | 0 | 1 | 5 |
+| [lib/assets/images/notes-filled.svg](/lib/assets/images/notes-filled.svg) | XML | 6 | 0 | 1 | 7 |
+| [lib/assets/images/notes.svg](/lib/assets/images/notes.svg) | XML | 6 | 0 | 1 | 7 |
+| [lib/assets/images/profile-selected.svg](/lib/assets/images/profile-selected.svg) | XML | 6 | 0 | 1 | 7 |
+| [lib/assets/images/profile.svg](/lib/assets/images/profile.svg) | XML | 5 | 0 | 1 | 6 |
+| [lib/assets/images/sick.svg](/lib/assets/images/sick.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/stomach.svg](/lib/assets/images/stomach.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/tired.svg](/lib/assets/images/tired.svg) | XML | 5 | 0 | 1 | 6 |
+| [lib/assets/images/tissue.svg](/lib/assets/images/tissue.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/toothache.svg](/lib/assets/images/toothache.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/triple-chevron.svg](/lib/assets/images/triple-chevron.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/assets/images/yellow-reminder.svg](/lib/assets/images/yellow-reminder.svg) | XML | 3 | 0 | 1 | 4 |
+| [lib/core/constants/constants.dart](/lib/core/constants/constants.dart) | Dart | 24 | 4 | 6 | 34 |
+| [lib/core/constants/firebase_constants.dart](/lib/core/constants/firebase_constants.dart) | Dart | 10 | 0 | 0 | 10 |
+| [lib/core/enums/enums.dart](/lib/core/enums/enums.dart) | Dart | 4 | 10 | 2 | 16 |
+| [lib/core/failure.dart](/lib/core/failure.dart) | Dart | 4 | 0 | 2 | 6 |
+| [lib/core/providers/firebase_provider.dart](/lib/core/providers/firebase_provider.dart) | Dart | 9 | 0 | 1 | 10 |
+| [lib/core/providers/storage_repository_provider.dart](/lib/core/providers/storage_repository_provider.dart) | Dart | 38 | 0 | 8 | 46 |
+| [lib/core/type_defs.dart](/lib/core/type_defs.dart) | Dart | 4 | 0 | 1 | 5 |
+| [lib/core/utils.dart](/lib/core/utils.dart) | Dart | 15 | 0 | 3 | 18 |
+| [lib/features/auth/controller/auth_controller.dart](/lib/features/auth/controller/auth_controller.dart) | Dart | 76 | 2 | 13 | 91 |
+| [lib/features/auth/repository/auth_repository.dart](/lib/features/auth/repository/auth_repository.dart) | Dart | 134 | 1 | 24 | 159 |
+| [lib/features/auth/screens/login_screen.dart](/lib/features/auth/screens/login_screen.dart) | Dart | 79 | 15 | 3 | 97 |
+| [lib/features/base_nav_wrapper/views/base_nav_wrapper.dart](/lib/features/base_nav_wrapper/views/base_nav_wrapper.dart) | Dart | 86 | 60 | 14 | 160 |
+| [lib/features/base_nav_wrapper/widgets/nav_bar_widget.dart](/lib/features/base_nav_wrapper/widgets/nav_bar_widget.dart) | Dart | 53 | 11 | 7 | 71 |
+| [lib/features/community/controllers/communtiy_controller.dart](/lib/features/community/controllers/communtiy_controller.dart) | Dart | 245 | 53 | 45 | 343 |
+| [lib/features/community/repository/community_repository.dart](/lib/features/community/repository/community_repository.dart) | Dart | 196 | 18 | 22 | 236 |
+| [lib/features/community/views/add_mods_view.dart](/lib/features/community/views/add_mods_view.dart) | Dart | 94 | 0 | 10 | 104 |
+| [lib/features/community/views/community_apllication_view.dart](/lib/features/community/views/community_apllication_view.dart) | Dart | 164 | 71 | 12 | 247 |
+| [lib/features/community/views/community_profile_view.dart](/lib/features/community/views/community_profile_view.dart) | Dart | 192 | 1 | 7 | 200 |
+| [lib/features/community/views/community_settings_view.dart](/lib/features/community/views/community_settings_view.dart) | Dart | 55 | 1 | 5 | 61 |
+| [lib/features/community/views/community_view.dart](/lib/features/community/views/community_view.dart) | Dart | 312 | 12 | 16 | 340 |
+| [lib/features/community/views/edit_community_view.dart](/lib/features/community/views/edit_community_view.dart) | Dart | 170 | 0 | 11 | 181 |
+| [lib/features/community/views/search_communities_delegate.dart](/lib/features/community/views/search_communities_delegate.dart) | Dart | 53 | 0 | 6 | 59 |
+| [lib/features/community/widgets/cannot_create_community_popup.dart](/lib/features/community/widgets/cannot_create_community_popup.dart) | Dart | 131 | 3 | 5 | 139 |
+| [lib/features/home/views/home_view.dart](/lib/features/home/views/home_view.dart) | Dart | 181 | 3 | 8 | 192 |
+| [lib/features/home/widgets/circular_fab.dart](/lib/features/home/widgets/circular_fab.dart) | Dart | 153 | 8 | 30 | 191 |
+| [lib/features/posts/controllers/post_controller.dart](/lib/features/posts/controllers/post_controller.dart) | Dart | 196 | 22 | 34 | 252 |
+| [lib/features/posts/repositories/post_repository.dart](/lib/features/posts/repositories/post_repository.dart) | Dart | 177 | 1 | 21 | 199 |
+| [lib/features/posts/views/add_post_view.dart](/lib/features/posts/views/add_post_view.dart) | Dart | 276 | 7 | 18 | 301 |
+| [lib/features/posts/views/comments_view.dart](/lib/features/posts/views/comments_view.dart) | Dart | 114 | 11 | 7 | 132 |
+| [lib/features/posts/widgets/comment_card.dart](/lib/features/posts/widgets/comment_card.dart) | Dart | 52 | 2 | 3 | 57 |
+| [lib/features/posts/widgets/post_card.dart](/lib/features/posts/widgets/post_card.dart) | Dart | 402 | 51 | 16 | 469 |
+| [lib/features/profile/controllers/profile_controller.dart](/lib/features/profile/controllers/profile_controller.dart) | Dart | 136 | 38 | 22 | 196 |
+| [lib/features/profile/repository/profile_repository.dart](/lib/features/profile/repository/profile_repository.dart) | Dart | 130 | 24 | 17 | 171 |
+| [lib/features/profile/views/approval_status_view.dart](/lib/features/profile/views/approval_status_view.dart) | Dart | 193 | 6 | 9 | 208 |
+| [lib/features/profile/views/bookmarks_view.dart](/lib/features/profile/views/bookmarks_view.dart) | Dart | 106 | 2 | 3 | 111 |
+| [lib/features/profile/views/edit_profile_view.dart](/lib/features/profile/views/edit_profile_view.dart) | Dart | 610 | 9 | 17 | 636 |
+| [lib/features/profile/views/profile_view.dart](/lib/features/profile/views/profile_view.dart) | Dart | 199 | 43 | 17 | 259 |
+| [lib/features/profile/widgets/approval_tile.dart](/lib/features/profile/widgets/approval_tile.dart) | Dart | 95 | 1 | 4 | 100 |
+| [lib/features/profile/widgets/profile_tile.dart](/lib/features/profile/widgets/profile_tile.dart) | Dart | 143 | 1 | 6 | 150 |
+| [lib/features/profile/widgets/rejected_tile.dart](/lib/features/profile/widgets/rejected_tile.dart) | Dart | 108 | 1 | 5 | 114 |
+| [lib/features/welcome/view/welcome_view.dart](/lib/features/welcome/view/welcome_view.dart) | Dart | 44 | 15 | 4 | 63 |
+| [lib/firebase_options.dart](/lib/firebase_options.dart) | Dart | 60 | 12 | 5 | 77 |
+| [lib/main.dart](/lib/main.dart) | Dart | 127 | 0 | 13 | 140 |
+| [lib/models/application_model.dart](/lib/models/application_model.dart) | Dart | 97 | 1 | 11 | 109 |
+| [lib/models/bookmarks_model.dart](/lib/models/bookmarks_model.dart) | Dart | 45 | 1 | 12 | 58 |
+| [lib/models/comment_model.dart](/lib/models/comment_model.dart) | Dart | 77 | 0 | 8 | 85 |
+| [lib/models/post_model.dart](/lib/models/post_model.dart) | Dart | 162 | 1 | 12 | 175 |
+| [lib/models/user_model.dart](/lib/models/user_model.dart) | Dart | 112 | 1 | 11 | 124 |
+| [lib/models/verification_model.dart](/lib/models/verification_model.dart) | Dart | 88 | 1 | 11 | 100 |
+| [lib/router.dart](/lib/router.dart) | Dart | 61 | 28 | 3 | 92 |
+| [lib/theme/palette.dart](/lib/theme/palette.dart) | Dart | 98 | 10 | 10 | 118 |
+| [lib/utils/app_fade_animation.dart](/lib/utils/app_fade_animation.dart) | Dart | 27 | 6 | 6 | 39 |
+| [lib/utils/app_multi_value_listenable_builder.dart](/lib/utils/app_multi_value_listenable_builder.dart) | Dart | 23 | 2 | 4 | 29 |
+| [lib/utils/button.dart](/lib/utils/button.dart) | Dart | 207 | 10 | 14 | 231 |
+| [lib/utils/convert_time.dart](/lib/utils/convert_time.dart) | Dart | 7 | 0 | 1 | 8 |
+| [lib/utils/error_text.dart](/lib/utils/error_text.dart) | Dart | 11 | 0 | 2 | 13 |
+| [lib/utils/keyboard_utils.dart](/lib/utils/keyboard_utils.dart) | Dart | 9 | 0 | 3 | 12 |
+| [lib/utils/loader.dart](/lib/utils/loader.dart) | Dart | 22 | 15 | 5 | 42 |
+| [lib/utils/picker.dart](/lib/utils/picker.dart) | Dart | 43 | 3 | 5 | 51 |
+| [lib/utils/snack_bar.dart](/lib/utils/snack_bar.dart) | Dart | 11 | 5 | 3 | 19 |
+| [lib/utils/string_extensions.dart](/lib/utils/string_extensions.dart) | Dart | 40 | 1 | 10 | 51 |
+| [lib/utils/text_input.dart](/lib/utils/text_input.dart) | Dart | 90 | 107 | 9 | 206 |
+| [lib/utils/widget_extensions.dart](/lib/utils/widget_extensions.dart) | Dart | 30 | 0 | 13 | 43 |
+
+[Summary](results.md) / Details / [Diff Summary](diff.md) / [Diff Details](diff-details.md)

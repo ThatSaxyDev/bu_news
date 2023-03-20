@@ -7,6 +7,7 @@ import 'package:bu_news/theme/palette.dart';
 import 'package:bu_news/utils/error_text.dart';
 import 'package:bu_news/utils/loader.dart';
 import 'package:bu_news/utils/string_extensions.dart';
+import 'package:bu_news/utils/widget_extensions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -70,15 +71,129 @@ class _AppprovalStatusViewState extends ConsumerState<AppprovalStatusView>
             labelStyle: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
-            tabs: const [
+            tabs: [
               Tab(
-                text: 'Pending',
+                // text: 'Pending',
+                icon: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Pending',
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    ref.watch(getPending).when(
+                          data: (pending) {
+                            if (pending.isEmpty) {
+                              return const SizedBox.shrink();
+                            }
+                            return Row(
+                              children: [
+                                5.sbW,
+                                CircleAvatar(
+                                  backgroundColor: Pallete.blueColor,
+                                  radius: 10.w,
+                                  child: Text(
+                                    pending.length.toString(),
+                                    style: const TextStyle(
+                                      color: Pallete.whiteColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                          error: (error, stackTrace) {
+                            if (kDebugMode) print(error);
+                            return ErrorText(error: error.toString());
+                          },
+                          loading: () => const Loader(),
+                        ),
+                  ],
+                ),
               ),
               Tab(
-                text: 'Approved',
+                // text: 'Approved',
+                icon: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Approved',
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    ref.watch(getApproved).when(
+                          data: (approved) {
+                            if (approved.isEmpty) {
+                              return const SizedBox.shrink();
+                            }
+                            return Row(
+                              children: [
+                                5.sbW,
+                                CircleAvatar(
+                                  backgroundColor: Pallete.blueColor,
+                                  radius: 10.w,
+                                  child: Text(
+                                    approved.length.toString(),
+                                    style: TextStyle(
+                                      color: Pallete.whiteColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                          error: (error, stackTrace) {
+                            if (kDebugMode) print(error);
+                            return ErrorText(error: error.toString());
+                          },
+                          loading: () => const Loader(),
+                        ),
+                  ],
+                ),
               ),
               Tab(
-                text: 'Rejected',
+                // text: 'Rejected',
+                icon: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Rejected',
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    ref.watch(getRejected).when(
+                          data: (rejected) {
+                            if (rejected.isEmpty) {
+                              return const SizedBox.shrink();
+                            }
+                            return Row(
+                              children: [
+                                5.sbW,
+                                CircleAvatar(
+                                  backgroundColor: Pallete.blueColor,
+                                  radius: 10.w,
+                                  child: Text(
+                                    rejected.length.toString(),
+                                    style: TextStyle(
+                                      color: Pallete.whiteColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                          error: (error, stackTrace) {
+                            if (kDebugMode) print(error);
+                            return ErrorText(error: error.toString());
+                          },
+                          loading: () => const Loader(),
+                        ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -71,7 +71,7 @@ class AuthRepository {
           uid: userCredential.user!.uid,
           name: userCredential.user!.displayName ?? 'No Name',
           profilePic: userCredential.user!.photoURL ?? Constants.avatarDefault,
-          banner: userCredential.user!.photoURL ?? Constants.bannerDefault,
+          banner: '',
           matricNo: '',
           schoolName: '',
           isACourseRep: false,

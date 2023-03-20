@@ -7,4 +7,5 @@ class FirebaseConstants {
   static const approvalCollection = 'approvals';
   static const bookmarksCollection = 'bookmarks';
   static const verificationCollection = 'verifications';
+  static const videoSpaceCollection = 'videospaces';
 }

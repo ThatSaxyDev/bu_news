@@ -1,8 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:bu_news/admin/models/community_model.dart';
 import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/features/community/controllers/communtiy_controller.dart';
 import 'package:bu_news/features/posts/widgets/post_card.dart';
+import 'package:bu_news/features/video_spaces/controllers/videos_spaces_controller.dart';
 import 'package:bu_news/theme/palette.dart';
 import 'package:bu_news/utils/error_text.dart';
 import 'package:bu_news/utils/loader.dart';
@@ -11,6 +14,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:routemaster/routemaster.dart';
 
 class CommnunityProfileView extends ConsumerWidget {
@@ -34,10 +38,24 @@ class CommnunityProfileView extends ConsumerWidget {
         .joinCommunity(community, context);
   }
 
+  void createSpace(
+    WidgetRef ref,
+    BuildContext context,
+    String communityPofilePic,
+  ) {
+    ref.read(videoSpacesControllerProvider.notifier).createVideoSpace(
+          context: context,
+          receiverName: name,
+          receiverUid: name,
+          receiverProfilePic: communityPofilePic,
+        );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
     final currentTheme = ref.watch(themeNotifierProvider);
+    String uid = '';
 
     String member;
     return Scaffold(
@@ -76,9 +94,27 @@ class CommnunityProfileView extends ConsumerWidget {
                           [
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: CircleAvatar(
-                                backgroundImage: NetworkImage(community.avatar),
-                                radius: 33.w,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage:
+                                        NetworkImage(community.avatar),
+                                    radius: 33.w,
+                                  ),
+                                  // if (community.mods.contains(user.uid))
+                                  IconButton(
+                                      onPressed: () {
+                                        // for (var id in community.members) {
+                                        //   // log(id);
+                                        //   uid = id;
+                                        // }
+                                        createSpace(
+                                            ref, context, community.avatar);
+                                      },
+                                      icon: Icon(PhosphorIcons.videoCamera))
+                                ],
                               ),
                             ),
                             15.sbH,
@@ -136,7 +172,6 @@ class CommnunityProfileView extends ConsumerWidget {
                             10.sbH,
                             const Divider(thickness: 2),
                           ],
-                          
                         ),
                       ),
                     ),

@@ -11,6 +11,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:routemaster/routemaster.dart';
 
 class CommnunityProfileView extends ConsumerWidget {
@@ -22,6 +23,10 @@ class CommnunityProfileView extends ConsumerWidget {
 
   void navigateToCommunitySettings(BuildContext context) {
     Routemaster.of(context).push('/com/$name/community-settings/$name');
+  }
+
+  void navigateToType(BuildContext context) {
+    Routemaster.of(context).push('/add-post/$name');
   }
 
   void joinCommunity(
@@ -136,7 +141,6 @@ class CommnunityProfileView extends ConsumerWidget {
                             10.sbH,
                             const Divider(thickness: 2),
                           ],
-                          
                         ),
                       ),
                     ),
@@ -193,6 +197,24 @@ class CommnunityProfileView extends ConsumerWidget {
             },
             error: (error, stackTrace) => ErrorText(error: error.toString()),
             loading: () => const Loader(),
+          ),
+      floatingActionButton: ref.watch(getCommunityByNameProvider(name)).when(
+            data: (community) {
+              if (!community.mods.contains(user.uid)) {
+                return const SizedBox.shrink();
+              }
+
+              return Padding(
+                padding: EdgeInsets.all(11.w),
+                child: FloatingActionButton(
+                  onPressed: () => navigateToType(context),
+                  backgroundColor: currentTheme.textTheme.bodyMedium!.color,
+                  child: const Icon(PhosphorIcons.pen),
+                ),
+              );
+            },
+            error: (error, stackTrace) => ErrorText(error: error.toString()),
+            loading: () => const SizedBox.shrink(),
           ),
     );
   }

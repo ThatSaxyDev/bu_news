@@ -27,7 +27,7 @@ class _HomeViewState extends ConsumerState<HomeView>
     with TickerProviderStateMixin {
   //!
   void navigateToType(BuildContext context) {
-    Routemaster.of(context).push('/add-post');
+    Routemaster.of(context).push('/add-post/from-home');
   }
 
   late TabController tabBarController;
@@ -178,7 +178,7 @@ class _HomeViewState extends ConsumerState<HomeView>
                   child: FloatingActionButton(
                     onPressed: () => navigateToType(context),
                     backgroundColor: currentTheme.textTheme.bodyMedium!.color,
-                    child: const Icon(PhosphorIcons.plusBold),
+                    child: const Icon(PhosphorIcons.pen),
                   ),
                 );
               },

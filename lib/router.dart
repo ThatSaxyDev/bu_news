@@ -7,6 +7,7 @@ import 'package:bu_news/features/community/views/community_settings_view.dart';
 import 'package:bu_news/features/community/views/edit_community_view.dart';
 import 'package:bu_news/features/home/views/home_view.dart';
 import 'package:bu_news/features/posts/views/add_post_view.dart';
+import 'package:bu_news/features/posts/views/image_view.dart';
 import 'package:bu_news/features/profile/views/approval_status_view.dart';
 import 'package:bu_news/features/profile/views/bookmarks_view.dart';
 import 'package:bu_news/features/profile/views/edit_profile_view.dart';
@@ -31,8 +32,10 @@ final loggedInRoute = RouteMap(
     '/approval-status': (_) => const MaterialPage(
           child: AppprovalStatusView(),
         ),
-    '/add-post': (routeData) => const MaterialPage(
-          child: AddPostView(),
+    '/add-post/:from': (routeData) => MaterialPage(
+          child: AddPostView(
+            isFromCommunity: routeData.pathParameters['from']!,
+          ),
         ),
     '/bookmarks': (routeData) => const MaterialPage(
           child: BookmarksView(),
@@ -62,11 +65,11 @@ final loggedInRoute = RouteMap(
             name: routeData.pathParameters['name']!,
           ),
         ),
-    // '/user-profile/:uid': (routeData) => MaterialPage(
-    //       child: UserProfileScreen(
-    //         uid: routeData.pathParameters['uid']!,
-    //       ),
-    //     ),
+    '/image/:url': (routeData) => MaterialPage(
+          child: ImageView(
+            imageUrl: routeData.pathParameters['url']!,
+          ),
+        ),
     '/edit-profile': (routeData) => const MaterialPage(
           child: EditProfileView(),
         ),

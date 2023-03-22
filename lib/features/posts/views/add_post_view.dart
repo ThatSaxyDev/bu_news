@@ -10,8 +10,10 @@ import 'package:bu_news/utils/app_fade_animation.dart';
 import 'package:bu_news/utils/button.dart';
 import 'package:bu_news/utils/error_text.dart';
 import 'package:bu_news/utils/loader.dart';
+import 'package:bu_news/utils/picker.dart';
 import 'package:bu_news/utils/widget_extensions.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +21,11 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:routemaster/routemaster.dart';
 
 class AddPostView extends ConsumerStatefulWidget {
-  const AddPostView({super.key});
+  final String isFromCommunity;
+  const AddPostView({
+    super.key,
+    required this.isFromCommunity,
+  });
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _AddPostViewState();
@@ -31,6 +37,7 @@ class _AddPostViewState extends ConsumerState<AddPostView> {
   final linkController = TextEditingController();
   List<Community> communities = [];
   Community? selectedCommunity;
+  int _selectedCommunityIndex = 0;
 
   File? image;
 
@@ -128,6 +135,155 @@ class _AddPostViewState extends ConsumerState<AddPostView> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
+                          widget.isFromCommunity == 'from-home'
+                              ? Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'Select community: ',
+                                        style: TextStyle(
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                    20.sbH,
+                                    ref.watch(userOwnCommunitiesProvider).when(
+                                          data: (communities) {
+                                            if (communities.isEmpty) {
+                                              return const SizedBox.shrink();
+                                            }
+
+                                            return InkWell(
+                                              onTap: () => showPicker(
+                                                context,
+                                                CupertinoPicker(
+                                                  scrollController:
+                                                      FixedExtentScrollController(
+                                                          initialItem:
+                                                              _selectedCommunityIndex),
+                                                  magnification: 1,
+                                                  squeeze: 1.2,
+                                                  useMagnifier: false,
+                                                  itemExtent: 32,
+                                                  onSelectedItemChanged:
+                                                      (int selectedCommunity) {
+                                                    setState(() {
+                                                      _selectedCommunityIndex =
+                                                          selectedCommunity;
+                                                    });
+                                                  },
+                                                  children:
+                                                      List<Widget>.generate(
+                                                    communities.length,
+                                                    (index) => Text(
+                                                      communities[index].name,
+                                                      style: const TextStyle(
+                                                          overflow: TextOverflow
+                                                              .ellipsis),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              child: Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 7.w,
+                                                    vertical: 10.h),
+                                                decoration: BoxDecoration(
+                                                  color: Pallete.blueColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.r),
+                                                ),
+                                                child: Center(
+                                                  child: Wrap(
+                                                    // mainAxisAlignment: MainAxisAlignment.end,
+                                                    children: [
+                                                      Text(
+                                                        communities[
+                                                                _selectedCommunityIndex]
+                                                            .name,
+                                                        style: TextStyle(
+                                                          color: Pallete
+                                                              .whiteColor,
+                                                          fontSize: 16.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                      10.sbW,
+                                                      const Icon(
+                                                        Icons
+                                                            .keyboard_arrow_down,
+                                                        color:
+                                                            Pallete.whiteColor,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                            // DropdownButton(
+                                            //   dropdownColor:
+                                            //       currentTheme.backgroundColor,
+                                            //   style: TextStyle(
+                                            //       color: currentTheme.textTheme
+                                            //           .bodyMedium!.color),
+                                            //   value:
+                                            //       selectedCommunity ?? data[0],
+                                            //   items: data
+                                            //       .map(
+                                            //         (e) => DropdownMenuItem(
+                                            //           value: e,
+                                            //           child: Text(e.name),
+                                            //         ),
+                                            //       )
+                                            //       .toList(),
+                                            //   onChanged: (val) {
+                                            //     setState(() {
+                                            //       selectedCommunity = val;
+                                            //     });
+                                            //   },
+                                            // );
+                                          },
+                                          error: (error, stackTrace) =>
+                                              ErrorText(
+                                                  error: error.toString()),
+                                          loading: () => const Loader(),
+                                        ),
+                                    30.sbH,
+                                  ],
+                                )
+                              : Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Posting to:  ',
+                                          style: TextStyle(
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 7.w, vertical: 4.h),
+                                          decoration: BoxDecoration(
+                                            color: Pallete.blueColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5.r),
+                                          ),
+                                          child: Text(
+                                            widget.isFromCommunity,
+                                            style: TextStyle(
+                                                fontSize: 16.sp,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    30.sbH,
+                                  ],
+                                ),
                           TextField(
                             controller: titleController,
                             decoration: InputDecoration(
@@ -240,44 +396,6 @@ class _AddPostViewState extends ConsumerState<AddPostView> {
                               ),
                             ],
                           ),
-                          40.sbH,
-                          const Align(
-                            alignment: Alignment.topLeft,
-                            child: Text('Select community'),
-                          ),
-                          ref.watch(userOwnCommunitiesProvider).when(
-                                data: (data) {
-                                  communities = data;
-
-                                  if (data.isEmpty) {
-                                    return const SizedBox();
-                                  }
-
-                                  return DropdownButton(
-                                    dropdownColor: currentTheme.backgroundColor,
-                                    style: TextStyle(
-                                        color: currentTheme
-                                            .textTheme.bodyMedium!.color),
-                                    value: selectedCommunity ?? data[0],
-                                    items: data
-                                        .map(
-                                          (e) => DropdownMenuItem(
-                                            value: e,
-                                            child: Text(e.name),
-                                          ),
-                                        )
-                                        .toList(),
-                                    onChanged: (val) {
-                                      setState(() {
-                                        selectedCommunity = val;
-                                      });
-                                    },
-                                  );
-                                },
-                                error: (error, stackTrace) =>
-                                    ErrorText(error: error.toString()),
-                                loading: () => const Loader(),
-                              ),
                           100.sbH,
                           BButton(
                             height: 60.h,

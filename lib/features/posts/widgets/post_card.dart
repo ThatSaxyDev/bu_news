@@ -7,6 +7,7 @@ import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:bu_news/features/community/controllers/communtiy_controller.dart';
 import 'package:bu_news/features/community/views/community_profile_view.dart';
 import 'package:bu_news/features/posts/controllers/post_controller.dart';
+import 'package:bu_news/features/posts/views/image_view.dart';
 import 'package:bu_news/features/profile/controllers/profile_controller.dart';
 import 'package:bu_news/models/post_model.dart';
 import 'package:bu_news/theme/palette.dart';
@@ -101,6 +102,14 @@ class PostCard extends ConsumerWidget {
   // void navigateToComments(BuildContext context) {
   //   Routemaster.of(context).push('/post/${post.id}/comments');
   // }
+
+  void navigateToImage(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ImageView(
+        imageUrl: post.imageUrl!,
+      ),
+    ));
+  }
 
   void bookmark(BuildContext context, WidgetRef ref, String uid) async {
     if (post.bookmarkedBy.contains(uid)) {
@@ -338,19 +347,24 @@ class PostCard extends ConsumerWidget {
                                     : Column(
                                         children: [
                                           20.sbH,
-                                          Container(
-                                            height: 200.h,
-                                            width: 300.w,
-                                            margin: post.link!.isEmpty
-                                                ? null
-                                                : EdgeInsets.only(bottom: 10.h),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              image: DecorationImage(
-                                                  image: NetworkImage(
-                                                      post.imageUrl!),
-                                                  fit: BoxFit.cover),
+                                          InkWell(
+                                            onTap: () =>
+                                                navigateToImage(context),
+                                            child: Container(
+                                              height: 200.h,
+                                              width: 300.w,
+                                              margin: post.link!.isEmpty
+                                                  ? null
+                                                  : EdgeInsets.only(
+                                                      bottom: 10.h),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                                image: DecorationImage(
+                                                    image: NetworkImage(
+                                                        post.imageUrl!),
+                                                    fit: BoxFit.cover),
+                                              ),
                                             ),
                                           ),
                                         ],

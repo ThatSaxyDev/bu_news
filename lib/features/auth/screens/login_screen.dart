@@ -42,14 +42,14 @@ class LoginScreen extends ConsumerWidget {
                   Container(
                     padding: 20.padH,
                     decoration: BoxDecoration(
-                        color: currentTheme.textTheme.bodyMedium!.color!
-                            .withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(20.r)),
-                    height: 150.h,
-                    width: 250.w,
-                    child: Image.asset('main_logo'.png),
+                      borderRadius: BorderRadius.circular(40.r),
+                      image: DecorationImage(
+                          image: AssetImage('log'.png), fit: BoxFit.cover),
+                    ),
+                    height: 200.h,
+                    width: 200.w,
                   ),
-                  200.sbH,
+                  170.sbH,
                   GButton(
                     padding: 10.h,
                     item: Row(

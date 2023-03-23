@@ -89,7 +89,7 @@ class BookmarksView extends ConsumerWidget {
                       child: Text(
                         'You have no bookmarks',
                         style: TextStyle(
-                          color: Pallete.whiteColor,
+                          // color: Pallete.whiteColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 17.sp,
                         ),

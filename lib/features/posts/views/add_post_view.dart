@@ -275,6 +275,7 @@ class _AddPostViewState extends ConsumerState<AddPostView> {
                                           child: Text(
                                             widget.isFromCommunity,
                                             style: TextStyle(
+                                                color: Pallete.whiteColor,
                                                 fontSize: 16.sp,
                                                 fontWeight: FontWeight.w500),
                                           ),

@@ -170,26 +170,33 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
                       itemCount: communities.length,
                       itemBuilder: (context, index) {
                         final community = communities[index];
-                        return CommunityTile(
-                          name: community.name,
-                          members: community.members.length.toString(),
-                          yours: community.mods.contains(user.uid)
-                              ? Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 7.w, vertical: 4.h),
-                                  decoration: BoxDecoration(
-                                    color: Pallete.blueColor,
-                                    borderRadius: BorderRadius.circular(5.r),
-                                  ),
-                                  child: Text(
-                                    'Yours',
-                                    style: TextStyle(
-                                        color: Pallete.whiteColor,
-                                        fontSize: 13.sp,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                )
-                              : const SizedBox.shrink(),
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () {
+                            navigateToCommunity(context, community.name);
+                          },
+                          child: CommunityTile(
+                            name: community.name,
+                            members: community.members.length.toString(),
+                            yours: community.mods.contains(user.uid)
+                                ? Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 7.w, vertical: 4.h),
+                                    decoration: BoxDecoration(
+                                      color: Pallete.blueColor,
+                                      borderRadius: BorderRadius.circular(5.r),
+                                    ),
+                                    child: Text(
+                                      'Yours',
+                                      style: TextStyle(
+                                          color: Pallete.whiteColor,
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  )
+                                : const SizedBox.shrink(),
+                          ),
                         );
                         // ListTile(
                         //   leading: CircleAvatar(
@@ -353,10 +360,17 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
                             itemCount: communities.length,
                             itemBuilder: (context, index) {
                               final community = communities[index];
-                              return CommunityTile(
-                                name: community.name,
-                                members: community.members.length.toString(),
-                                yours: const SizedBox.shrink(),
+                              return InkWell(
+                                splashColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () {
+                                  navigateToCommunity(context, community.name);
+                                },
+                                child: CommunityTile(
+                                  name: community.name,
+                                  members: community.members.length.toString(),
+                                  yours: const SizedBox.shrink(),
+                                ),
                               );
                               // return ListTile(
                               //   leading: CircleAvatar(

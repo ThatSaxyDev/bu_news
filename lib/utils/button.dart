@@ -1,9 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:bu_news/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:bu_news/features/auth/controller/auth_controller.dart';
 
 import '../theme/palette.dart';
 
@@ -16,6 +17,7 @@ class BButton extends StatelessWidget {
   final Widget? item;
   final String? text;
   final bool isText;
+ final Color? textColor;
   const BButton({
     Key? key,
     this.height,
@@ -26,6 +28,7 @@ class BButton extends StatelessWidget {
     this.item,
     this.text,
     this.isText = true,
+    this.textColor,
   }) : super(key: key);
 
   @override
@@ -53,6 +56,7 @@ class BButton extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 15.sp,
                     fontWeight: FontWeight.w500,
+                    color: textColor,
                   ),
                 )
               : item,

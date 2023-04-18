@@ -154,97 +154,97 @@ class _AddPostViewState extends ConsumerState<AddPostView> {
                                               return const SizedBox.shrink();
                                             }
 
-                                            return InkWell(
-                                              onTap: () => showPicker(
-                                                context,
-                                                CupertinoPicker(
-                                                  scrollController:
-                                                      FixedExtentScrollController(
-                                                          initialItem:
-                                                              _selectedCommunityIndex),
-                                                  magnification: 1,
-                                                  squeeze: 1.2,
-                                                  useMagnifier: false,
-                                                  itemExtent: 32,
-                                                  onSelectedItemChanged:
-                                                      (int selectedCommunity) {
-                                                    setState(() {
-                                                      _selectedCommunityIndex =
-                                                          selectedCommunity;
-                                                    });
-                                                  },
-                                                  children:
-                                                      List<Widget>.generate(
-                                                    communities.length,
-                                                    (index) => Text(
-                                                      communities[index].name,
-                                                      style: const TextStyle(
-                                                          overflow: TextOverflow
-                                                              .ellipsis),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              child: Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 7.w,
-                                                    vertical: 10.h),
-                                                decoration: BoxDecoration(
-                                                  color: Pallete.blueColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.r),
-                                                ),
-                                                child: Center(
-                                                  child: Wrap(
-                                                    // mainAxisAlignment: MainAxisAlignment.end,
-                                                    children: [
-                                                      Text(
-                                                        communities[
-                                                                _selectedCommunityIndex]
-                                                            .name,
-                                                        style: TextStyle(
-                                                          color: Pallete
-                                                              .whiteColor,
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                      ),
-                                                      10.sbW,
-                                                      const Icon(
-                                                        Icons
-                                                            .keyboard_arrow_down,
-                                                        color:
-                                                            Pallete.whiteColor,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                            // DropdownButton(
-                                            //   dropdownColor:
-                                            //       currentTheme.backgroundColor,
-                                            //   style: TextStyle(
-                                            //       color: currentTheme.textTheme
-                                            //           .bodyMedium!.color),
-                                            //   value:
-                                            //       selectedCommunity ?? data[0],
-                                            //   items: data
-                                            //       .map(
-                                            //         (e) => DropdownMenuItem(
-                                            //           value: e,
-                                            //           child: Text(e.name),
+                                            // return InkWell(
+                                            //   onTap: () => showPicker(
+                                            //     context,
+                                            //     CupertinoPicker(
+                                            //       scrollController:
+                                            //           FixedExtentScrollController(
+                                            //               initialItem:
+                                            //                   _selectedCommunityIndex),
+                                            //       magnification: 1,
+                                            //       squeeze: 1.2,
+                                            //       useMagnifier: false,
+                                            //       itemExtent: 32,
+                                            //       onSelectedItemChanged:
+                                            //           (int selectedCommunity) {
+                                            //         setState(() {
+                                            //           _selectedCommunityIndex =
+                                            //               selectedCommunity;
+                                            //         });
+                                            //       },
+                                            //       children:
+                                            //           List<Widget>.generate(
+                                            //         communities.length,
+                                            //         (index) => Text(
+                                            //           communities[index].name,
+                                            //           style: const TextStyle(
+                                            //               overflow: TextOverflow
+                                            //                   .ellipsis),
                                             //         ),
-                                            //       )
-                                            //       .toList(),
-                                            //   onChanged: (val) {
-                                            //     setState(() {
-                                            //       selectedCommunity = val;
-                                            //     });
-                                            //   },
+                                            //       ),
+                                            //     ),
+                                            //   ),
+                                            //   child: Container(
+                                            //     padding: EdgeInsets.symmetric(
+                                            //         horizontal: 7.w,
+                                            //         vertical: 10.h),
+                                            //     decoration: BoxDecoration(
+                                            //       color: Pallete.blueColor,
+                                            //       borderRadius:
+                                            //           BorderRadius.circular(
+                                            //               5.r),
+                                            //     ),
+                                            //     child: Center(
+                                            //       child: Wrap(
+                                            //         // mainAxisAlignment: MainAxisAlignment.end,
+                                            //         children: [
+                                            //           Text(
+                                            //             communities[
+                                            //                     _selectedCommunityIndex]
+                                            //                 .name,
+                                            //             style: TextStyle(
+                                            //               color: Pallete
+                                            //                   .whiteColor,
+                                            //               fontSize: 16.sp,
+                                            //               fontWeight:
+                                            //                   FontWeight.w500,
+                                            //             ),
+                                            //           ),
+                                            //           10.sbW,
+                                            //           const Icon(
+                                            //             Icons
+                                            //                 .keyboard_arrow_down,
+                                            //             color:
+                                            //                 Pallete.whiteColor,
+                                            //           ),
+                                            //         ],
+                                            //       ),
+                                            //     ),
+                                            //   ),
                                             // );
+                                            return DropdownButton(
+                                              dropdownColor:
+                                                  currentTheme.backgroundColor,
+                                              style: TextStyle(
+                                                  color: currentTheme.textTheme
+                                                      .bodyMedium!.color),
+                                              value: selectedCommunity ??
+                                                  communities[0],
+                                              items: communities
+                                                  .map(
+                                                    (e) => DropdownMenuItem(
+                                                      value: e,
+                                                      child: Text(e.name),
+                                                    ),
+                                                  )
+                                                  .toList(),
+                                              onChanged: (val) {
+                                                setState(() {
+                                                  selectedCommunity = val;
+                                                });
+                                              },
+                                            );
                                           },
                                           error: (error, stackTrace) =>
                                               ErrorText(

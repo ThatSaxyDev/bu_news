@@ -18,50 +18,52 @@ class AdminLoginScreen extends ConsumerWidget {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.w),
-        child: isLoading
-            ? const Loader()
-            : Column(
-                children: [
-                  100.sbH,
-                  // Align(
-                  //   alignment: Alignment.centerRight,
-                  //   child: GestureDetector(
-                  //     onTap: () => signInAsGuest(ref, context),
-                  //     child: Text(
-                  //       AppTexts.skip,
-                  //       style: TextStyle(
-                  //         // color: Pallete.whiteColor,
-                  //         fontSize: 18.sp,
-                  //         fontWeight: FontWeight.w600,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  // Spc(h: 15.h),
-                  SizedBox(
-                    height: 300.h,
-                    width: 250.w,
-                    child: Image.asset('main_logo'.png),
-                  ),
-                  60.sbH,
-                  AdminGButton(
-                    padding: 10.h,
-                    item: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        SizedBox(
-                          width: 30.w,
-                          child: Image.asset('google'.png),
-                        ),
-                        Text(
-                          'Continue With Google',
-                          style: TextStyle(fontSize: 14.sp),
-                        ),
-                      ],
+        child: Center(
+          child: isLoading
+              ? const Loader()
+              : Column(
+                  children: [
+                    100.sbH,
+                    // Align(
+                    //   alignment: Alignment.centerRight,
+                    //   child: GestureDetector(
+                    //     onTap: () => signInAsGuest(ref, context),
+                    //     child: Text(
+                    //       AppTexts.skip,
+                    //       style: TextStyle(
+                    //         // color: Pallete.whiteColor,
+                    //         fontSize: 18.sp,
+                    //         fontWeight: FontWeight.w600,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // Spc(h: 15.h),
+                    SizedBox(
+                      height: 300.h,
+                      width: 250.w,
+                      child: Image.asset('main_logo'.png),
                     ),
-                  ),
-                ],
-              ),
+                    60.sbH,
+                    AdminGButton(
+                      padding: 10.h,
+                      item: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SizedBox(
+                            width: 30.w,
+                            child: Image.asset('google'.png),
+                          ),
+                          Text(
+                            'Continue With Google',
+                            style: TextStyle(fontSize: 14.sp),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+        ),
       ),
     );
   }
@@ -97,7 +99,7 @@ class AdminGButton extends ConsumerWidget {
     final currentTheme = ref.watch(themeNotifierProvider);
     return SizedBox(
       height: 50.h,
-      // width: width,
+      width: 300.w,
       child: ElevatedButton(
         onPressed: () => signInWithGoogleAdmin(context, ref),
         style: ElevatedButton.styleFrom(

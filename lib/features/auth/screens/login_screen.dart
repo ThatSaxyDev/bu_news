@@ -71,22 +71,30 @@ class LoginScreen extends ConsumerWidget {
                     ),
                   ),
                   20.sbH,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        PhosphorIcons.warning,
-                        color: Colors.red,
-                        size: 23.sp,
-                      ),
-                      10.sbW,
-                      Text(
-                        'Make sure it is your school email',
-                        style: TextStyle(
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 7.h),
+                    decoration: BoxDecoration(
+                        color: Pallete.thickRed,
+                        borderRadius: BorderRadius.circular(10.r)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          PhosphorIcons.warning,
+                          color: Pallete.whiteColor,
+                          size: 23.sp,
+                        ),
+                        10.sbW,
+                        Text(
+                          'Make sure it is your school email',
+                          style: TextStyle(
                             fontSize: 16.sp,
-                            color: currentTheme.textTheme.bodyMedium!.color),
-                      ),
-                    ],
+                            color: Pallete.whiteColor,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

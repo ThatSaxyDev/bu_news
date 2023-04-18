@@ -15,7 +15,9 @@ import 'package:bu_news/utils/app_fade_animation.dart';
 import 'package:bu_news/utils/error_text.dart';
 import 'package:bu_news/utils/loader.dart';
 import 'package:bu_news/utils/widget_extensions.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -146,7 +148,15 @@ class PostCard extends ConsumerWidget {
     return InkWell(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      // onTap: () => navigateToComments(context),
+      onTap: () {
+        if (isInCommentView == true) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => CommentsView(
+              post: post,
+            ),
+          ));
+        } else {}
+      },
       child: AppFadeAnimation(
         delay: delay,
         child: Container(
@@ -360,10 +370,50 @@ class PostCard extends ConsumerWidget {
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(8.r),
-                                                image: DecorationImage(
-                                                    image: NetworkImage(
-                                                        post.imageUrl!),
-                                                    fit: BoxFit.cover),
+                                                // image: DecorationImage(
+                                                //     image: NetworkImage(
+                                                //         post.imageUrl!),
+                                                //     fit: BoxFit.cover),
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                                child: CachedNetworkImage(
+                                                  fit: BoxFit.cover,
+                                                  imageUrl: post.imageUrl!,
+                                                  placeholder: (context, url) =>
+                                                      Container(
+                                                    decoration: BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        colors: [
+                                                          Colors.black12
+                                                              .withOpacity(0.1),
+                                                          Colors.black12
+                                                              .withOpacity(0.1),
+                                                          Colors.black26,
+                                                          Colors.black26,
+                                                        ],
+                                                        begin:
+                                                            Alignment.topLeft,
+                                                        end: Alignment
+                                                            .bottomRight,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.r),
+                                                    ),
+                                                  )
+                                                          .animate(
+                                                              onPlay: (controller) =>
+                                                                  controller
+                                                                      .repeat())
+                                                          .shimmer(
+                                                              duration:
+                                                                  1200.ms),
+                                                  errorWidget: (context, url,
+                                                          error) =>
+                                                      const Icon(Icons.error),
+                                                ),
                                               ),
                                             ),
                                           ),

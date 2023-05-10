@@ -59,10 +59,10 @@ class AuthRepository {
         userCredential = await _auth.signInWithCredential(credential);
       }
 
-      final userEmail = userCredential.user!.email;
-      if (!userEmail!.contains('@student.babcock.edu.ng')) {
-        return left(Failure('Not a babcock mail'));
-      }
+      // final userEmail = userCredential.user!.email;
+      // if (!userEmail!.contains('@student.babcock.edu.ng')) {
+      //   return left(Failure('Not a babcock mail'));
+      // }
 
       UserModel userModel;
 

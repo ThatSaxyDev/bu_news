@@ -135,8 +135,9 @@ class _AddPostViewState extends ConsumerState<AddPostView> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          widget.isFromCommunity == 'from-home'
-                              ? Column(
+                          // widget.isFromCommunity == 'from-home'
+                          //     ? 
+                              Column(
                                   children: [
                                     Align(
                                       alignment: Alignment.topLeft,
@@ -253,38 +254,38 @@ class _AddPostViewState extends ConsumerState<AddPostView> {
                                         ),
                                     30.sbH,
                                   ],
-                                )
-                              : Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Posting to:  ',
-                                          style: TextStyle(
-                                              fontSize: 16.sp,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 7.w, vertical: 4.h),
-                                          decoration: BoxDecoration(
-                                            color: Pallete.blueColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5.r),
-                                          ),
-                                          child: Text(
-                                            widget.isFromCommunity,
-                                            style: TextStyle(
-                                                color: Pallete.whiteColor,
-                                                fontSize: 16.sp,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    30.sbH,
-                                  ],
                                 ),
+                              // : Column(
+                              //     children: [
+                              //       Row(
+                              //         children: [
+                              //           Text(
+                              //             'Posting to:  ',
+                              //             style: TextStyle(
+                              //                 fontSize: 16.sp,
+                              //                 fontWeight: FontWeight.w500),
+                              //           ),
+                              //           Container(
+                              //             padding: EdgeInsets.symmetric(
+                              //                 horizontal: 7.w, vertical: 4.h),
+                              //             decoration: BoxDecoration(
+                              //               color: Pallete.blueColor,
+                              //               borderRadius:
+                              //                   BorderRadius.circular(5.r),
+                              //             ),
+                              //             child: Text(
+                              //               widget.isFromCommunity,
+                              //               style: TextStyle(
+                              //                   color: Pallete.whiteColor,
+                              //                   fontSize: 16.sp,
+                              //                   fontWeight: FontWeight.w500),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       30.sbH,
+                              //     ],
+                              //   ),
                           TextField(
                             controller: titleController,
                             decoration: InputDecoration(

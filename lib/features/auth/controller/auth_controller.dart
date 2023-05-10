@@ -56,16 +56,18 @@ class AuthController extends StateNotifier<bool> {
           _ref.read(userProvider.notifier).update((state) => userM = userModel),
     );
 
-    // join busa
-    final res =
-        await _communityRepository.joinCommunity('busa_official', userM.uid);
-    // state = false;
-    res.fold(
-      (failure) => showSnackBar(context, failure.message),
-      (success) {
-        log('');
-      },
-    );
+    if (userM.email.contains('@student.babcock.edu.ng')) {
+      // join busa
+      final res =
+          await _communityRepository.joinCommunity('busa_official', userM.uid);
+      // state = false;
+      res.fold(
+        (failure) => showSnackBar(context, failure.message),
+        (success) {
+          log('');
+        },
+      );
+    }
   }
 
   void signInWithGoogleAdmin(BuildContext context) async {

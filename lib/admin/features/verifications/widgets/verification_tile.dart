@@ -122,21 +122,68 @@ class _VerificationsTileState extends ConsumerState<VerificationsTile> {
                                 width: 400.w,
                                 child: Column(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                      MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    //! name
                                     RichText(
                                         text: TextSpan(
                                       children: [
                                         TextSpan(
-                                          text: 'Description: ',
+                                          text: 'Name: ',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w700,
                                             fontSize: 26.sp,
                                           ),
                                         ),
                                         TextSpan(
-                                          text: widget.application.userId,
+                                          text: user.name,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 20.sp,
+                                            color: currentTheme
+                                                .textTheme.bodyMedium!.color,
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+
+                                    //! matric no
+                                    RichText(
+                                        text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'MAtric no: ',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 26.sp,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: widget.application.matricNo,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 20.sp,
+                                            color: currentTheme
+                                                .textTheme.bodyMedium!.color,
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+
+                                    //! phone
+                                    RichText(
+                                        text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'Phone: ',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 26.sp,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: widget.application.phoneNumber,
                                           style: TextStyle(
                                             fontWeight: FontWeight.w700,
                                             fontSize: 20.sp,

@@ -410,9 +410,21 @@ class PostCard extends ConsumerWidget {
                                                           .shimmer(
                                                               duration:
                                                                   1200.ms),
-                                                  errorWidget: (context, url,
-                                                          error) =>
-                                                      const Icon(Icons.error),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Container(
+                                                    color: currentTheme
+                                                        .textTheme
+                                                        .bodyMedium!
+                                                        .color!
+                                                        .withOpacity(0.1),
+                                                    child: Center(
+                                                      child: Icon(
+                                                        Icons.error,
+                                                        size: 30.sp,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -432,6 +444,20 @@ class PostCard extends ConsumerWidget {
                                               displayDirection: UIDirection
                                                   .uiDirectionHorizontal,
                                               link: post.link!,
+                                              errorWidget: Container(
+                                                decoration: BoxDecoration(
+                                                    color: currentTheme
+                                                        .textTheme
+                                                        .bodyMedium!
+                                                        .color!
+                                                        .withOpacity(0.1),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.r)),
+                                                child: const Center(
+                                                    child: Text(
+                                                        'Error loading link')),
+                                              ),
                                             ),
                                           ),
                                         ],

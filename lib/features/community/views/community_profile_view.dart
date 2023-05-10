@@ -6,9 +6,12 @@ import 'package:bu_news/features/posts/widgets/post_card.dart';
 import 'package:bu_news/theme/palette.dart';
 import 'package:bu_news/utils/error_text.dart';
 import 'package:bu_news/utils/loader.dart';
+import 'package:bu_news/utils/string_extensions.dart';
 import 'package:bu_news/utils/widget_extensions.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -66,10 +69,40 @@ class CommnunityProfileView extends ConsumerWidget {
                       flexibleSpace: Stack(
                         children: [
                           Positioned.fill(
-                            child: Image.network(
-                              community.banner,
+                            child: CachedNetworkImage(
                               fit: BoxFit.cover,
+                              imageUrl: community.banner,
+                              placeholder: (context, url) => Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.black12.withOpacity(0.1),
+                                      Colors.black12.withOpacity(0.1),
+                                      Colors.black26,
+                                      Colors.black26,
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  // borderRadius: BorderRadius.circular(15.r),
+                                ),
+                              )
+                                  .animate(
+                                      onPlay: (controller) =>
+                                          controller.repeat())
+                                  .shimmer(duration: 1200.ms),
+                              errorWidget: (context, url, error) => Container(
+
+                                color: Pallete.greey,
+                                height: 300.h,
+                                width: 250.w,
+                                child: Image.asset('main_logo'.png),
+                              ),
                             ),
+                            // child: Image.network(
+                            //   community.banner,
+                            //   fit: BoxFit.cover,
+                            // ),
                           )
                         ],
                       ),
